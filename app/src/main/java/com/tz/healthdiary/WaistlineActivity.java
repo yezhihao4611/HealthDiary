@@ -46,6 +46,7 @@ public class WaistlineActivity extends Activity implements View.OnClickListener 
         if (height >= 20 && height <= 240&&waist>=20&&waist<=150){
             tv_result_waist.setText(str);
         }
+
     }
 
     @Override
