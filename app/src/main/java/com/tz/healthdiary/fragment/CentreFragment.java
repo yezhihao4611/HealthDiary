@@ -19,7 +19,7 @@ import com.tz.healthdiary.R;
  * Centre页面的Fragment
  */
 
-public class CentreFragment extends Fragment {
+public class CentreFragment extends Fragment{
 
     @Nullable
     @Override
