@@ -3,6 +3,8 @@ package com.tz.healthdiary;
 import android.app.Activity;
 import android.icu.math.BigDecimal;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -27,6 +29,8 @@ public class WaistlineActivity extends Activity implements View.OnClickListener 
     int height;
     int waist;
     double resulr;
+    String str;
+    TextWatcher textWatcher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,15 +46,36 @@ public class WaistlineActivity extends Activity implements View.OnClickListener 
         height = Integer.parseInt(et_height_waist.getText().toString());
         waist = Integer.parseInt(et_waist_waist.getText().toString());
         resulr = (double) waist / height;
-        String str = String.format("%.2f", resulr);
-        if (height >= 20 && height <= 240 && waist >= 20 && waist <= 150) {
-            tv_result_waist.setText(str);
-        }
-    }
+        str = String.format("%.2f", resulr);
+        et_height_waist.addTextChangedListener(textWatcher);
+        result();
+        textWatcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                result();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        };
+    }
     @Override
     public void onClick(View v) {
 
     }
 
+    private void result() {
+
+        if (height >= 20 && height <= 240 && waist >= 20 && waist <= 150) {
+            tv_result_waist.setText(str);
+        } else {
+        }
+    }
 }
