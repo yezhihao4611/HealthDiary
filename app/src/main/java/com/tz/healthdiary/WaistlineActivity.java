@@ -40,17 +40,17 @@ public class WaistlineActivity extends Activity implements View.OnClickListener 
         ll_result_waist = (LinearLayout) findViewById(R.id.ll_result_waist);
         tv_result_waist = (TextView) findViewById(R.id.tv_result_waist);
         height = Integer.parseInt(et_height_waist.getText().toString());
-        waist=Integer.parseInt(et_waist_waist.getText().toString());
-        resulr=(double) waist/height;
-        String str=String.format("%.2f",resulr);
-        if (height >= 20 && height <= 240&&waist>=20&&waist<=150){
+        waist = Integer.parseInt(et_waist_waist.getText().toString());
+        resulr = (double) waist / height;
+        String str = String.format("%.2f", resulr);
+        if (height >= 20 && height <= 240 && waist >= 20 && waist <= 150) {
             tv_result_waist.setText(str);
         }
-
     }
 
     @Override
     public void onClick(View v) {
 
     }
+
 }
