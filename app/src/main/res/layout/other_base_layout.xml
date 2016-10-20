@@ -36,6 +36,7 @@
             android:layout_margin="16dp"
             android:layout_weight="2"
             android:text="年        龄"
+            android:inputType="number"
             android:textSize="20sp" />
 
         <EditText
@@ -90,6 +91,7 @@
         <EditText
             android:id="@+id/editText2"
             android:layout_width="0dp"
+            android:inputType="number"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="3"
@@ -124,6 +126,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="3"
+            android:inputType="number"
             android:gravity="center"
             android:text="70" />
 

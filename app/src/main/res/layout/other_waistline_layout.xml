@@ -41,6 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
+            android:inputType="number"
             android:text="22"
             />
 
@@ -88,6 +89,7 @@
             android:id="@+id/et_height_waist"
             android:layout_width="0dp"
             android:layout_weight="3"
+            android:inputType="number"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
@@ -121,6 +123,7 @@
             android:id="@+id/et_waist_waist"
             android:layout_width="0dp"
             android:layout_weight="3"
+            android:inputType="number"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"

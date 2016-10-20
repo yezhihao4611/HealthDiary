@@ -36,7 +36,6 @@ public class OtherFragment extends Fragment implements View.OnClickListener {
         return view;
     }
 
-
     @Override
     public void onClick(View v) {
         switch (v.getId()){
