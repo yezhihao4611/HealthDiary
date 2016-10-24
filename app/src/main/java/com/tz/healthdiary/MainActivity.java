@@ -39,9 +39,6 @@ public class MainActivity extends AppCompatActivity {
     NewsFragment mNewsFragment;
     OtherFragment mOtherFragment;
 
-    PopupWindow mPopupWindow;
-    View mPopView;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,10 +95,6 @@ public class MainActivity extends AppCompatActivity {
         mNewsFragment = new NewsFragment();
         mOtherFragment = new OtherFragment();
 
-
-        mPopupWindow = new PopupWindow(getLayoutInflater().inflate(R.layout.activity_test_m, null), WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
-
-        mPopupWindow.setOutsideTouchable(false);
         centre.setChecked(true);
     }
 
@@ -114,14 +107,9 @@ public class MainActivity extends AppCompatActivity {
         switch (view.getId()) {
             case R.id.fab_main:
                 Toast.makeText(MainActivity.this, "ok", Toast.LENGTH_LONG).show();
-
-                mPopupWindow.showAtLocation(mLinearLayout, Gravity.CENTER, 0, 0);
-                /*Intent intent = new Intent(MainActivity.this,AddActivity.class);
-                startActivity(intent);*/
                 break;
         }
     }
-
 
     private void showFragment(int i) {
         manager = getSupportFragmentManager();
@@ -179,5 +167,4 @@ public class MainActivity extends AppCompatActivity {
             transaction.hide(mOtherFragment);
         }
     }
-
 }
