@@ -4,12 +4,9 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Gravity;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
@@ -17,7 +14,6 @@ import com.tz.healthdiary.fragment.BMIFragment;
 import com.tz.healthdiary.fragment.CentreFragment;
 import com.tz.healthdiary.fragment.NewsFragment;
 import com.tz.healthdiary.fragment.OtherFragment;
-import com.tz.healthdiary.utils.MyApplication;
 
 /**
  * Created by 西野七濑 on 2016/10/19.
