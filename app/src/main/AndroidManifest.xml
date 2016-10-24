@@ -28,10 +28,16 @@
         <activity android:name=".WaistlineActivity">
 
         </activity>
-        <activity android:name=".BodyActivity">
+        <activity android:name=".TestActivity">
 
         </activity>
-        <activity android:name=".BaseActivity">
+        <activity android:name=".Jisuanqi.WaistlineActivity">
+
+        </activity>
+        <activity android:name=".Jisuanqi.BodyActivity">
+
+        </activity>
+        <activity android:name=".Jisuanqi.BaseActivity">
 
         </activity>
     </application>

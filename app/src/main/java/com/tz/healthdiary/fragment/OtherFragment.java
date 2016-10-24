@@ -9,32 +9,40 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.tz.healthdiary.BaseActivity;
-import com.tz.healthdiary.BodyActivity;
+import com.tz.healthdiary.Jisuanqi.BaseActivity;
+import com.tz.healthdiary.Jisuanqi.BodyActivity;
 import com.tz.healthdiary.R;
-import com.tz.healthdiary.WaistlineActivity;
+import com.tz.healthdiary.Jisuanqi.WaistlineActivity;
 
 /**
  * Created by 西野七濑 on 2016/10/18.
  * Other页面的Fragment
  */
-public class OtherFragment extends Fragment implements View.OnClickListener {
+public class OtherFragment extends Fragment implements View.OnClickListener{
     TextView tv_waist_other;
     TextView tv_body_other;
     TextView tv_base_other;
     Intent intent;
+    TextView tv_hour;
+    TextView tv_month;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.oter_layout,null);
-        tv_waist_other= (TextView) view.findViewById(R.id.tv_waist_other);
-        tv_body_other= (TextView) view.findViewById(R.id.tv_body_other);
-        tv_base_other= (TextView) view.findViewById(R.id.tv_base_other);
+        View view = inflater.inflate(R.layout.oter_layout, null);
+        tv_waist_other = (TextView) view.findViewById(R.id.tv_waist_other);
+        tv_body_other = (TextView) view.findViewById(R.id.tv_body_other);
+        tv_base_other = (TextView) view.findViewById(R.id.tv_base_other);
+        tv_hour = (TextView) view.findViewById(R.id.tv_hour);
+        tv_month = (TextView) view.findViewById(R.id.tv_hour);
+        tv_month.setOnClickListener(this);
+        tv_hour.setOnClickListener(this);
         tv_waist_other.setOnClickListener(this);
         tv_body_other.setOnClickListener(this);
         tv_base_other.setOnClickListener(this);
         return view;
+
     }
+
 
 
     @Override
@@ -52,9 +60,11 @@ public class OtherFragment extends Fragment implements View.OnClickListener {
                 intent=new Intent(getActivity(), BaseActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.tv_hour:
+
+
 
         }
-
 
     }
 }

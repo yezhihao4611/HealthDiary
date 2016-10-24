@@ -10,6 +10,7 @@
         android:background="#d9213d">
 
         <ImageView
+            android:id="@+id/iv_back_base"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -40,7 +41,7 @@
             android:textSize="20sp" />
 
         <EditText
-            android:id="@+id/editText3"
+            android:id="@+id/et_year_base"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -49,7 +50,7 @@
             android:text="22" />
 
         <RadioGroup
-            android:id="@+id/rg_main"
+            android:id="@+id/rg_base"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
@@ -58,7 +59,7 @@
             android:orientation="horizontal">
 
             <RadioButton
-                android:id="@+id/man"
+                android:id="@+id/rb_man_base"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:button="@null"
@@ -66,7 +67,7 @@
                 android:drawableTop="@drawable/man" />
 
             <RadioButton
-                android:id="@+id/wuman"
+                android:id="@+id/rb_wumen_base"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:button="@null"
@@ -89,7 +90,7 @@
             android:textSize="20sp" />
 
         <EditText
-            android:id="@+id/editText2"
+            android:id="@+id/et_height_base"
             android:layout_width="0dp"
             android:inputType="number"
             android:layout_height="wrap_content"
@@ -118,10 +119,11 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:layout_weight="2"
-            android:text="腰        围"
+            android:text="体        重"
             android:textSize="20sp" />
 
         <EditText
+            android:id="@+id/et_weight_base"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -136,7 +138,7 @@
             android:layout_gravity="center"
             android:layout_weight="3"
             android:gravity="center"
-            android:text="cm"
+            android:text="kg"
             android:textSize="20sp" />
     </LinearLayout>
 
@@ -154,15 +156,17 @@
             android:textSize="20sp" />
 
         <TextView
+            android:id="@+id/tv_activity_base"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="3"
             android:gravity="center"
-            android:text="70"
+            android:text="久坐不动"
             android:textSize="20sp" />
 
         <ImageView
+            android:id="@+id/iv_activity_base"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -191,6 +195,7 @@
             android:text="基础代谢率"
             android:textSize="20sp" />
         <TextView
+            android:id="@+id/tv_result_base"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
@@ -217,6 +222,7 @@
             android:text="总能量消耗"
             android:textSize="20sp" />
         <TextView
+            android:id="@+id/tv_base_base"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
