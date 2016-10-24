@@ -7,6 +7,7 @@
         android:background="#d9213d"
         android:layout_height="40dp">
         <ImageView
+            android:id="@+id/iv_back_body"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -21,6 +22,7 @@
             android:layout_gravity="center"
             android:text="体脂率"/>
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -33,17 +35,18 @@
             android:text="年        龄"/>
 
         <EditText
+            android:id="@+id/et_year_body"
             android:layout_width="0dp"
             android:layout_weight="3"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="22"
             android:inputType="number"
-            android:id="@+id/editText3" />
+            android:text="22"
+            />
 
         <RadioGroup
-            android:id="@+id/rg_main"
+            android:id="@+id/rg_body"
             android:layout_width="0dp"
             android:layout_weight="3"
             android:layout_height="match_parent"
@@ -52,16 +55,15 @@
             android:orientation="horizontal">
 
             <RadioButton
-                android:id="@+id/man"
+                android:id="@+id/rb_man_body"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:button="@null"
-                android:checked="true"
                 android:drawableTop="@drawable/man"
                 />
 
             <RadioButton
-                android:id="@+id/wuman"
+                android:id="@+id/rb_wumen_body"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:button="@null"
@@ -69,7 +71,6 @@
                 />
         </RadioGroup>
     </LinearLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:gravity="center"
@@ -81,10 +82,10 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:textSize="20sp"
-            android:text="身        高"
-            android:id="@+id/textView" />
+            android:text="身        高" />
 
         <EditText
+            android:id="@+id/et_height_body"
             android:layout_width="0dp"
             android:layout_weight="3"
             android:inputType="number"
@@ -92,7 +93,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:text="170"
-            android:id="@+id/editText2" />
+            />
 
         <TextView
             android:layout_width="0dp"
@@ -103,6 +104,39 @@
             android:textSize="20sp"
             android:text="cm"/>
     </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:textSize="20sp"
+            android:text="体        重" />
+
+        <EditText
+            android:id="@+id/et_weight_body"
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:inputType="number"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="3"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:text="kg"/>
+    </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:gravity="center"
@@ -118,13 +152,13 @@
             />
 
         <EditText
+            android:id="@+id/et_waist_body"
             android:layout_width="0dp"
             android:layout_weight="3"
             android:inputType="number"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="70"
             />
 
         <TextView
@@ -136,73 +170,9 @@
             android:textSize="20sp"
             android:text="cm"/>
     </LinearLayout>
+
     <LinearLayout
-        android:layout_width="match_parent"
-        android:gravity="center"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="2"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:textSize="20sp"
-            android:text="颈        围"
-            />
-
-        <EditText
-            android:layout_width="0dp"
-            android:layout_weight="3"
-            android:inputType="number"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:text="70"
-            />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="3"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:textSize="20sp"
-            android:text="cm"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:gravity="center"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="2"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:textSize="20sp"
-            android:text="臀       围"
-            />
-
-        <EditText
-            android:layout_width="0dp"
-            android:layout_weight="3"
-            android:inputType="number"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:text="70"
-            />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="3"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:textSize="20sp"
-            android:text="cm"/>
-    </LinearLayout>
-    <LinearLayout
+        android:id="@+id/ll_result_body"
         android:layout_width="match_parent"
         android:layout_margin="16dp"
         android:orientation="horizontal"
@@ -217,18 +187,24 @@
             android:layout_height="wrap_content"
             android:text="结    果"/>
         <TextView
+            android:id="@+id/tv_result_body"
             android:layout_width="0dp"
             android:layout_weight="3"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:textSize="16sp"
-            android:text="0.35"/>
+            android:textSize="16sp" />
         <TextView
             android:layout_width="0dp"
             android:layout_weight="3"
             android:layout_height="wrap_content" />
     </LinearLayout>
+    <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="0dp"
+       android:orientation="vertical"
+       android:layout_weight="1">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="horizontal"
@@ -244,6 +220,7 @@
             android:gravity="center_vertical"
             android:text="低"/>
         <TextView
+            android:id="@+id/tv_low_body"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -269,6 +246,7 @@
             android:gravity="center_vertical"
             android:text="正常"/>
         <TextView
+            android:id="@+id/tv_normal_body"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -294,6 +272,7 @@
             android:gravity="center_vertical"
             android:text="高"/>
         <TextView
+            android:id="@+id/tv_high_body"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -319,10 +298,12 @@
             android:gravity="center_vertical"
             android:text="非常高"/>
         <TextView
+            android:id="@+id/tv_mosthigh"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginRight="10dp"
             android:text="＞39％"/>
     </LinearLayout>
+   </LinearLayout>
 </LinearLayout>
