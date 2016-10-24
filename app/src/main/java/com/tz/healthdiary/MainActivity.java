@@ -17,7 +17,6 @@ import com.tz.healthdiary.fragment.BMIFragment;
 import com.tz.healthdiary.fragment.CentreFragment;
 import com.tz.healthdiary.fragment.NewsFragment;
 import com.tz.healthdiary.fragment.OtherFragment;
-import com.tz.healthdiary.utils.MyApplication;
 
 /**
  * Created by 西野七濑 on 2016/10/19.
