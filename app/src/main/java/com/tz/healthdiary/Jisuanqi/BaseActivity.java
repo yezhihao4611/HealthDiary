@@ -135,6 +135,7 @@ public class BaseActivity extends Activity implements View.OnClickListener {
             case R.id.tv_five:
                 tv_activity_base.setText("大量运动");
                 popupWindow.dismiss();
+
                 break;
 
         }
