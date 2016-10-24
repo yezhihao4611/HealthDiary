@@ -24,6 +24,13 @@
         <activity android:name=".TestActivity">
 
         </activity>
+
+        <activity android:name=".WaistlineActivity">
+
+        </activity>
+        <activity android:name=".TestActivity">
+
+        </activity>
         <activity android:name=".Jisuanqi.WaistlineActivity">
 
         </activity>

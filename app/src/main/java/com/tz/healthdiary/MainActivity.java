@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     NewsFragment mNewsFragment;
     OtherFragment mOtherFragment;
 
-  //  PopupWindow mPopupWindow;
+    PopupWindow mPopupWindow;
     View mPopView;
 
     @Override
@@ -97,14 +97,11 @@ public class MainActivity extends AppCompatActivity {
         mBMIFragment = new BMIFragment();
         mNewsFragment = new NewsFragment();
         mOtherFragment = new OtherFragment();
-       // mPopView = View.inflate(MyApplication.getContext(),R.layout.activity_test_m,null);
 
 
+        mPopupWindow = new PopupWindow(getLayoutInflater().inflate(R.layout.activity_test_m, null), WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);
 
-        /*mPopupWindow = new PopupWindow(getLayoutInflater().inflate(R.layout.activity_test_m,null),
-                WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT);*/
-
-       // mPopupWindow.setOutsideTouchable(false);
+        mPopupWindow.setOutsideTouchable(false);
         centre.setChecked(true);
     }
 
@@ -116,9 +113,9 @@ public class MainActivity extends AppCompatActivity {
     public void doClick(View view) {
         switch (view.getId()) {
             case R.id.fab_main:
-                Toast.makeText(MainActivity.this,"ok",Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, "ok", Toast.LENGTH_LONG).show();
 
-               // mPopupWindow.showAtLocation(mLinearLayout, Gravity.CENTER,0,0);
+                mPopupWindow.showAtLocation(mLinearLayout, Gravity.CENTER, 0, 0);
                 /*Intent intent = new Intent(MainActivity.this,AddActivity.class);
                 startActivity(intent);*/
                 break;
