@@ -4,9 +4,11 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
@@ -35,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
     BMIFragment mBMIFragment;
     NewsFragment mNewsFragment;
     OtherFragment mOtherFragment;
+
+    PopupWindow mPopupWindow;
+    View mView;
 
 
     @Override
@@ -92,6 +97,7 @@ public class MainActivity extends AppCompatActivity {
         mBMIFragment = new BMIFragment();
         mNewsFragment = new NewsFragment();
         mOtherFragment = new OtherFragment();
+        mView = LayoutInflater.from(MainActivity.this).inflate(R.layout.popupwindow_add_day_data,null);
 
         centre.setChecked(true);
     }
@@ -103,12 +109,17 @@ public class MainActivity extends AppCompatActivity {
      */
     public void doClick(View view) {
         switch (view.getId()) {
-            case R.id.fab_main:
+            case R.id.fab_add:
+                showPopupWindow(mView);
                 Toast.makeText(MainActivity.this, "ok", Toast.LENGTH_LONG).show();
-
                 break;
         }
     }
+
+    private void showPopupWindow(View view){
+        mPopupWindow = new PopupWindow(view);
+
+    };
 
 
     private void showFragment(int i) {
@@ -167,5 +178,4 @@ public class MainActivity extends AppCompatActivity {
             transaction.hide(mOtherFragment);
         }
     }
-
 }

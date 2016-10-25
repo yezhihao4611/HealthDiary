@@ -40,9 +40,7 @@
             android:layout_height="wrap_content"
             android:background="#00000000"
             android:text="确认"/>
+
     </LinearLayout>
 
-
-
 </LinearLayout>
-
