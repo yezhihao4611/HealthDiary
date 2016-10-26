@@ -143,19 +143,13 @@ public class WheelView extends ScrollView {
                                 }
                             });
                         }
-
-
                     }
-
-
                 } else {
                     initialY = getScrollY();
                     WheelView.this.postDelayed(scrollerTask, newCheck);
                 }
             }
         };
-
-
     }
 
     int initialY;
@@ -200,7 +194,6 @@ public class WheelView extends ScrollView {
         return tv;
     }
 
-
     @Override
     protected void onScrollChanged(int l, int t, int oldl, int oldt) {
         super.onScrollChanged(l, t, oldl, oldt);
@@ -230,10 +223,7 @@ public class WheelView extends ScrollView {
         } else {
 //            Log.d(TAG, "向上滚动");
             scrollDirection = SCROLL_DIRECTION_UP;
-
         }
-
-
     }
 
     private void refreshItemView(int y) {
@@ -302,7 +292,6 @@ public class WheelView extends ScrollView {
         return selectedAreaBorder;
     }
 
-
     private int scrollDirection = -1;
     private static final int SCROLL_DIRECTION_UP = 0;
     private static final int SCROLL_DIRECTION_DOWN = 1;
@@ -312,12 +301,10 @@ public class WheelView extends ScrollView {
 
     @Override
     public void setBackgroundDrawable(Drawable background) {
-
         if (viewWidth == 0) {
             viewWidth = ((Activity) context).getWindowManager().getDefaultDisplay().getWidth();
             Log.d(TAG, "viewWidth: " + viewWidth);
         }
-
         if (null == paint) {
             paint = new Paint();
             paint.setColor(Color.parseColor("#83cde6"));
@@ -333,12 +320,10 @@ public class WheelView extends ScrollView {
 
             @Override
             public void setAlpha(int alpha) {
-
             }
 
             @Override
             public void setColorFilter(ColorFilter cf) {
-
             }
 
             @Override
@@ -346,10 +331,7 @@ public class WheelView extends ScrollView {
                 return 0;
             }
         };
-
-
         super.setBackgroundDrawable(background);
-
     }
 
     @Override
@@ -367,7 +349,6 @@ public class WheelView extends ScrollView {
         if (null != onWheelViewListener) {
             onWheelViewListener.onSelected(selectedIndex, items.get(selectedIndex));
         }
-
     }
 
     public void setSeletion(int position) {
@@ -379,7 +360,6 @@ public class WheelView extends ScrollView {
                 WheelView.this.smoothScrollTo(0, p * itemHeight);
             }
         });
-
     }
 
     public String getSeletedItem() {
@@ -426,5 +406,4 @@ public class WheelView extends ScrollView {
         view.measure(width, expandSpec);
         return view.getMeasuredHeight();
     }
-
 }

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,9 +51,8 @@ public class MainActivity extends AppCompatActivity {
     View mPopView;
     WheelView wvkg;
     WheelView wvg;
-    private static final String[] KgList = new String[]{"0", "1", "2", "3", "4", "5", "6", "7",
-            "8", "9"};
-    private static final String[] GList = new String[]{"25", "26", "27", "28", "29", "30", "31",
+
+    private static final String[] KgList = new String[]{"25", "26", "27", "28", "29", "30", "31",
             "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45",
             "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59",
             "60", "61", "62", "63", "64", "65", "66", "67", "68", "69", "70", "71", "72", "73",
@@ -75,8 +75,8 @@ public class MainActivity extends AppCompatActivity {
             "270", "271", "272", "273", "274", "275", "276", "277", "278", "279", "280", "281",
             "282", "283", "284", "285", "286", "287", "288", "289", "290", "291", "292", "293",
             "294", "295", "296", "297", "298", "299", "300"};
-
-    private static final String TAG = MainActivity.class.getSimpleName();
+    private static final String[] GList = new String[]{"0", "1", "2", "3", "4", "5", "6", "7",
+            "8", "9"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,18 +143,27 @@ public class MainActivity extends AppCompatActivity {
     private void initWheelView() {
         wvkg = (WheelView) mPopView.findViewById(R.id.wv_kg);
         wvg = (WheelView) mPopView.findViewById(R.id.wv_g);
-        wvkg.setOffset(2);
-        wvg.setOffset(2);
+        //设置首个item的起始值
+        wvkg.setOffset(1);
+        wvg.setOffset(1);
+
         wvkg.setItems(Arrays.asList(KgList));
         wvg.setItems(Arrays.asList(GList));
+        //设置显示的item数量
         wvkg.setSeletion(3);
         wvg.setSeletion(3);
-       /* wvkg.setOnWheelViewListener(new WheelView.OnWheelViewListener() {
+        wvkg.setOnWheelViewListener(new WheelView.OnWheelViewListener() {
             @Override
             public void onSelected(int selectedIndex, String item) {
-                Log.d(TAG, "[Dialog]selectedIndex: " + selectedIndex + ", item: " + item);
+                Log.i("TZ","[Dialog]selectedIndex: " + selectedIndex + ", item: " + item);
             }
-        });*/
+        });
+        wvg.setOnWheelViewListener(new WheelView.OnWheelViewListener() {
+            @Override
+            public void onSelected(int selectedIndex, String item) {
+                Log.i("TZ","[Dialog]selectedIndex: " + selectedIndex + ", item: " + item);
+            }
+        });
     }
 
     /**
