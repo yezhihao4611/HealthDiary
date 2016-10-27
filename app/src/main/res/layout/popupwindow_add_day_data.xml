@@ -3,62 +3,84 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#80ffffff"
     android:gravity="center"
     android:orientation="vertical">
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal">
-
-        <com.tz.healthdiary.custom.WheelView
-            android:id="@+id/wv_kg"
-            android:layout_width="64dp"
-            android:layout_height="48dp">
-
-        </com.tz.healthdiary.custom.WheelView>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/alipay_msp_black_point"/>
-
-        <com.tz.healthdiary.custom.WheelView
-            android:id="@+id/wv_g"
-            android:layout_width="64dp"
-            android:layout_height="48dp">
-
-        </com.tz.healthdiary.custom.WheelView>
+        android:layout_width="320dp"
+        android:layout_height="384dp"
+        android:background="#ffffff"
+        android:orientation="vertical">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:text="Kg"/>
+            android:layout_margin="16dp"
+            android:layout_marginBottom="20dp"
+            android:text="体重"
+            android:textSize="32dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <com.tz.healthdiary.custom.WheelView
+                android:id="@+id/wv_kg"
+                android:layout_width="96dp"
+                android:layout_height="64dp">
+
+            </com.tz.healthdiary.custom.WheelView>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/alipay_msp_black_point"/>
+
+            <com.tz.healthdiary.custom.WheelView
+                android:id="@+id/wv_g"
+                android:layout_width="96dp"
+                android:layout_height="64dp">
+
+            </com.tz.healthdiary.custom.WheelView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:text="Kg"
+                android:textSize="20dp"
+                android:id="@+id/textView5"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/bt_add_yes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#00000000"
+                android:onClick="doClick"
+                android:text="取消"/>
+
+            <Button
+                android:id="@+id/bt_add_no"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#00000000"
+                android:onClick="doClick"
+                android:text="确认"/>
+
+        </LinearLayout>
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/Button_add_yes"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#00000000"
-            android:text="取消"/>
-
-        <Button
-            android:id="@+id/Button_add_no"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#00000000"
-            android:text="确认"/>
-
-    </LinearLayout>
 
 </LinearLayout>

@@ -1,6 +1,6 @@
 package com.tz.healthdiary;
 
-import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -10,6 +10,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -24,6 +25,8 @@ import com.tz.healthdiary.fragment.OtherFragment;
 
 import java.util.Arrays;
 
+import static com.tz.healthdiary.R.id.bt_add_no;
+import static com.tz.healthdiary.R.id.bt_add_yes;
 import static com.tz.healthdiary.R.id.fab_add;
 
 /**
@@ -33,6 +36,8 @@ import static com.tz.healthdiary.R.id.fab_add;
 public class MainActivity extends AppCompatActivity {
 
     LinearLayout mLinearLayout;
+    Button mButton1;
+    Button mButton2;
 
     private RadioButton centre;
     private RadioButton bmi;
@@ -77,6 +82,10 @@ public class MainActivity extends AppCompatActivity {
             "294", "295", "296", "297", "298", "299", "300"};
     private static final String[] GList = new String[]{"0", "1", "2", "3", "4", "5", "6", "7",
             "8", "9"};
+
+    private static final int NUM = 1;
+    int KgSelectedIndex;
+    int GSelectedIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -144,26 +153,32 @@ public class MainActivity extends AppCompatActivity {
         wvkg = (WheelView) mPopView.findViewById(R.id.wv_kg);
         wvg = (WheelView) mPopView.findViewById(R.id.wv_g);
         //设置首个item的起始值
-        wvkg.setOffset(1);
-        wvg.setOffset(1);
-
+        wvkg.setOffset(NUM);
+        wvg.setOffset(NUM);
+        //设置控件中各个item的内容
         wvkg.setItems(Arrays.asList(KgList));
         wvg.setItems(Arrays.asList(GList));
-        //设置显示的item数量
-        wvkg.setSeletion(3);
-        wvg.setSeletion(3);
+
         wvkg.setOnWheelViewListener(new WheelView.OnWheelViewListener() {
             @Override
             public void onSelected(int selectedIndex, String item) {
-                Log.i("TZ","[Dialog]selectedIndex: " + selectedIndex + ", item: " + item);
+                KgSelectedIndex = selectedIndex;
+                Log.i("TZ", "[Dialog]selectedIndex: " + selectedIndex + ", item: " + item);
             }
         });
         wvg.setOnWheelViewListener(new WheelView.OnWheelViewListener() {
             @Override
             public void onSelected(int selectedIndex, String item) {
-                Log.i("TZ","[Dialog]selectedIndex: " + selectedIndex + ", item: " + item);
+                GSelectedIndex = selectedIndex;
+                Log.i("TZ", "[Dialog]selectedIndex: " + selectedIndex + ", item: " + item);
             }
         });
+    }
+
+    public void backgroundAlpha(float bgAlpha) {
+        WindowManager.LayoutParams lp = getWindow().getAttributes();
+        lp.alpha = bgAlpha; //0.0-1.0
+        getWindow().setAttributes(lp);
     }
 
     /**
@@ -178,10 +193,22 @@ public class MainActivity extends AppCompatActivity {
                 mPopupWindow.showAtLocation(mPopView, Gravity.CENTER, 0, 0);
                 Toast.makeText(MainActivity.this, "ok", Toast.LENGTH_LONG).show();
                 break;
+            case bt_add_no:
+                mPopupWindow.dismiss();
+                break;
+            case bt_add_yes:
+                mPopupWindow.dismiss();
+                break;
+            default:
+                break;
         }
     }
 
     private void showPopupWindow(View view) {
+        //设置控件选中的位置
+        wvkg.setSeletion(KgSelectedIndex - NUM);
+        wvg.setSeletion(GSelectedIndex - NUM);
+
         mPopupWindow = new PopupWindow(view);
         mPopupWindow.setWidth(WindowManager.LayoutParams.WRAP_CONTENT);
         mPopupWindow.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
@@ -190,11 +217,12 @@ public class MainActivity extends AppCompatActivity {
         //设置外部点击
         mPopupWindow.setOutsideTouchable(true);
         //设置背景颜色，0x后面加8位
-        mPopupWindow.setBackgroundDrawable(new ColorDrawable(0xcbcbcffa));
+        mPopupWindow.setBackgroundDrawable(new BitmapDrawable());
+        //设置屏幕背景透明度
+        backgroundAlpha(0.5f);
+        //添加pop窗口关闭事件
+        mPopupWindow.setOnDismissListener(new PopupWindowDismissListener());
     }
-
-    ;
-
 
     private void showFragment(int i) {
         manager = getSupportFragmentManager();
@@ -250,6 +278,19 @@ public class MainActivity extends AppCompatActivity {
         }
         if (mOtherFragment != null) {
             transaction.hide(mOtherFragment);
+        }
+    }
+    /**
+     * popWin关闭事件，主要是为了将背景透明度改回来
+     * @author cg
+     *
+     */
+    class PopupWindowDismissListener implements PopupWindow.OnDismissListener{
+
+        @Override
+        public void onDismiss() {
+            //窗口关闭时恢复背景透明度
+            backgroundAlpha(1f);
         }
     }
 }
