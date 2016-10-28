@@ -58,7 +58,6 @@ public class CentreFragment extends Fragment {
         lines.add(new Jchart(4, Color.parseColor("#5F77F6")));
 
 
-
         mLineChar.setLineStyle(JcoolGraph.LINE_CURVE);
         mLineChar.setLinePointRadio((int) mLineChar.getLineWidth());
         mLineChar.setLineShowStyle(JcoolGraph.LINESHOW_ASWAVE);
