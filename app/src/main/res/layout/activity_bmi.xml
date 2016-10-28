@@ -6,147 +6,387 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="64dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="horizontal">
+            style="@style/mw"
+            android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/health_guide_woman"/>
+            <LinearLayout
+                style="@style/mw"
+                android:layout_marginTop="16dp"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/age_number"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="24"
-                android:textSize="28dp"/>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="64dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@mipmap/health_guide_woman"/>
+
+                    <TextView
+                        android:id="@+id/age_number"
+                        style="@style/sizeOfBMI"
+                        android:text="24"/>
+
+                    <TextView
+                        style="@style/sizeOfBMI"
+                        android:text="岁"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/otherFour">
+
+                    <TextView
+                        android:id="@+id/stature_number"
+                        style="@style/sizeOfBMI"
+                        android:text="170"/>
+
+                    <TextView
+                        style="@style/sizeOfBMI"
+                        android:text="cm"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    style="@style/otherFour">
+
+                    <TextView
+                        android:id="@+id/weight_number"
+                        style="@style/sizeOfBMI"
+                        android:text="60"/>
+
+                    <TextView
+                        style="@style/sizeOfBMI"
+                        android:text="Kg"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <com.tz.healthdiary.custom.ColorArcProgressBar
+                android:id="@+id/bar1"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="岁"
-                android:textSize="24dp"/>
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="128dp"
+                android:layout_marginBottom="128dp"
+                app:back_color="@android:color/darker_gray"
+                app:back_width="2dp"
+                app:front_color1="@color/color1"
+                app:front_color2="@color/color2"
+                app:front_color3="@color/color3"
+                app:front_color4="@color/color4"
+                app:front_color5="@color/color5"
+                app:front_color6="@color/color6"
+                app:front_color7="@color/color7"
+                app:front_color8="@color/color8"
+                app:front_width="10dp"
+                app:is_need_content="true"
+                app:is_need_dial="true"
+                app:is_need_title="true"
+                app:is_need_unit="true"
+                app:max_value="100"
+                app:string_title="当前指数"
+                app:string_unit=""
+                app:total_engle="270"/>
+
+            <LinearLayout
+                style="@style/mw"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <TextView
+                    style="@style/sizeOfBMI"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="正常体重"/>
+
+                <TextView
+                    android:id="@+id/min_weight_number"
+                    style="@style/sizeOfBMI"
+                    android:text="15"/>
+
+                <TextView
+                    style="@style/sizeOfBMI"
+                    android:text=" - "/>
+
+                <TextView
+                    android:id="@+id/max_weight_number"
+                    style="@style/sizeOfBMI"
+                    android:text="16"/>
+
+                <TextView
+                    style="@style/sizeOfBMI"
+                    android:text="Kg"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                style="@style/mwv">
+
+                <LinearLayout
+                    style="@style/mwv">
+
+                    <LinearLayout
+                        style="@style/mwch">
+
+                        <LinearLayout
+                            style="@style/otherOne">
+
+                            <ImageView
+                                style="@style/colors"
+                                android:background="@color/color1"/>
+
+                            <TextView
+                                style="@style/otherThree"
+                                android:text="极严重体重不足"/>
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:text="0-16.0"
+                            style="@style/otherTwo"
+                            />
+
+                    </LinearLayout>
+
+                    <ImageView
+                        style="@style/partingLine"/>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    style="@style/mwv">
+
+                    <LinearLayout
+                        style="@style/mwch">
+
+                        <LinearLayout
+                            style="@style/otherOne">
+
+                            <ImageView
+                                style="@style/colors"
+                                android:background="@color/color2"/>
+
+                            <TextView
+                                style="@style/otherThree"
+                                android:text="严重体重不足"/>
+
+                        </LinearLayout>
+
+                        <TextView
+                            style="@style/otherTwo"
+                            android:text="16.0-16.9"/>
+
+                    </LinearLayout>
+
+                    <ImageView
+                        style="@style/partingLine"/>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    style="@style/mwv">
+
+                    <LinearLayout
+                        style="@style/mwch">
+
+                        <LinearLayout
+                            style="@style/otherOne">
+
+                            <ImageView
+                                style="@style/colors"
+                                android:background="@color/color3"/>
+
+                            <TextView
+                                style="@style/otherThree"
+                                android:text="体重不足"/>
+
+                        </LinearLayout>
+
+                        <TextView
+                            style="@style/otherTwo"
+                            android:text="17.0-18.4"/>
+
+                    </LinearLayout>
+
+                    <ImageView
+                        style="@style/partingLine"/>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    style="@style/mwv">
+
+                    <LinearLayout
+                        style="@style/mwch">
+
+                        <LinearLayout
+                            style="@style/otherOne">
+
+                            <ImageView
+                                style="@style/colors"
+                                android:background="@color/color4"/>
+
+                            <TextView
+                                style="@style/otherThree"
+                                android:text="正常"/>
+
+                        </LinearLayout>
+
+                        <TextView
+                            style="@style/otherTwo"
+                            android:text="18.5-24.9"/>
+
+                    </LinearLayout>
+
+                    <ImageView
+                        style="@style/partingLine"/>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    style="@style/mwv">
+
+                    <LinearLayout
+                        style="@style/mwch">
+
+                        <LinearLayout
+                            style="@style/otherOne">
+
+                            <ImageView
+                                style="@style/colors"
+                                android:background="@color/color5"/>
+
+                            <TextView
+                                style="@style/otherThree"
+                                android:text="超重"/>
+
+                        </LinearLayout>
+
+                        <TextView
+                            style="@style/otherTwo"
+                            android:text="25.0-29.9"/>
+
+                    </LinearLayout>
+
+                    <ImageView
+                        style="@style/partingLine"/>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    style="@style/mwv">
+
+                    <LinearLayout
+                        style="@style/mwch">
+
+                        <LinearLayout
+                            style="@style/otherOne">
+
+                            <ImageView
+                                style="@style/colors"
+                                android:background="@color/color6"/>
+
+                            <TextView
+                                style="@style/otherThree"
+                                android:text="肥胖等级Ⅰ"/>
+
+                        </LinearLayout>
+
+                        <TextView
+                            style="@style/otherTwo"
+                            android:text="30.0-34.9"/>
+
+                    </LinearLayout>
+
+                    <ImageView
+                        style="@style/partingLine"/>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    style="@style/mwv">
+
+                    <LinearLayout
+                        style="@style/mwch">
+
+                        <LinearLayout
+                            style="@style/otherOne">
+
+                            <ImageView
+                                style="@style/colors"
+                                android:background="@color/color7"/>
+
+                            <TextView
+                                style="@style/otherThree"
+                                android:text="肥胖等级Ⅱ"/>
+
+                        </LinearLayout>
+
+                        <TextView
+                            style="@style/otherTwo"
+                            android:text="35.0-39.9"
+                            android:id="@+id/textView3"/>
+
+                    </LinearLayout>
+
+                    <ImageView
+                        style="@style/partingLine"/>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    style="@style/mwv">
+
+                    <LinearLayout
+                        style="@style/mwch">
+
+                        <LinearLayout
+                            style="@style/otherOne">
+
+                            <ImageView
+                                style="@style/colors"
+                                android:background="@color/color8"/>
+
+                            <TextView
+                                style="@style/otherThree"
+                                android:text="肥胖等级Ⅲ"
+                                android:id="@+id/textView4"/>
+
+                        </LinearLayout>
+
+                        <TextView
+                            style="@style/otherTwo"
+                            android:text="≥40.0"/>
+
+                    </LinearLayout>
+
+                    <ImageView
+                        style="@style/partingLine"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center">
-
-            <TextView
-                android:id="@+id/stature_number"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="170"
-                android:textSize="28dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="cm"
-                android:textSize="24dp"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center">
-
-            <TextView
-                android:id="@+id/weight_number"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="60"
-                android:textSize="28dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Kg"
-                android:textSize="24dp"/>
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <com.tz.healthdiary.custom.ColorArcProgressBar
-        android:id="@+id/bar1"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="150dp"
-        app:back_color="@android:color/darker_gray"
-        app:back_width="2dp"
-        app:front_color1="@color/color1"
-        app:front_color2="@color/color2"
-        app:front_color3="@color/color3"
-        app:front_color4="@color/color4"
-        app:front_color5="@color/color5"
-        app:front_color6="@color/color6"
-        app:front_color7="@color/color7"
-        app:front_color8="@color/color8"
-        app:front_width="10dp"
-        app:is_need_content="true"
-        app:is_need_dial="true"
-        app:is_need_title="true"
-        app:is_need_unit="true"
-        app:max_value="100"
-        app:string_title="当前速度"
-        app:string_unit="km/h"
-        app:total_engle="270"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="16dp">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="正常体重"
-            android:textSize="30dp"/>
-
-        <TextView
-            android:id="@+id/min_weight_number"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="15"
-            android:textSize="28dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=" - "
-            android:textSize="28dp"/>
-
-        <TextView
-            android:id="@+id/max_weight_number"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="16"
-            android:textSize="28dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Kg"
-            android:textSize="24dp"/>
-
-    </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
