@@ -67,7 +67,6 @@ public class CentreFragment extends Fragment {
 //        mLineChar.setYaxisValues(0, 0, 0);
         mLineChar.setPaintShaderColors(Color.RED, Color.parseColor("#E79D23"), Color.parseColor("#FFF03D"), Color.parseColor("#A9E16F"), Color.parseColor("#75B9EF"));
 
-
     }
 
     @Override
