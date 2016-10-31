@@ -19,7 +19,7 @@ import java.util.List;
  * 随时供Service调用
  */
 
-public class TitleData {
+public class HealthData {
 
     private final String[] TITLE_TRUE = {"头条", "财经", "游戏", "电影", "娱乐", "军事",
             "手机", "体育", "科技", "汽车"};
@@ -28,7 +28,7 @@ public class TitleData {
             "亲子", "CBA", "足球", "房产"};
 
     private ContentValues contentValues;
-    private TitleDbHelper titleDbHelper;
+    private HealthDbHelper mHealthDbHelper;
     private SQLiteDatabase sqLiteDatabase;
 
     private Date date;
@@ -60,10 +60,10 @@ public class TitleData {
      * 分别获得mList和nList
      */
     public void readData() {
-        titleDbHelper = new TitleDbHelper(MyApplication.getContext());
-        sqLiteDatabase = titleDbHelper.getReadableDatabase();
+        mHealthDbHelper = new HealthDbHelper(MyApplication.getContext());
+        sqLiteDatabase = mHealthDbHelper.getReadableDatabase();
 
-        Cursor cursor = sqLiteDatabase.query(TitleDbHelper.TABLE_NAME, null, null, null, null, null, null);
+        Cursor cursor = sqLiteDatabase.query(HealthDbHelper.TABLE_NAME, null, null, null, null, null, null);
         if (cursor != null) {
             while (cursor.moveToNext()) {
                 String mPoint = cursor.getString(cursor.getColumnIndex("point"));
@@ -88,8 +88,8 @@ public class TitleData {
      */
     public void alterData(List<String> mList_s, List<String> nList_s) {
         contentValues = new ContentValues();
-        titleDbHelper = new TitleDbHelper(MyApplication.getContext());
-        sqLiteDatabase = titleDbHelper.getWritableDatabase();
+        mHealthDbHelper = new HealthDbHelper(MyApplication.getContext());
+        sqLiteDatabase = mHealthDbHelper.getWritableDatabase();
 
         simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd  HH:mm:ss");
         date = new Date();
@@ -104,7 +104,7 @@ public class TitleData {
 
             String where = "title=?";
             String[] title = {mList_s.get(i)};
-            sqLiteDatabase.update(TitleDbHelper.TABLE_NAME, contentValues, where, title);
+            sqLiteDatabase.update(HealthDbHelper.TABLE_NAME, contentValues, where, title);
         }
         for (int i = 0; i < nList_s.size(); i++) {
             date = new Date();
@@ -116,7 +116,7 @@ public class TitleData {
 
             String where = "title=?";
             String[] title = {nList_s.get(i)};
-            sqLiteDatabase.update(TitleDbHelper.TABLE_NAME, contentValues, where, title);
+            sqLiteDatabase.update(HealthDbHelper.TABLE_NAME, contentValues, where, title);
         }
     }
 
@@ -125,12 +125,12 @@ public class TitleData {
      */
     public void initData() {
         contentValues = new ContentValues();
-        titleDbHelper = new TitleDbHelper(MyApplication.getContext());
-        sqLiteDatabase = titleDbHelper.getWritableDatabase();
+        mHealthDbHelper = new HealthDbHelper(MyApplication.getContext());
+        sqLiteDatabase = mHealthDbHelper.getWritableDatabase();
 
         simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd  HH:mm:ss");
 
-        for (int i = 0; i < TITLE_TRUE.length; i++) {
+        /*for (int i = 0; i < TITLE_TRUE.length; i++) {
             date = new Date();
             time = simpleDateFormat.format(date);
 
@@ -140,7 +140,7 @@ public class TitleData {
             contentValues.put("point", TRUE);
             contentValues.put("time", time);
             contentValues.put("newTime", time);
-            sqLiteDatabase.insert(TitleDbHelper.TABLE_NAME, null, contentValues);
+            sqLiteDatabase.insert(HealthDbHelper.TABLE_NAME, null, contentValues);
         }
         for (int i = 0; i < TITLE_FALSE.length; i++) {
             date = new Date();
@@ -152,15 +152,15 @@ public class TitleData {
             contentValues.put("point", FALSE);
             contentValues.put("time", time);
             contentValues.put("newTime", time);
-            sqLiteDatabase.insert(TitleDbHelper.TABLE_NAME, null, contentValues);
+            sqLiteDatabase.insert(HealthDbHelper.TABLE_NAME, null, contentValues);
             Log.i("TZ", "initData()：加载完毕");
-        }
+        }*/
     }
 
     public void ifDataNull() {
-        titleDbHelper = new TitleDbHelper(MyApplication.getContext());
-        sqLiteDatabase = titleDbHelper.getReadableDatabase();
-        Cursor cursor = sqLiteDatabase.query(TitleDbHelper.TABLE_NAME, null, null, null, null, null, null);
+        mHealthDbHelper = new HealthDbHelper(MyApplication.getContext());
+        sqLiteDatabase = mHealthDbHelper.getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.query(HealthDbHelper.TABLE_NAME, null, null, null, null, null, null);
         if (cursor != null) {
             while (cursor.moveToNext()) {
                 String mTitle = cursor.getString(cursor.getColumnIndex("title"));

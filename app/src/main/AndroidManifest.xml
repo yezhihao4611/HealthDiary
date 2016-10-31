@@ -40,6 +40,9 @@
         <activity android:name=".Jisuanqi.BaseActivity">
 
         </activity>
+        <activity android:name=".TestOneActivity">
+
+        </activity>
     </application>
 
 </manifest>

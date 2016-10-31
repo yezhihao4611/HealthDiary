@@ -18,7 +18,7 @@ import java.util.List;
 
 public class MyDataService extends Service {
 
-    TitleData titleData = new TitleData();
+    HealthData mHealthData = new HealthData();
     private static List<String> mList;
     private static List<String> nList;
 
@@ -65,14 +65,14 @@ public class MyDataService extends Service {
     }
 
     public void initData(){
-        titleData.ifDataNull();
+        mHealthData.ifDataNull();
         if (mList == null && nList == null) {
-            mList = titleData.getmList();
-            nList = titleData.getnList();
+            mList = mHealthData.getmList();
+            nList = mHealthData.getnList();
         }
     }
 
     public void updataData(){
-        titleData.alterData(mList,nList);
+        mHealthData.alterData(mList,nList);
     }
 }

@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:onClick="doClick"
-        android:src="@mipmap/timg"
+        android:src="@mipmap/nanase"
         app:border_color="#FF8200"
         app:border_width="2dp"/>
 
