@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#dad9d9">
+
+        <TextView
+            android:id="@+id/tv_back_opinion"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:text="取消"
+            android:textColor="#e91926" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="意见反馈"
+            android:textColor="#262626"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_send_opinion"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="发送"
+            android:layout_margin="10dp"
+            android:textColor="#e91926" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/et_content_opinion"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="start"
+        android:hint="   期待你好的意见和建议，我们将会根据你们的意见或建议进行完善....." />
+
+</LinearLayout>
