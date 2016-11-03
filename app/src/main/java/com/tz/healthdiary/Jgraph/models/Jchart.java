@@ -79,7 +79,7 @@ public class Jchart implements Cloneable {
         mStart.y = 0;
         this.mColor = color;
         this.mXmsg = TextUtils.isEmpty(mXmsg) ? new DecimalFormat("##").format(mHeight) : mXmsg;
-        mShowMsg = new DecimalFormat("##").format(mUpper);
+        mShowMsg = new DecimalFormat("##.#").format(mUpper);
     }
 
     public RectF getRectF(){

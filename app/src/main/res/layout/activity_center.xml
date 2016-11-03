@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#323032"
+    android:background="#AFEEEE"
     android:orientation="horizontal">
 
 
@@ -11,11 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="360dp"
         android:layout_gravity="center"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
         android:clickable="true"
         android:paddingRight="5dp"
-        android:paddingTop="100dp"
+        android:paddingTop="50dp"
         app:graphstyle="line"
         app:linestyle="curve"
         app:linewidth="3dp"
