@@ -898,7 +898,7 @@ public class JcoolGraph extends BaseGraph {
         for(Jchart jchart : mJcharts) {
             jchart.setAniratio(0);
         }
-        aniShowChar(0, mJcharts.size()-1, new LinearInterpolator(), ( mJcharts.size()-1 )*80, true);
+        aniShowChar(0, mJcharts.size()-1, new LinearInterpolator(), ( mJcharts.size()-1 )*200, true);
     }
 
     @Override

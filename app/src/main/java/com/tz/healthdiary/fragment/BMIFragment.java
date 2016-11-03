@@ -23,7 +23,7 @@ public class BMIFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_bmi,null);
         mColorArcProgressBar = (ColorArcProgressBar) view.findViewById(R.id.bar1);
-        mColorArcProgressBar.setCurrentValues(30);
+        mColorArcProgressBar.setCurrentValues(100);
 
         return view;
     }
