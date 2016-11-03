@@ -27,7 +27,7 @@ import java.util.Arrays;
 
 import static com.tz.healthdiary.R.id.bt_add_no;
 import static com.tz.healthdiary.R.id.bt_add_yes;
-import static com.tz.healthdiary.R.id.fab_add;
+import static com.tz.healthdiary.R.id.fab_main;
 
 /**
  * Created by 西野七濑 on 2016/10/19.
@@ -131,6 +131,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
     private void initView() {
         mLinearLayout = (LinearLayout) findViewById(R.id.main);
         centre = (RadioButton) findViewById(R.id.centre);
@@ -188,7 +189,7 @@ public class MainActivity extends AppCompatActivity {
      */
     public void doClick(View view) {
         switch (view.getId()) {
-            case fab_add:
+            case fab_main:
                 showPopupWindow(mPopView);
                 mPopupWindow.showAtLocation(mPopView, Gravity.CENTER, 0, 0);
                 Toast.makeText(MainActivity.this, "ok", Toast.LENGTH_LONG).show();

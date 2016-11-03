@@ -3,62 +3,54 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-<LinearLayout
-    android:layout_width="match_parent"
-    android:background="#d9213d"
-    android:layout_height="40dp">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:layout_marginLeft="12dp"
-        android:textColor="#b6b1b1"
-        android:gravity="center"
-        android:layout_gravity="center"
-        android:text="其他"/>
-</LinearLayout>
+
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:background="#e9e5e5"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="#e9e5e5">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="6dp"
             android:layout_gravity="center"
+            android:textSize="16sp"
+            android:layout_margin="12dp"
             android:gravity="center"
-            android:text="个人资料"/>
+            android:text="个人资料" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <TextView
             android:layout_width="0dp"
-            android:layout_weight="2"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:textSize="16sp"
-            android:text="年        龄"/>
+            android:layout_weight="2"
+            android:text="年        龄"
+            android:textSize="16sp" />
 
         <EditText
+            android:id="@+id/editText3"
             android:layout_width="0dp"
-            android:layout_weight="3"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_weight="3"
             android:gravity="center"
-            android:text="22"
             android:inputType="number"
-            android:id="@+id/editText3" />
+            android:background="@null"
+            android:text="22" />
 
         <RadioGroup
             android:id="@+id/rg_main"
             android:layout_width="0dp"
-            android:layout_weight="3"
             android:layout_height="match_parent"
-           android:gravity="center"
             android:layout_marginTop="10dp"
+            android:layout_weight="3"
+            android:gravity="center"
             android:orientation="horizontal">
 
             <RadioButton
@@ -67,205 +59,220 @@
                 android:layout_height="wrap_content"
                 android:button="@null"
                 android:checked="true"
-                android:drawableTop="@drawable/man"
-                />
+                android:drawableTop="@drawable/man" />
 
             <RadioButton
                 android:id="@+id/wuman"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
                 android:button="@null"
-                android:drawableTop="@drawable/wumen"
-                />
+                android:drawableTop="@drawable/wumen" />
         </RadioGroup>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:gravity="center"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:gravity="center">
 
         <TextView
+            android:id="@+id/textView"
             android:layout_width="0dp"
-            android:layout_weight="2"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:textSize="16sp"
+            android:layout_weight="2"
             android:text="身        高"
-            android:id="@+id/textView" />
+            android:textSize="16sp" />
 
         <EditText
             android:id="@+id/et_height_other"
             android:layout_width="0dp"
-            android:layout_weight="3"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_weight="3"
             android:gravity="center"
             android:inputType="number"
-            android:text="170"
-            />
+            android:background="@null"
+            android:text="170" />
 
         <TextView
             android:layout_width="0dp"
-            android:layout_weight="3"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_weight="3"
             android:gravity="center"
-            android:textSize="20sp"
-            android:text="cm"/>
+            android:text="cm"
+            android:textSize="20sp" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:gravity="center"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:gravity="center">
 
         <TextView
+            android:id="@+id/textView2"
             android:layout_width="0dp"
-            android:layout_weight="2"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:textSize="16sp"
+            android:layout_weight="2"
             android:text="体        重"
-            android:id="@+id/textView2" />
+            android:textSize="16sp" />
 
-        <EditText
+        <TextView
             android:id="@+id/et_weight_other"
             android:layout_width="0dp"
-            android:layout_weight="3"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_weight="3"
             android:gravity="center"
             android:inputType="number"
+            android:textSize="18sp"
             android:text="67" />
 
         <TextView
             android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_weight="3"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:gravity="center"
-            android:textSize="20sp"
-            android:text="kg"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:background="#e9e5e5"
-        android:layout_height="wrap_content">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="6dp"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:text="计算器"/>
+            android:text="kg"
+            android:textSize="20sp" />
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#e9e5e5">
+
         <TextView
-            android:id="@+id/tv_waist_other"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="16sp"
+            android:layout_margin="12dp"
             android:gravity="center"
-            android:layout_margin="2dp"
-            android:drawablePadding="10dp"
-            android:drawableLeft="@drawable/xp"
-            android:text="腰围身高比"/>
+            android:text="计算器" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_waist_other"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:drawableLeft="@mipmap/waist"
+        android:drawablePadding="10dp"
+        android:padding="8dp"
+        android:textSize="16sp"
+        android:gravity="center_vertical"
+        android:text="腰围身高比" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:background="#a19e9e"/>
+        android:background="#a19e9e" />
+
     <TextView
         android:id="@+id/tv_body_other"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:layout_margin="5dp"
+        android:drawableLeft="@mipmap/body"
         android:drawablePadding="10dp"
-        android:layout_margin="2dp"
-        android:drawableLeft="@drawable/xp"
+        android:textSize="16sp"
+        android:padding="8dp"
+        android:gravity="center_vertical"
         android:text="体   脂    率" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:background="#a19e9e"/>
+        android:background="#a19e9e"
+        android:id="@+id/textView3" />
 
     <TextView
         android:id="@+id/tv_base_other"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:textSize="16sp"
+        android:drawableLeft="@mipmap/base"
+        android:drawablePadding="10dp"
+        android:padding="8dp"
+        android:gravity="center_vertical"
+        android:text="基础代谢率" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#a19e9e" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#e9e5e5">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="16sp"
+            android:layout_margin="12dp"
+            android:gravity="center"
+            android:text="设置" />
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#a19e9e" />
+
+    <TextView
+        android:id="@+id/tv_delete_other"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_margin="2dp"
-        android:drawablePadding="10dp"
-        android:drawableLeft="@drawable/xp"
-        android:text="基础代谢率"/>
+        android:layout_margin="10dp"
+        android:text="删除所有数据"
+        android:textSize="18sp" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:background="#a19e9e"/>
+        android:background="#a19e9e" />
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/tv_opinion_other"
         android:layout_width="match_parent"
-        android:background="#e9e5e5"
-        android:layout_height="wrap_content">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:layout_margin="6dp"
-            android:text="设置"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:text="提  醒"
-            android:textSize="18sp"
-            />
-        <ImageView
-            android:id="@+id/iv_remind_other"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:src="@mipmap/sideslip_night_off"/>
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/tv_hour"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="1 2"/>
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="意  见   反   馈"
+        android:textSize="18sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text=" : " />
-
-        <TextView
-            android:id="@+id/tv_month"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="0 0"
-            android:layout_marginRight="20dp"/>
-    </LinearLayout>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:background="#a19e9e"/>
-<TextView
-    android:id="@+id/tv_delete_other"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    android:textSize="18sp"
-    android:text="删除所有数据"/>
+        android:background="#a19e9e" />
+<LinearLayout
+    android:id="@+id/ll_update"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/tv_about_other"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="版   本   更   新"
+        android:textSize="18sp" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="8dp"
+        android:text="1.2.2"/>
+</LinearLayout>
+
 
 </LinearLayout>
