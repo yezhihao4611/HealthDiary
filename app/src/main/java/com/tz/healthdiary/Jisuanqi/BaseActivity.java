@@ -214,7 +214,7 @@ public class BaseActivity extends Activity implements View.OnClickListener {
             result = (int) str;
             re = String.valueOf(result);
             if (year >= 5 & year <= 120 && height >= 20 && height <= 250 & weight >= 10 && weight <= 400) {
-                tv_result_base.setText(re);
+                tv_result_base.setText(re+"kcal");
                 if (tv_activity_base.getText().toString().equals("久坐不动")){
                     str = (float) ((655 + (9.7 * weight) + (1.8 * height) - (4.7 * year))*1.2);
                     result = (int) str;
@@ -260,6 +260,7 @@ public class BaseActivity extends Activity implements View.OnClickListener {
             } else {
                 tv_result_base.setText("0");
                 tv_base_base.setText("0");
+
             }
         }
     }
@@ -296,7 +297,7 @@ public class BaseActivity extends Activity implements View.OnClickListener {
         //设置外部点击
         popupWindow.setOutsideTouchable(true);
         //设置背景颜色，0x后面加8位
-        popupWindow.setBackgroundDrawable(new ColorDrawable(0xcbcbcffa));
+        popupWindow.setBackgroundDrawable(new ColorDrawable(0x000000));
     }
 
 }

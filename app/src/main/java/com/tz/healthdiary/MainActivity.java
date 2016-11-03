@@ -83,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
     private void initView() {
         mLinearLayout = (LinearLayout) findViewById(R.id.main);
         centre = (RadioButton) findViewById(R.id.centre);
