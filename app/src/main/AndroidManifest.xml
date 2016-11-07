@@ -14,28 +14,32 @@
     <!--允许读取手机状态 用于创建BmobInstallation-->
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <application
+        android:name=".utils.MyApplication"
         android:allowBackup="true"
         android:icon="@drawable/logo920"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.Design.Light.NoActionBar">
         <activity android:name=".StartAnimaActivity">
-
-        </activity>
-        <activity android:name=".FirstActivity">
-
-        </activity>
-        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TestActivity">
+        <activity android:name=".FirstActivity">
+
+        </activity>
+        <activity android:name=".InitializeActivity">
+
+        </activity>
+        <activity android:name=".MainActivity">
 
         </activity>
 
+        <activity android:name=".TestActivity">
+
+        </activity>
         <activity android:name=".Jisuanqi.WaistlineActivity">
 
         </activity>
@@ -54,6 +58,7 @@
         <activity android:name=".OpinionActivity">
 
         </activity>
+
     </application>
 
 </manifest>

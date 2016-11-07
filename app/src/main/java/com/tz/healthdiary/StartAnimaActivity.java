@@ -20,8 +20,7 @@ public class StartAnimaActivity extends AppCompatActivity {
 
     ImageView mImageView;
 
-    SharedPreferences mSharedPreferences;
-
+    static SharedPreferences mSharedPreferences;
     static MyDataService myDataService;
 
     Handler mHandler = new Handler() {
@@ -31,13 +30,18 @@ public class StartAnimaActivity extends AppCompatActivity {
             switch (msg.what) {
                 case 0:
                     Intent intent0 = new Intent(StartAnimaActivity.this, FirstActivity.class);
-                    mSharedPreferences.edit().putBoolean("first", false).commit();
+
                     startActivity(intent0);
                     finish();
                     break;
                 case 1:
-                    Intent intent1 = new Intent(StartAnimaActivity.this, MainActivity.class);
+                    Intent intent1 = new Intent(StartAnimaActivity.this, InitializeActivity.class);
                     startActivity(intent1);
+                    finish();
+                    break;
+                case 2:
+                    Intent intent2 = new Intent(StartAnimaActivity.this, MainActivity.class);
+                    startActivity(intent2);
                     finish();
                     break;
                 default:
@@ -50,7 +54,7 @@ public class StartAnimaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_startanima);
         initView();//控件初始化
-        //initService();//启动Service
+        initService();//启动Service
         newThread();//判断跳转
     }
 
@@ -58,7 +62,6 @@ public class StartAnimaActivity extends AppCompatActivity {
         //启动服务
         Intent intent = new Intent(StartAnimaActivity.this, MyDataService.class);
         startService(intent);
-        myDataService.initData();
     }
 
     private void initView() {
@@ -70,6 +73,7 @@ public class StartAnimaActivity extends AppCompatActivity {
     private void newThread() {
         mSharedPreferences = getSharedPreferences("firstSharedPreferences", 0);
         final boolean first = mSharedPreferences.getBoolean("first", true);//不存在则默认为true
+        final boolean initialize = mSharedPreferences.getBoolean("initialize", true);//不存在则默认为true
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -79,7 +83,11 @@ public class StartAnimaActivity extends AppCompatActivity {
                     if (first) {
                         message.what = 0;
                     } else {
-                        message.what = 1;
+                        if (initialize) {
+                            message.what = 1;
+                        } else {
+                            message.what = 2;
+                        }
                     }
                     mHandler.sendMessage(message);
                 } catch (InterruptedException e) {

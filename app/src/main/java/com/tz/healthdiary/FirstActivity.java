@@ -2,6 +2,7 @@ package com.tz.healthdiary;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
@@ -28,15 +29,13 @@ public class FirstActivity extends AppCompatActivity {
     private PagerAdapter mPagerAdapter;
     private int[] imageId = new int[]{R.mipmap.firstone,R.mipmap.firsttwo,R.mipmap.firstthree};
     private List<ImageView> mImageViews = new ArrayList<ImageView>();
-
-
+    SharedPreferences mSharedPreferences = StartAnimaActivity.mSharedPreferences;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first);
         initView();
-
 
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override//从滑动开始到结束前一直调用
@@ -54,7 +53,6 @@ public class FirstActivity extends AppCompatActivity {
 
             }
         });
-
     }
 
     private void initView() {
@@ -63,8 +61,10 @@ public class FirstActivity extends AppCompatActivity {
         mTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(FirstActivity.this, MainActivity.class);
+                Intent intent = new Intent(FirstActivity.this, InitializeActivity.class);
                 startActivity(intent);
+                mSharedPreferences = getSharedPreferences("firstSharedPreferences", 0);
+                mSharedPreferences.edit().putBoolean("first", false).apply();
                 finish();
             }
         });
