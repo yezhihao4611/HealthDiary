@@ -22,8 +22,10 @@ import com.tz.healthdiary.fragment.BMIFragment;
 import com.tz.healthdiary.fragment.CentreFragment;
 import com.tz.healthdiary.fragment.NewsFragment;
 import com.tz.healthdiary.fragment.OtherFragment;
+import com.tz.healthdiary.sqlite.MyDataService;
 
 import java.util.Arrays;
+import java.util.Calendar;
 
 import static com.tz.healthdiary.R.id.bt_add_no;
 import static com.tz.healthdiary.R.id.bt_add_yes;
@@ -35,29 +37,33 @@ import static com.tz.healthdiary.R.id.fab_add;
 
 public class MainActivity extends AppCompatActivity {
 
-    LinearLayout mLinearLayout;
-    Button mButton1;
-    Button mButton2;
+    private LinearLayout mLinearLayout;
+    private Button mButton1;
+    private Button mButton2;
 
     private RadioButton centre;
     private RadioButton bmi;
     private RadioButton news;
     private RadioButton other;
 
-    FragmentManager manager;
-    FragmentTransaction transaction;
+    private FragmentManager manager;
+    private FragmentTransaction transaction;
 
-    CentreFragment mCentreFragment;
-    BMIFragment mBMIFragment;
-    NewsFragment mNewsFragment;
-    OtherFragment mOtherFragment;
+    private CentreFragment mCentreFragment;
+    private BMIFragment mBMIFragment;
+    private NewsFragment mNewsFragment;
+    private OtherFragment mOtherFragment;
 
-    PopupWindow mPopupWindow;
-    View mPopView;
-    WheelView wvkg;
-    WheelView wvg;
+    private Calendar calendar = Calendar.getInstance();
 
-    private static final String[] KgList = new String[]{"25", "26", "27", "28", "29", "30", "31",
+    private PopupWindow mPopupWindow;
+    private View mPopView;
+    private WheelView wvkg;
+    private WheelView wvg;
+
+    private static final String[] KgList = new String[]{"0", "1", "2", "3", "4", "5", "6", "7",
+            "8", "9", "10", "11", "12", "13", "14", "15", "16", "17",
+            "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31",
             "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45",
             "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59",
             "60", "61", "62", "63", "64", "65", "66", "67", "68", "69", "70", "71", "72", "73",
@@ -84,15 +90,126 @@ public class MainActivity extends AppCompatActivity {
             "8", "9"};
 
     private static final int NUM = 1;
-    int KgSelectedIndex;
-    int GSelectedIndex;
+    private int KgX = 36;
+    private int GX = 1;
+
+    //日期
+    private int y;
+    private int m;
+    private int d;
+
+    private int Kg;
+    private int G;
+
+    //BMI指数
+    private double BMI;
+
+    MyDataService mMyDataService = StartAnimaActivity.myDataService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
+        initData();
         onCheckedChangeds();
+    }
+
+    private void initView() {
+        mMyDataService.initData();//读取数据
+        mLinearLayout = (LinearLayout) findViewById(R.id.main);
+        centre = (RadioButton) findViewById(R.id.centre);
+        bmi = (RadioButton) findViewById(R.id.bmi);
+        news = (RadioButton) findViewById(R.id.news);
+        other = (RadioButton) findViewById(R.id.other);
+
+        mCentreFragment = new CentreFragment();
+        mBMIFragment = new BMIFragment();
+        mNewsFragment = new NewsFragment();
+        mOtherFragment = new OtherFragment();
+
+        mPopView = LayoutInflater.from(MainActivity.this).inflate(R.layout.popupwindow_add_day_data, null);
+        initWheelView();
+        centre.setChecked(true);
+    }
+
+    private void initData() {
+        y = mMyDataService.getY();
+        m = mMyDataService.getM();
+        d = mMyDataService.getD();
+
+        Kg = mMyDataService.getNewKg();
+        G = mMyDataService.getNewG();
+
+        BMI = mMyDataService.getBMI();
+        Log.i("TZ", "BMI初始化:"+BMI);
+        Log.i("TZ", "initData(),Kg: " + Kg + ", G: " + G);
+        wvkg.setOnWheelViewListener(new WheelView.OnWheelViewListener() {
+            @Override
+            public void onSelected(int selectedIndex, String item) {
+                KgX = selectedIndex;
+                Kg = Integer.parseInt(item);
+                mMyDataService.setNewKg(Kg);
+                Log.i("TZ", "[Dialog]selectedIndex: " + selectedIndex + ", item: " + item);
+            }
+        });
+        wvg.setOnWheelViewListener(new WheelView.OnWheelViewListener() {
+            @Override
+            public void onSelected(int selectedIndex, String item) {
+                GX = selectedIndex;
+                G = Integer.parseInt(item);
+                mMyDataService.setNewG(G);
+                Log.i("TZ", "[Dialog]selectedIndex: " + selectedIndex + ", item: " + item);
+            }
+        });
+    }
+
+    /**
+     * 点击事件
+     *
+     * @param view
+     */
+    public void doClick(View view) {
+        switch (view.getId()) {
+            case fab_add:
+                Log.i("TZ", "fab_add,Kg: " + Kg + ", G: " + G);
+                wvkg.setSeletion(Kg);
+                wvg.setSeletion(G);
+                showPopupWindow(mPopView);
+                mPopupWindow.showAtLocation(mPopView, Gravity.CENTER, 0, 0);
+                Toast.makeText(MainActivity.this, "ok", Toast.LENGTH_LONG).show();
+                break;
+            case bt_add_no:
+                mPopupWindow.dismiss();
+                break;
+            case bt_add_yes:
+                int year = calendar.get(Calendar.YEAR);
+                int month = calendar.get(Calendar.MONTH)+1;
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
+                if (day!=d){
+                    mMyDataService.setY(year);
+                    mMyDataService.setM(month);
+                    mMyDataService.setD(day);
+                    mMyDataService.setNewKg(Kg);
+                    mMyDataService.setNewG(G);
+                    Log.i("TZ", "bt_add_yes:确认储存");
+                    mMyDataService.everydayAddData();
+                    Log.i("TZ", "bt_add_yes:储存完毕");
+                }else {
+                    mMyDataService.setNewKg(Kg);
+                    mMyDataService.setNewG(G);
+                    Log.i("TZ", "bt_add_yes:确认修改");
+                    mMyDataService.updataData();
+                    Log.i("TZ", "bt_add_yes:修改完毕");
+
+                }
+                BMI = mMyDataService.getBMI();
+                Log.i("TZ", "BMI更新后:"+BMI);
+                mPopupWindow.dismiss();
+                break;
+            default:
+                break;
+        }
     }
 
     private void onCheckedChangeds() {
@@ -129,99 +246,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-    }
-
-    private void initView() {
-        mLinearLayout = (LinearLayout) findViewById(R.id.main);
-        centre = (RadioButton) findViewById(R.id.centre);
-        bmi = (RadioButton) findViewById(R.id.bmi);
-        news = (RadioButton) findViewById(R.id.news);
-        other = (RadioButton) findViewById(R.id.other);
-
-        mCentreFragment = new CentreFragment();
-        mBMIFragment = new BMIFragment();
-        mNewsFragment = new NewsFragment();
-        mOtherFragment = new OtherFragment();
-
-        mPopView = LayoutInflater.from(MainActivity.this).inflate(R.layout.popupwindow_add_day_data, null);
-        initWheelView();
-
-        centre.setChecked(true);
-    }
-
-    private void initWheelView() {
-        wvkg = (WheelView) mPopView.findViewById(R.id.wv_kg);
-        wvg = (WheelView) mPopView.findViewById(R.id.wv_g);
-        //设置首个item的起始值
-        wvkg.setOffset(NUM);
-        wvg.setOffset(NUM);
-        //设置控件中各个item的内容
-        wvkg.setItems(Arrays.asList(KgList));
-        wvg.setItems(Arrays.asList(GList));
-
-        wvkg.setOnWheelViewListener(new WheelView.OnWheelViewListener() {
-            @Override
-            public void onSelected(int selectedIndex, String item) {
-                KgSelectedIndex = selectedIndex;
-                Log.i("TZ", "[Dialog]selectedIndex: " + selectedIndex + ", item: " + item);
-            }
-        });
-        wvg.setOnWheelViewListener(new WheelView.OnWheelViewListener() {
-            @Override
-            public void onSelected(int selectedIndex, String item) {
-                GSelectedIndex = selectedIndex;
-                Log.i("TZ", "[Dialog]selectedIndex: " + selectedIndex + ", item: " + item);
-            }
-        });
-    }
-
-    public void backgroundAlpha(float bgAlpha) {
-        WindowManager.LayoutParams lp = getWindow().getAttributes();
-        lp.alpha = bgAlpha; //0.0-1.0
-        getWindow().setAttributes(lp);
-    }
-
-    /**
-     * 点击事件
-     *
-     * @param view
-     */
-    public void doClick(View view) {
-        switch (view.getId()) {
-            case fab_add:
-                showPopupWindow(mPopView);
-                mPopupWindow.showAtLocation(mPopView, Gravity.CENTER, 0, 0);
-                Toast.makeText(MainActivity.this, "ok", Toast.LENGTH_LONG).show();
-                break;
-            case bt_add_no:
-                mPopupWindow.dismiss();
-                break;
-            case bt_add_yes:
-                mPopupWindow.dismiss();
-                break;
-            default:
-                break;
-        }
-    }
-
-    private void showPopupWindow(View view) {
-        //设置控件选中的位置
-        wvkg.setSeletion(KgSelectedIndex - NUM);
-        wvg.setSeletion(GSelectedIndex - NUM);
-
-        mPopupWindow = new PopupWindow(view);
-        mPopupWindow.setWidth(WindowManager.LayoutParams.WRAP_CONTENT);
-        mPopupWindow.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
-        //设置pop点击
-        mPopupWindow.setTouchable(true);
-        //设置外部点击
-        mPopupWindow.setOutsideTouchable(true);
-        //设置背景颜色，0x后面加8位
-        mPopupWindow.setBackgroundDrawable(new BitmapDrawable());
-        //设置屏幕背景透明度
-        backgroundAlpha(0.5f);
-        //添加pop窗口关闭事件
-        mPopupWindow.setOnDismissListener(new PopupWindowDismissListener());
     }
 
     private void showFragment(int i) {
@@ -280,12 +304,46 @@ public class MainActivity extends AppCompatActivity {
             transaction.hide(mOtherFragment);
         }
     }
+
+    private void initWheelView() {
+        wvkg = (WheelView) mPopView.findViewById(R.id.wv_kg);
+        wvg = (WheelView) mPopView.findViewById(R.id.wv_g);
+        //设置首个item的起始值
+        wvkg.setOffset(NUM);
+        wvg.setOffset(NUM);
+        //设置控件中各个item的内容
+        wvkg.setItems(Arrays.asList(KgList));
+        wvg.setItems(Arrays.asList(GList));
+    }
+
+    private void showPopupWindow(View view) {
+        mPopupWindow = new PopupWindow(view);
+        mPopupWindow.setWidth(WindowManager.LayoutParams.WRAP_CONTENT);
+        mPopupWindow.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
+        //设置pop点击
+        mPopupWindow.setTouchable(true);
+        //设置外部点击
+        mPopupWindow.setOutsideTouchable(true);
+        //设置背景颜色，0x后面加8位
+        mPopupWindow.setBackgroundDrawable(new BitmapDrawable());
+        //设置屏幕背景透明度
+        backgroundAlpha(0.5f);
+        //添加pop窗口关闭事件
+        mPopupWindow.setOnDismissListener(new PopupWindowDismissListener());
+    }
+
+    public void backgroundAlpha(float bgAlpha) {
+        WindowManager.LayoutParams lp = getWindow().getAttributes();
+        lp.alpha = bgAlpha; //0.0-1.0
+        getWindow().setAttributes(lp);
+    }
+
     /**
      * popWin关闭事件，主要是为了将背景透明度改回来
-     * @author cg
      *
+     * @author cg
      */
-    class PopupWindowDismissListener implements PopupWindow.OnDismissListener{
+    class PopupWindowDismissListener implements PopupWindow.OnDismissListener {
 
         @Override
         public void onDismiss() {

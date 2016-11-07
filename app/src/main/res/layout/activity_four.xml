@@ -27,25 +27,37 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_margin="48dp"
-            >
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/et_weight"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:textSize="24dp"/>
+            <com.tz.healthdiary.custom.WheelView
+                android:id="@+id/wv_kg"
+                android:layout_width="96dp"
+                android:layout_height="64dp">
+
+            </com.tz.healthdiary.custom.WheelView>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/alipay_msp_black_point"/>
+
+            <com.tz.healthdiary.custom.WheelView
+                android:id="@+id/wv_g"
+                android:layout_width="96dp"
+                android:layout_height="64dp">
+
+            </com.tz.healthdiary.custom.WheelView>
+
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
                 android:text="Kg"
-                android:gravity="center"
-                android:textSize="24dp"
-                android:textColor="#40BC64"/>
+                android:textSize="20dp"
+                android:id="@+id/textView5"/>
 
         </LinearLayout>
 
@@ -54,16 +66,43 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/bt_weight"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="doClick"
-            android:background="#40BC64"
-            android:layout_margin="64dp"
-            android:text="下一步"/>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="32dp">
+
+            <Button
+                android:id="@+id/bt_weight_previous"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#40BC64"
+                android:onClick="doClick"
+                android:text="上一步"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="32dp">
+
+            <Button
+                android:id="@+id/bt_weight_next"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#40BC64"
+                android:onClick="doClick"
+                android:text="下一步"/>
+        </LinearLayout>
 
     </LinearLayout>
 

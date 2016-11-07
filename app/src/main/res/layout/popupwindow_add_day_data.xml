@@ -63,7 +63,7 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/bt_add_yes"
+                android:id="@+id/bt_add_no"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="#00000000"
@@ -71,7 +71,7 @@
                 android:text="取消"/>
 
             <Button
-                android:id="@+id/bt_add_no"
+                android:id="@+id/bt_add_yes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="#00000000"
@@ -81,6 +81,5 @@
         </LinearLayout>
 
     </LinearLayout>
-
 
 </LinearLayout>
