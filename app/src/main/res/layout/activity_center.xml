@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#AFEEEE"
+    android:background="#E8E8E8"
     android:orientation="horizontal">
 
 
@@ -10,14 +10,18 @@
         android:id="@+id/chart_line"
         android:layout_width="match_parent"
         android:layout_height="360dp"
-        android:layout_gravity="center"
         android:clickable="true"
-        android:paddingRight="5dp"
+        android:paddingRight="10dp"
         android:paddingTop="50dp"
         app:graphstyle="line"
         app:linestyle="curve"
         app:linewidth="3dp"
         app:showymsg="true" />
+
+    <ListView
+        android:id="@+id/lv_weight_center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></ListView>
 
 
 </LinearLayout>

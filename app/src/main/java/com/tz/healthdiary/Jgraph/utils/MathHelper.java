@@ -36,7 +36,7 @@ public class MathHelper {
      * @return
      */
     public static int getCeil10(float num){
-        return ( (int)( num+9.9999999 ) )/10*10;
+        return ( (int)( num+0.999f) );
     }
 
     /**

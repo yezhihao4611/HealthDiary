@@ -165,7 +165,7 @@ public abstract class BaseGraph extends View implements GestureDetector.OnGestur
     private int mAbscissaMsgSize;
     protected int mState = 0;
     private int mXNums;
-    private int mXinterval;
+    private float mXinterval;
     private GestureDetector mGestureDetector;
     private Scroller mScroller;
     private int mMinimumVelocity;
@@ -707,7 +707,7 @@ public abstract class BaseGraph extends View implements GestureDetector.OnGestur
     }
 
     private void drawAbscissaMsg(Canvas canvas) {
-        int mTotalTime = mXinterval * mXNums;
+        float mTotalTime = mXinterval * mXNums;
         String total = String.valueOf(mTotalTime);
         float xWi = mWidth - mChartArea.left - getPaddingRight() - mAbscissaPaint.measureText(total, 0, total.length());
         for (int i = 0; i < mXNums + 1; i++) {
@@ -865,8 +865,7 @@ public abstract class BaseGraph extends View implements GestureDetector.OnGestur
         } else {
             if (mYaxis_Max < mHeightestChart.getTopest() || mYaxis_min > mMinestChart.getTopest()) {
                 //纵轴的 最大值 要比数据最大还大
-                mYaxis_Max = mYaxis_Max < mHeightestChart.getTopest() ? MathHelper
-                        .getCeil10(mHeightestChart.getTopest()) : mYaxis_Max;
+                mYaxis_Max = mYaxis_Max < mHeightestChart.getTopest() ? MathHelper.getCeil10(mHeightestChart.getTopest()) : mYaxis_Max;
                 if (mYaxis_min > mMinestChart.getTopest()) {
                     mYaxis_min = MathHelper.getCast10(mMinestChart.getTopest());
                 }
@@ -927,7 +926,7 @@ public abstract class BaseGraph extends View implements GestureDetector.OnGestur
         mYaxismax = new DecimalFormat("##.#").format(mYaxis_Max);
         mYaxis_min = min;
         mYaxis_msg = mYaxis_msg == null ? new ArrayList<String>(showYnum) : mYaxis_msg;
-        refreshExcels();
+//        refreshExcels();
     }
 
     private void refreshYaxisValues(int showYnum) {
@@ -959,7 +958,7 @@ public abstract class BaseGraph extends View implements GestureDetector.OnGestur
      * @param xNums     几段
      * @param xinterval 每段多少
      */
-    public void setXnums(int xNums, int xinterval) {
+    public void setXnums(int xNums, float xinterval) {
         mXNums = xNums;
         mXinterval = xinterval;
     }
