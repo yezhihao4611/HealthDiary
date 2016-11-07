@@ -45,13 +45,13 @@ public class CentreFragment extends Fragment {
 
         List<Jchart> lines = new ArrayList<>();
 
-        lines.add(new Jchart(0, 25, "07-10", Color.parseColor("#5F77F6")));
-        lines.add(new Jchart(0, 15, "07-11", Color.parseColor("#5F77F6")));
-        lines.add(new Jchart(0, 32, "07-12", Color.parseColor("#5F77F6")));
-        lines.add(new Jchart(0, 4, "07-13", Color.parseColor("#5F77F6")));
-        lines.add(new Jchart(0, 25, "07-14", Color.parseColor("#5F77F6")));
-        lines.add(new Jchart(0, 32, "07-15", Color.parseColor("#5F77F6")));
-        lines.add(new Jchart(0, 49, "07-16", Color.parseColor("#5F77F6")));
+        lines.add(new Jchart(0, 550, "07-10", Color.BLACK));
+        lines.add(new Jchart(0, 551, "07-11", Color.BLACK));
+        lines.add(new Jchart(0, 552, "07-12", Color.BLACK));
+        lines.add(new Jchart(0, 551, "07-13", Color.BLACK));
+        lines.add(new Jchart(0, 548, "07-14", Color.BLACK));
+        lines.add(new Jchart(0, 551, "07-15", Color.BLACK));
+        lines.add(new Jchart(0, 553, "07-16", Color.BLACK));
 
 
         mLineChar.setLineStyle(JcoolGraph.LINE_CURVE);
@@ -60,7 +60,8 @@ public class CentreFragment extends Fragment {
         mLineChar.setSelectedMode(BaseGraph.SELECETD_MSG_SHOW_TOP);
         mLineChar.setScrollAble(false);
         mLineChar.feedData(lines);
-//        mLineChar.setYaxisValues(0, 0, 0);
+
+//        mLineChar.setYaxisValues(551, 0, 0);
         mLineChar.setPaintShaderColors(Color.RED, Color.parseColor("#E79D23"), Color.parseColor("#FFF03D"), Color.parseColor("#A9E16F"), Color.parseColor("#75B9EF"));
 
     }

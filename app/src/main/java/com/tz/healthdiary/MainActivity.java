@@ -29,7 +29,7 @@ import java.util.Calendar;
 
 import static com.tz.healthdiary.R.id.bt_add_no;
 import static com.tz.healthdiary.R.id.bt_add_yes;
-import static com.tz.healthdiary.R.id.fab_add;
+import static com.tz.healthdiary.R.id.fab_main;
 
 /**
  * Created by 西野七濑 on 2016/10/19.

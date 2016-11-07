@@ -1,24 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="#ffffff"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="match_parent"
-        android:background="#d9213d"
-        android:layout_height="40dp">
+        android:background="#10d627"
+        android:layout_height="50dp">
         <ImageView
             android:id="@+id/iv_back_body"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="8dp"
-            android:src="@mipmap/other_back"/>
+            android:src="@mipmap/backk"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:layout_marginLeft="12dp"
-            android:textColor="#b6b1b1"
+            android:textColor="#ffffff"
             android:layout_gravity="center"
             android:text="体脂率"/>
     </LinearLayout>
@@ -67,6 +69,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:button="@null"
+                android:layout_marginLeft="8dp"
                 android:drawableTop="@drawable/wumen"
                 />
         </RadioGroup>
@@ -176,13 +179,13 @@
         android:layout_width="match_parent"
         android:layout_margin="16dp"
         android:orientation="horizontal"
-        android:background="#c9c6c6"
+        android:background="#e4e1e1"
         android:layout_height="wrap_content">
         <TextView
             android:layout_width="0dp"
             android:layout_weight="2"
             android:layout_margin="10dp"
-            android:gravity="center"
+            android:layout_gravity="center_vertical"
             android:textSize="16sp"
             android:layout_height="wrap_content"
             android:text="结    果"/>
@@ -193,11 +196,14 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
+            android:text="0"
             android:textSize="16sp" />
         <TextView
+            android:id="@+id/iv_eye_body"
             android:layout_width="0dp"
             android:layout_weight="3"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+          />
     </LinearLayout>
     <LinearLayout
        android:layout_width="match_parent"
@@ -206,6 +212,7 @@
        android:layout_weight="1">
 
     <LinearLayout
+        android:id="@+id/ll_low"
         android:layout_width="match_parent"
         android:orientation="horizontal"
         android:layout_height="wrap_content">
@@ -232,6 +239,7 @@
         android:layout_height="0.6dp"
         android:background="#a19e9e"/>
     <LinearLayout
+        android:id="@+id/ll_nomal"
         android:layout_width="match_parent"
         android:orientation="horizontal"
         android:layout_height="wrap_content">
@@ -258,6 +266,7 @@
         android:layout_height="0.6dp"
         android:background="#a19e9e"/>
     <LinearLayout
+        android:id="@+id/ll_high"
         android:layout_width="match_parent"
         android:orientation="horizontal"
         android:layout_height="wrap_content">
@@ -284,6 +293,7 @@
         android:layout_height="0.6dp"
         android:background="#a19e9e"/>
     <LinearLayout
+        android:id="@+id/mosthigh"
         android:layout_width="match_parent"
         android:orientation="horizontal"
         android:layout_height="wrap_content">
