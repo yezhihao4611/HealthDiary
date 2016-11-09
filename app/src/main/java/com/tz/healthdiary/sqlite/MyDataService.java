@@ -399,11 +399,14 @@ public class MyDataService extends Service {
         listOnes = mHealthData.getListOnes();
         Log.i("TZ", "everydayAddData():" + "listOne:" + listOne);
         Log.i("TZ", "everydayAddData():" + "listOnes:" + listOnes);
-        /*listTwo = mHealthData.getListOne();
+        listTwo = mHealthData.getListOne();
         listTwos = mHealthData.getListTwos();
-
+        Log.i("TZ", "everydayAddData():" + "listTwo:" + listTwo);
+        Log.i("TZ", "everydayAddData():" + "listTwos:" + listTwos);
         listFour = mHealthData.getListOne();
-        listFours = mHealthData.getListFours();*/
+        listFours = mHealthData.getListFours();
+        Log.i("TZ", "everydayAddData():" + "listFour:" + listFour);
+        Log.i("TZ", "everydayAddData():" + "listFours:" + listFours);
     }
 
     //修改最近一次数据

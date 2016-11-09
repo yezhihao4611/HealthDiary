@@ -571,8 +571,8 @@ public class HealthData {
         readData();//读取基本数据，10个
         readNewData();//读取最近一次数据，6个+1个
         readWeekData();//读取最近7次数据
-        /*readTwoWeekData();//读取最近14次数据
-        readFourWeekData();//读取最近28次数据*/
+        readTwoWeekData();//读取最近14次数据
+        readFourWeekData();//读取最近28次数据
         Log.i("TZ", "startData()：数据读取完毕！");
     }
 }
