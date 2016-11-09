@@ -15,9 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -32,7 +30,6 @@ import com.tz.healthdiary.bean.NewsInfo;
 
 import java.util.ArrayList;
 import java.util.List;
-
 
 import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobObject;

@@ -2,7 +2,6 @@ package com.tz.healthdiary;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.media.MediaCodec;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -13,7 +12,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,7 +20,6 @@ import com.google.gson.Gson;
 import com.tz.healthdiary.bean.Info;
 
 import java.io.IOException;
-
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;

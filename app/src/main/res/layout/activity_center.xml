@@ -6,7 +6,6 @@
     android:background="#E8E8E8"
     android:orientation="vertical">
 
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -63,4 +62,5 @@
             android:layout_below="@id/tv_tv_2"></com.tz.healthdiary.bean.ListViewForScrollView>
 
     </RelativeLayout>
+
 </ScrollView>

@@ -77,18 +77,6 @@ public class InitializeActivity extends AppCompatActivity {
     private static final String[] MonthList = new String[]{"1", "2", "3", "4", "5", "6", "7", "8",
             "9", "10", "11", "12"};
 
-    /*private static final String[] FebDayList = new String[]{"1", "2", "3", "4", "5", "6", "7", "8",
-            "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23",
-            "24", "25", "26", "27", "28"};
-
-    private static final String[] LeapFebDayList = new String[]{"1", "2", "3", "4", "5", "6", "7",
-            "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22",
-            "23", "24", "25", "26", "27", "28", "29"};
-
-    private static final String[] SmallDayList = new String[]{"1", "2", "3", "4", "5", "6", "7",
-            "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22",
-            "23", "24", "25", "26", "27", "28", "29", "30"};*/
-
     private static final String[] BigDayList = new String[]{"1", "2", "3", "4", "5", "6", "7", "8",
             "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23",
             "24", "25", "26", "27", "28", "29", "30", "31"};
@@ -198,19 +186,6 @@ public class InitializeActivity extends AppCompatActivity {
         wvDay = (WheelView) mViewThree.findViewById(R.id.wv_day);
         wvDay.setOffset(NUM);
         wvDay.setItems(Arrays.asList(BigDayList));
-        /*if (((Year % 4 == 0) | (Year % 400 == 0)) & Month == 2){
-            item = itemOne;
-            wvDay.setItems(item);
-        }else if (Month == 2){
-            item = itemTwo;
-            wvDay.setItems(item);
-        }else if (Month == 4 || Month == 6 || Month == 9 || Month == 11){
-            item = itemThree;
-            wvDay.setItems(item);
-        }else {
-            item = itemFour;
-            wvDay.setItems(item);
-        }*/
 
         mViewFour = LayoutInflater.from(InitializeActivity.this).inflate(R.layout.activity_four, null);
         wvkg = (WheelView) mViewFour.findViewById(R.id.wv_kg);

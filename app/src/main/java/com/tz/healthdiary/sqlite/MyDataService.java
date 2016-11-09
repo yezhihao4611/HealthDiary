@@ -302,8 +302,7 @@ public class MyDataService extends Service {
         Meter = mHealthData.getMeter();
         Cm = mHealthData.getCm();
         waistline = mHealthData.getWaistline();
-        //6+1
-        point = mHealthData.getPoint();
+        //6
         y = mHealthData.getY();
         m = mHealthData.getM();
         d = mHealthData.getD();
@@ -358,9 +357,7 @@ public class MyDataService extends Service {
         d = days;
         newKg = Kg;
         newG = G;
-        DecimalFormat df = new DecimalFormat("0.00 ");
-        double a = ((double) newKg + ((double) newG / 10)) / (((double) Meter + ((double) Cm / 100)) * ((double) Meter + ((double) Cm / 100)));
-        BMI = Double.parseDouble(df.format(a));
+        BMIget();
         Log.i("TZ", "everydayAddData():" + "y:" + y + "m:" + m + "d:" + d + "newKg:" + newKg + "newG:" + newG
                 + "BMI:" + BMI);
         mHealthData.setPoint(point);
@@ -373,31 +370,47 @@ public class MyDataService extends Service {
         mHealthData.reserveFirstData();
     }
 
+    private void BMIget() {
+        DecimalFormat df = new DecimalFormat("0.00");
+        double a = ((double) newKg + ((double) newG / 10)) / (((double) Meter + ((double) Cm / 100)) * ((double) Meter + ((double) Cm / 100)));
+        BMI = Double.parseDouble(df.format(a));
+    }
+
     //添加每日数据
     public void everydayAddData() {
         Log.i("TZ", "everydayAddData():" + "y:" + y + "m:" + m + "d:" + d + "newKg:" + newKg + "newG:" + newG
                 + "BMI:" + BMI);
-        mHealthData.setPoint(point);
         mHealthData.setY(y);
         mHealthData.setM(m);
         mHealthData.setD(d);
         mHealthData.setNewKg(newKg);
         mHealthData.setNewG(newG);
-        DecimalFormat df = new DecimalFormat("0.00 ");
-        double a = ((double) newKg + ((double) newG / 10)) / (((double) Meter + ((double) Cm / 100)) * ((double) Meter + ((double) Cm / 100)));
-        BMI = Double.parseDouble(df.format(a));
+        BMIget();
         mHealthData.setBMI(BMI);
         mHealthData.reserveNewData();
-        mHealthData.UpData();
+        renewData();
+    }
+
+    /**
+     * 每日数据储存后更新service中数据
+     */
+    public void renewData() {
+        listOne = mHealthData.getListOne();
+        listOnes = mHealthData.getListOnes();
+        Log.i("TZ", "everydayAddData():" + "listOne:" + listOne);
+        Log.i("TZ", "everydayAddData():" + "listOnes:" + listOnes);
+        /*listTwo = mHealthData.getListOne();
+        listTwos = mHealthData.getListTwos();
+
+        listFour = mHealthData.getListOne();
+        listFours = mHealthData.getListFours();*/
     }
 
     //修改最近一次数据
     public void updataData() {
         mHealthData.setNewKg(newKg);
         mHealthData.setNewG(newG);
-        DecimalFormat df = new DecimalFormat("0.00 ");
-        double a = ((double) newKg + ((double) newG / 10)) / (((double) Meter + ((double) Cm / 100)) * ((double) Meter + ((double) Cm / 100)));
-        BMI = Double.parseDouble(df.format(a));
+        BMIget();
         mHealthData.setBMI(BMI);
         mHealthData.alterWeightData();
     }

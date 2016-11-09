@@ -1,5 +1,6 @@
 package com.tz.healthdiary.fragment;
 
+import android.app.Fragment;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.DialogInterface;
@@ -17,11 +18,11 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.tz.healthdiary.Jisuanqi.BaseActivity;
 import com.tz.healthdiary.Jisuanqi.BodyActivity;
+import com.tz.healthdiary.Jisuanqi.WaistlineActivity;
 import com.tz.healthdiary.OpinionActivity;
 import com.tz.healthdiary.R;
 import com.tz.healthdiary.Jisuanqi.WaistlineActivity;
