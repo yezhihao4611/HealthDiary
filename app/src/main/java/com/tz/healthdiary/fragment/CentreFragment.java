@@ -1,22 +1,19 @@
 package com.tz.healthdiary.fragment;
 
 
+import android.app.Fragment;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 
 import com.tz.healthdiary.Jgraph.graph.JcoolGraph;
 import com.tz.healthdiary.Jgraph.inter.BaseGraph;
 import com.tz.healthdiary.Jgraph.models.Jchart;
 import com.tz.healthdiary.R;
 
-import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +23,7 @@ import java.util.List;
  */
 
 public class CentreFragment extends Fragment {
+
     private JcoolGraph mLineChar;
 
 

@@ -287,7 +287,7 @@ public class HealthData {
 
         mContentValues.put("name", "每日数据");
 
-        mContentValues.put("point", point+1);
+        mContentValues.put("point", maxPoint + 1);
 
         mContentValues.put("y", y);
         mContentValues.put("m", m);
@@ -301,6 +301,25 @@ public class HealthData {
         mSQLiteDatabase.insert(HealthDbHelper.TABLE_NAME, null, mContentValues);
 
         Log.i("TZ", "reserveNewData()：每日数据储存完毕");
+        UpData();
+    }
+
+    /**
+     * 储存每日数据后更新point和maxPoint
+     */
+    public void UpData() {
+        mHealthDbHelper = new HealthDbHelper(MyApplication.getContext());
+        mSQLiteDatabase = mHealthDbHelper.getReadableDatabase();
+        Cursor cursor = mSQLiteDatabase.query(HealthDbHelper.TABLE_NAME, null, null, null, null, null, null);
+        if (cursor != null) {
+            if (cursor.moveToLast()) {
+                point = Integer.parseInt(cursor.getString(cursor.getColumnIndex("point")));
+                maxPoint = point;
+                Log.i("TZ", "point:" + point);
+            }
+        }
+        Log.i("TZ", "point和maxPoint更新完毕：" + "point:" + point + "maxPoint:" + maxPoint);
+        readWeekData();
     }
 
     /**
@@ -358,7 +377,7 @@ public class HealthData {
                 newKg = Integer.parseInt(cursor.getString(cursor.getColumnIndex("newKg")));
                 newG = Integer.parseInt(cursor.getString(cursor.getColumnIndex("newG")));
 
-                BMI = Double.parseDouble(cursor.getString(cursor.getColumnIndex("bmi")));
+                BMI = Float.parseFloat(cursor.getString(cursor.getColumnIndex("bmi")));
             }
             Log.i("TZ", "point:" + point + "maxPoint:" + maxPoint + "y:" + y + "m:" + m + "d:" + d + "newKg:" + newKg + "newG:" + newG
                     + "BMI:" + BMI);
@@ -375,10 +394,10 @@ public class HealthData {
         Cursor cursor = mSQLiteDatabase.query(HealthDbHelper.TABLE_NAME, null, null, null, null, null, null);
         if (cursor != null) {
             listOnes = new ArrayList<>();
-            cursor.move(2);
+            cursor.move(1);
             while (cursor.moveToNext()) {
                 point = Integer.parseInt(cursor.getString(cursor.getColumnIndex("point")));
-                if (maxPoint - 7 < point) {
+                if (point > maxPoint - 7) {
                     listOne = new ArrayList<>();
                     point = Integer.parseInt(cursor.getString(cursor.getColumnIndex("point")));
 
@@ -395,12 +414,15 @@ public class HealthData {
                     listOne.add(d);
                     listOne.add(newKg);
                     listOne.add(newG);
+                    Log.i("TZ", "该数据可用:" + "point=" + point);
+                } else {
+                    Log.i("TZ", "该数据不可用:" + "point=" + point);
                 }
                 listOnes.add(listOne);
-                Log.i("TZ", "readWeekData：7次数据读取完毕");
-                Log.i("TZ", "readWeekData：listOne:" + listOne);
-                Log.i("TZ", "readWeekData：lists:" + listOnes);
             }
+            Log.i("TZ", "readWeekData：7次数据读取完毕");
+            Log.i("TZ", "readWeekData：listOne:" + listOne);
+            Log.i("TZ", "readWeekData：lists:" + listOnes);
         }
     }
 
@@ -413,9 +435,10 @@ public class HealthData {
         Cursor cursor = mSQLiteDatabase.query(HealthDbHelper.TABLE_NAME, null, null, null, null, null, null);
         if (cursor != null) {
             listTwos = new ArrayList<>();
+            cursor.move(1);
             while (cursor.moveToNext()) {
                 point = Integer.parseInt(cursor.getString(cursor.getColumnIndex("point")));
-                if (maxPoint - 14 < point) {
+                if (point > maxPoint - 14) {
                     listTwo = new ArrayList<>();
                     point = Integer.parseInt(cursor.getString(cursor.getColumnIndex("point")));
 
@@ -432,12 +455,15 @@ public class HealthData {
                     listTwo.add(d);
                     listTwo.add(newKg);
                     listTwo.add(newG);
+                    Log.i("TZ", "该数据可用:" + "point=" + point);
+                } else {
+                    Log.i("TZ", "该数据不可用:" + "point=" + point);
                 }
                 listTwos.add(listTwo);
-                Log.i("TZ", "readTwoWeekData：14日数据读取完毕");
-                Log.i("TZ", "readTwoWeekData：listTwo:" + listTwo);
-                Log.i("TZ", "readTwoWeekData：lists:" + listTwos);
             }
+            Log.i("TZ", "readTwoWeekData：14日数据读取完毕");
+            Log.i("TZ", "readTwoWeekData：listTwo:" + listTwo);
+            Log.i("TZ", "readTwoWeekData：lists:" + listTwos);
         }
     }
 
@@ -450,9 +476,10 @@ public class HealthData {
         Cursor cursor = mSQLiteDatabase.query(HealthDbHelper.TABLE_NAME, null, null, null, null, null, null);
         if (cursor != null) {
             listFours = new ArrayList<>();
+            cursor.move(1);
             while (cursor.moveToNext()) {
                 point = Integer.parseInt(cursor.getString(cursor.getColumnIndex("point")));
-                if (maxPoint - 28 < point) {
+                if (point > maxPoint - 28) {
                     listFour = new ArrayList<>();
                     point = Integer.parseInt(cursor.getString(cursor.getColumnIndex("point")));
 
@@ -469,18 +496,20 @@ public class HealthData {
                     listFour.add(d);
                     listFour.add(newKg);
                     listFour.add(newG);
+                    Log.i("TZ", "该数据可用:" + "point=" + point);
+                } else {
+                    Log.i("TZ", "该数据不可用:" + "point=" + point);
                 }
                 listFours.add(listFour);
-                Log.i("TZ", "readFourWeekData：28日数据读取完毕");
-                Log.i("TZ", "readFourWeekData：listFour:" + listFour);
-                Log.i("TZ", "readFourWeekData：lists:" + listFours);
             }
+            Log.i("TZ", "readFourWeekData：28日数据读取完毕");
+            Log.i("TZ", "readFourWeekData：listFour:" + listFour);
+            Log.i("TZ", "readFourWeekData：lists:" + listFours);
         }
     }
 
     /**
      * 修改最近一次体重
-     *
      */
     public void alterWeightData() {
         mContentValues = new ContentValues();
@@ -489,7 +518,7 @@ public class HealthData {
 
         mContentValues.put("newKg", newKg);
         mContentValues.put("newG", newG);
-        mContentValues.put("bmi",BMI);
+        mContentValues.put("bmi", BMI);
 
         String where = "point=?";
         String[] point = {maxPoint + ""};
@@ -498,7 +527,6 @@ public class HealthData {
 
     /**
      * 修改腰围
-     *
      */
     public void alterWaistlineData() {
         mContentValues = new ContentValues();

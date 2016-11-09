@@ -17,20 +17,22 @@
             <LinearLayout
                 style="@style/mw"
                 android:layout_marginTop="16dp"
-                android:gravity="center"
-                android:orientation="horizontal">
+                android:gravity="center|left"
+                android:orientation="horizontal"
+                android:paddingLeft="24dp"
+                android:paddingRight="24dp">
+
+                <com.tz.healthdiary.custom.CircleImageView
+                    android:id="@+id/civ_sex"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/boy"
+                    app:border_color="#FF8200"
+                    app:border_width="2dp"/>
 
                 <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="64dp"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@mipmap/health_guide_woman"/>
+                    style="@style/otherFour">
 
                     <TextView
                         android:id="@+id/age_number"
@@ -40,6 +42,7 @@
                     <TextView
                         style="@style/sizeOfBMI"
                         android:text="岁"/>
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -48,11 +51,11 @@
                     <TextView
                         android:id="@+id/stature_number"
                         style="@style/sizeOfBMI"
-                        android:text="170"/>
+                        android:text="1.7"/>
 
                     <TextView
                         style="@style/sizeOfBMI"
-                        android:text="cm"/>
+                        android:text="m"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -61,7 +64,7 @@
                     <TextView
                         android:id="@+id/weight_number"
                         style="@style/sizeOfBMI"
-                        android:text="60"/>
+                        android:text="160"/>
 
                     <TextView
                         style="@style/sizeOfBMI"
@@ -72,12 +75,12 @@
             </LinearLayout>
 
             <com.tz.healthdiary.custom.ColorArcProgressBar
-                android:id="@+id/bar1"
+                android:id="@+id/bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="128dp"
-                android:layout_marginBottom="128dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginTop="32dp"
                 app:back_color="@android:color/darker_gray"
                 app:back_width="2dp"
                 app:front_color1="@color/color1"
@@ -94,8 +97,8 @@
                 app:is_need_title="true"
                 app:is_need_unit="true"
                 app:max_value="100"
-                app:string_title="当前指数"
-                app:string_unit=""
+                app:string_title="当前BMI指数"
+                app:string_unit="kg/m²"
                 app:total_engle="270"/>
 
             <LinearLayout
@@ -104,24 +107,30 @@
                 android:padding="16dp">
 
                 <TextView
-                    style="@style/sizeOfBMI"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:textSize="24dp"
                     android:text="正常体重"/>
 
                 <TextView
                     android:id="@+id/min_weight_number"
-                    style="@style/sizeOfBMI"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="24dp"
                     android:text="15"/>
 
                 <TextView
-                    style="@style/sizeOfBMI"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="24dp"
                     android:text=" - "/>
 
                 <TextView
                     android:id="@+id/max_weight_number"
-                    style="@style/sizeOfBMI"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="24dp"
                     android:text="16"/>
 
                 <TextView
@@ -153,8 +162,8 @@
                         </LinearLayout>
 
                         <TextView
-                            android:text="0-16.0"
                             style="@style/otherTwo"
+                            android:text="0-16.0"
                             />
 
                     </LinearLayout>
@@ -340,9 +349,9 @@
                         </LinearLayout>
 
                         <TextView
+                            android:id="@+id/textView3"
                             style="@style/otherTwo"
-                            android:text="35.0-39.9"
-                            android:id="@+id/textView3"/>
+                            android:text="35.0-39.9"/>
 
                     </LinearLayout>
 
@@ -366,9 +375,9 @@
                                 android:background="@color/color8"/>
 
                             <TextView
+                                android:id="@+id/textView4"
                                 style="@style/otherThree"
-                                android:text="肥胖等级Ⅲ"
-                                android:id="@+id/textView4"/>
+                                android:text="肥胖等级Ⅲ"/>
 
                         </LinearLayout>
 

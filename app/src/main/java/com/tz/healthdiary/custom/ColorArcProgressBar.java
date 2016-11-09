@@ -48,9 +48,9 @@ public class ColorArcProgressBar extends View {
     private float sweepAngle = 270;
     private float currentAngle = 0;
     private float lastAngle;
-    private int[] colors = new int[]{Color.GREEN, Color.YELLOW, Color.RED, Color.BLACK,Color.DKGRAY,
+    private int[] colors = new int[]{Color.GREEN, Color.YELLOW, Color.RED, Color.BLACK, Color.DKGRAY,
             Color.GRAY, Color.LTGRAY, Color.WHITE, Color.WHITE};
-    private float maxValues = 60;
+    private float maxValues = 30;
     private float curValues = 0;
     private float bgArcWidth = dipToPx(2);
     private float progressWidth = dipToPx(10);
@@ -75,6 +75,8 @@ public class ColorArcProgressBar extends View {
     private boolean isNeedDial;
     private boolean isNeedContent;
 
+    private double bmi;
+
     // sweepAngle / maxValues 的值
     private float k;
 
@@ -97,6 +99,7 @@ public class ColorArcProgressBar extends View {
 
     /**
      * 初始化布局配置
+     *
      * @param context
      * @param attrs
      */
@@ -127,13 +130,12 @@ public class ColorArcProgressBar extends View {
         setCurrentValues(curValues);
         setMaxValues(maxValues);
         a.recycle();
-
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int width = (int) (2 * longdegree + progressWidth + diameter + 2 * DEGREE_PROGRESS_DISTANCE);
-        int height= (int) (2 * longdegree + progressWidth + diameter + 2 * DEGREE_PROGRESS_DISTANCE);
+        int height = (int) (2 * longdegree + progressWidth + diameter + 2 * DEGREE_PROGRESS_DISTANCE);
         setMeasuredDimension(width, height);
     }
 
@@ -142,14 +144,14 @@ public class ColorArcProgressBar extends View {
         diameter = 3 * getScreenWidth() / 5;
         //弧形的矩阵区域
         bgRect = new RectF();
-        bgRect.top = longdegree + progressWidth/2 + DEGREE_PROGRESS_DISTANCE;
-        bgRect.left = longdegree + progressWidth/2 + DEGREE_PROGRESS_DISTANCE;
-        bgRect.right = diameter + (longdegree + progressWidth/2 + DEGREE_PROGRESS_DISTANCE);
-        bgRect.bottom = diameter + (longdegree + progressWidth/2 + DEGREE_PROGRESS_DISTANCE);
+        bgRect.top = longdegree + progressWidth / 2 + DEGREE_PROGRESS_DISTANCE;
+        bgRect.left = longdegree + progressWidth / 2 + DEGREE_PROGRESS_DISTANCE;
+        bgRect.right = diameter + (longdegree + progressWidth / 2 + DEGREE_PROGRESS_DISTANCE);
+        bgRect.bottom = diameter + (longdegree + progressWidth / 2 + DEGREE_PROGRESS_DISTANCE);
 
         //圆心
-        centerX = (2 * longdegree + progressWidth + diameter + 2 * DEGREE_PROGRESS_DISTANCE)/2;
-        centerY = (2 * longdegree + progressWidth + diameter + 2 * DEGREE_PROGRESS_DISTANCE)/2;
+        centerX = (2 * longdegree + progressWidth + diameter + 2 * DEGREE_PROGRESS_DISTANCE) / 2;
+        centerY = (2 * longdegree + progressWidth + diameter + 2 * DEGREE_PROGRESS_DISTANCE) / 2;
 
         //外部刻度线
         degreePaint = new Paint();
@@ -193,6 +195,7 @@ public class ColorArcProgressBar extends View {
         sweepGradient = new SweepGradient(centerX, centerY, colors, null);
         rotateMatrix = new Matrix();
     }
+
     @Override
     protected void onDraw(Canvas canvas) {
         //抗锯齿
@@ -224,7 +227,7 @@ public class ColorArcProgressBar extends View {
         canvas.drawArc(bgRect, startAngle, sweepAngle, false, allArcPaint);
 
         //设置渐变色
-        rotateMatrix.setRotate(130, centerX, centerY);
+        rotateMatrix.setRotate(100, centerX, centerY);
         sweepGradient.setLocalMatrix(rotateMatrix);
         progressPaint.setShader(sweepGradient);
 
@@ -232,7 +235,8 @@ public class ColorArcProgressBar extends View {
         canvas.drawArc(bgRect, startAngle, currentAngle, false, progressPaint);
 
         if (isNeedContent) {
-            canvas.drawText(String.format("%.0f", curValues), centerX, centerY + textSize / 3, vTextPaint);
+            //evolveBMI(curValues);
+            canvas.drawText(String.format("%.0f", bmi), centerX, centerY + textSize / 3, vTextPaint);
         }
         if (isNeedUnit) {
             canvas.drawText(hintString, centerX, centerY + 2 * textSize / 3, hintPaint);
@@ -240,22 +244,23 @@ public class ColorArcProgressBar extends View {
         if (isNeedTitle) {
             canvas.drawText(titleString, centerX, centerY - 2 * textSize / 3, curSpeedPaint);
         }
-
         invalidate();
-
     }
 
     /**
      * 设置最大值
+     *
      * @param maxValues
      */
     public void setMaxValues(float maxValues) {
         this.maxValues = maxValues;
-        k = sweepAngle/maxValues;
+        k = sweepAngle / maxValues;
+        //Log.i("TZ", "lastAngle:" + lastAngle + "");
     }
 
     /**
      * 设置当前值
+     *
      * @param currentValues
      */
     public void setCurrentValues(float currentValues) {
@@ -272,6 +277,7 @@ public class ColorArcProgressBar extends View {
 
     /**
      * 设置整个圆弧宽度
+     *
      * @param bgArcWidth
      */
     public void setBgArcWidth(int bgArcWidth) {
@@ -280,6 +286,7 @@ public class ColorArcProgressBar extends View {
 
     /**
      * 设置进度宽度
+     *
      * @param progressWidth
      */
     public void setProgressWidth(int progressWidth) {
@@ -288,6 +295,7 @@ public class ColorArcProgressBar extends View {
 
     /**
      * 设置速度文字大小
+     *
      * @param textSize
      */
     public void setTextSize(int textSize) {
@@ -296,6 +304,7 @@ public class ColorArcProgressBar extends View {
 
     /**
      * 设置单位文字大小
+     *
      * @param hintSize
      */
     public void setHintSize(int hintSize) {
@@ -304,6 +313,7 @@ public class ColorArcProgressBar extends View {
 
     /**
      * 设置单位文字
+     *
      * @param hintString
      */
     public void setUnit(String hintString) {
@@ -313,6 +323,7 @@ public class ColorArcProgressBar extends View {
 
     /**
      * 设置直径大小
+     *
      * @param diameter
      */
     public void setDiameter(int diameter) {
@@ -321,14 +332,16 @@ public class ColorArcProgressBar extends View {
 
     /**
      * 设置标题
+     *
      * @param title
      */
-    private void setTitle(String title){
+    private void setTitle(String title) {
         this.titleString = title;
     }
 
     /**
      * 设置是否显示标题
+     *
      * @param isNeedTitle
      */
     private void setIsNeedTitle(boolean isNeedTitle) {
@@ -337,6 +350,7 @@ public class ColorArcProgressBar extends View {
 
     /**
      * 设置是否显示单位文字
+     *
      * @param isNeedUnit
      */
     private void setIsNeedUnit(boolean isNeedUnit) {
@@ -345,6 +359,7 @@ public class ColorArcProgressBar extends View {
 
     /**
      * 设置是否显示外部刻度盘
+     *
      * @param isNeedDial
      */
     private void setIsNeedDial(boolean isNeedDial) {
@@ -353,6 +368,7 @@ public class ColorArcProgressBar extends View {
 
     /**
      * 为进度设置动画
+     *
      * @param last
      * @param current
      */
@@ -364,8 +380,9 @@ public class ColorArcProgressBar extends View {
 
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
-                currentAngle= (float) animation.getAnimatedValue();
-                curValues = currentAngle/k;
+                currentAngle = (float) animation.getAnimatedValue();
+                //Log.i("TZ", "currentAngle:" + currentAngle + "");
+                curValues = currentAngle / k;
             }
         });
         progressAnimator.start();
@@ -373,16 +390,18 @@ public class ColorArcProgressBar extends View {
 
     /**
      * dip 转换成px
+     *
      * @param dip
      * @return
      */
     private int dipToPx(float dip) {
         float density = getContext().getResources().getDisplayMetrics().density;
-        return (int)(dip * density + 0.5f * (dip >= 0 ? 1 : -1));
+        return (int) (dip * density + 0.5f * (dip >= 0 ? 1 : -1));
     }
 
     /**
      * 得到屏幕宽度
+     *
      * @return
      */
     private int getScreenWidth() {
@@ -390,5 +409,9 @@ public class ColorArcProgressBar extends View {
         DisplayMetrics displayMetrics = new DisplayMetrics();
         windowManager.getDefaultDisplay().getMetrics(displayMetrics);
         return displayMetrics.widthPixels;
+    }
+
+    public void setBMI(double BMI) {
+        this.bmi = BMI;
     }
 }

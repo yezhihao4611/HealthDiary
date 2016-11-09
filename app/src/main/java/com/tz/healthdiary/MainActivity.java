@@ -1,9 +1,11 @@
 package com.tz.healthdiary;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
@@ -106,6 +108,20 @@ public class MainActivity extends AppCompatActivity {
 
     MyDataService mMyDataService = StartAnimaActivity.myDataService;
 
+    Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what) {
+                case 0:
+                    mBMIFragment.initData();
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -142,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
         G = mMyDataService.getNewG();
 
         BMI = mMyDataService.getBMI();
-        Log.i("TZ", "BMI初始化:"+BMI);
+        Log.i("TZ", "BMI初始化:" + BMI);
         Log.i("TZ", "initData(),Kg: " + Kg + ", G: " + G);
         wvkg.setOnWheelViewListener(new WheelView.OnWheelViewListener() {
             @Override
@@ -184,9 +200,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case bt_add_yes:
                 int year = calendar.get(Calendar.YEAR);
-                int month = calendar.get(Calendar.MONTH)+1;
+                int month = calendar.get(Calendar.MONTH) + 1;
                 int day = calendar.get(Calendar.DAY_OF_MONTH);
-                if (day!=d){
+                //if (day != d) {
                     mMyDataService.setY(year);
                     mMyDataService.setM(month);
                     mMyDataService.setD(day);
@@ -195,16 +211,23 @@ public class MainActivity extends AppCompatActivity {
                     Log.i("TZ", "bt_add_yes:确认储存");
                     mMyDataService.everydayAddData();
                     Log.i("TZ", "bt_add_yes:储存完毕");
-                }else {
+                /*} else {
                     mMyDataService.setNewKg(Kg);
                     mMyDataService.setNewG(G);
                     Log.i("TZ", "bt_add_yes:确认修改");
                     mMyDataService.updataData();
                     Log.i("TZ", "bt_add_yes:修改完毕");
-
-                }
+                }*/
                 BMI = mMyDataService.getBMI();
-                Log.i("TZ", "BMI更新后:"+BMI);
+                Log.i("TZ", "BMI更新后:" + BMI);
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Message message = new Message();
+                        message.what = 0;
+                        mHandler.sendMessage(message);
+                    }
+                }).start();
                 mPopupWindow.dismiss();
                 break;
             default:
@@ -249,7 +272,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showFragment(int i) {
-        manager = getSupportFragmentManager();
+        manager = getFragmentManager();
         transaction = manager.beginTransaction();
         //先把所有的fragment隐藏
         HideAllFragment(transaction);

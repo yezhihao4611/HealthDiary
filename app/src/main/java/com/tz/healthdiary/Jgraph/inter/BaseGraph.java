@@ -405,6 +405,11 @@ public abstract class BaseGraph extends View implements GestureDetector.OnGestur
             return;
         }
         findTheBestChart();
+
+        Log.i("TZ", "mChartArea.bottom:"
+                + "mChartArea.top:"
+                + "mYaxis_Max:" + mYaxis_Max
+                + "mYaxis_min:" + mYaxis_min);
         mHeightRatio = (mChartArea.bottom - mChartArea.top) / (mYaxis_Max - mYaxis_min);
         for (int i = 0; i < mJcharts.size(); i++) {
             Jchart jchart = mJcharts.get(i);
@@ -874,6 +879,7 @@ public abstract class BaseGraph extends View implements GestureDetector.OnGestur
                 refreshYaxisValues(mYaxis_msg.size());
             }
         }
+
     }
 
     public void setOnGraphItemListener(OnGraphItemListener listener) {

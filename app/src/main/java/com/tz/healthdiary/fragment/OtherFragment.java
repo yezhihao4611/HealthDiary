@@ -1,25 +1,21 @@
 package com.tz.healthdiary.fragment;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.tz.healthdiary.Jisuanqi.BaseActivity;
 import com.tz.healthdiary.Jisuanqi.BodyActivity;
+import com.tz.healthdiary.Jisuanqi.WaistlineActivity;
 import com.tz.healthdiary.OpinionActivity;
 import com.tz.healthdiary.R;
-import com.tz.healthdiary.Jisuanqi.WaistlineActivity;
 /**
  * Created by 西野七濑 on 2016/10/18.
  * Other页面的Fragment

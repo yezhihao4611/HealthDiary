@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#AFEEEE"
     android:orientation="horizontal">
 
 
-    <com.tz.healthdiary.Jgraph.graph.JcoolGraph xmlns:app="http://schemas.android.com/apk/res-auto"
+    <com.tz.healthdiary.Jgraph.graph.JcoolGraph
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/chart_line"
         android:layout_width="match_parent"
         android:layout_height="360dp"
@@ -17,7 +19,14 @@
         app:graphstyle="line"
         app:linestyle="curve"
         app:linewidth="3dp"
-        app:showymsg="true" />
+        app:showymsg="true"/>
+
+    <ListView
+        android:id="@+id/lv_weight_center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </ListView>
 
 
 </LinearLayout>
