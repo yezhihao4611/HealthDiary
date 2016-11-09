@@ -19,7 +19,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tz.healthdiary.R;
+import com.tz.healthdiary.StartAnimaActivity;
+import com.tz.healthdiary.sqlite.MyDataService;
 
+import static com.tz.healthdiary.R.id.et_waist_waist;
 import static com.tz.healthdiary.R.id.rb_wumen_waist;
 
 /**
@@ -51,13 +54,14 @@ public class WaistlineActivity extends Activity implements View.OnClickListener 
     LinearLayout ll_morefat;
     LinearLayout ll_mostfat;
 
+    MyDataService mMyDataService = StartAnimaActivity.myDataService;
 
     int height;
     int waist;
     double result;
     String str;
     double i;
-    int a = 1;
+    int a = mMyDataService.getSex();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,14 +94,20 @@ public class WaistlineActivity extends Activity implements View.OnClickListener 
         rb_man_waise.setOnClickListener(this);
         rb_wumen_waise.setOnClickListener(this);
         rg_waist.setOnClickListener(this);
+        int Mheight=mMyDataService.getMeter();
+        int mheight=mMyDataService.getCm();
+        int Nheighe=Mheight*100+mheight;
+        et_height_waist.setText(Nheighe+"");
+        et_waist_waist.setText(mMyDataService.getWaistline()+"");
+        et_year_waist.setText(mMyDataService.getAge()+"");
         et_height_waist.addTextChangedListener(textWatcher);
         et_waist_waist.addTextChangedListener(textWatcher);
-        if (a == 2) {
-            rg_waist.check(R.id.rb_wumen_waist);
+        if (a == 1) {
+            rg_waist.check(R.id.rb_man_waist);
             WumenResult();
         } else {
             ManResult();
-            rg_waist.check(R.id.rb_man_waist);
+            rg_waist.check(R.id.rb_wumen_waist);
         }
         rg_waist.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -142,6 +152,14 @@ public class WaistlineActivity extends Activity implements View.OnClickListener 
                 ManResult();
             } else {
                 WumenResult();
+            }
+            if (et_waist_waist.getText().toString().equals("")){
+
+            }
+            else {
+                int wasit = Integer.parseInt(et_waist_waist.getText().toString());
+                mMyDataService.setWaistline(wasit);
+                mMyDataService.alterWaistlineData();
             }
         }
 
@@ -197,7 +215,6 @@ public class WaistlineActivity extends Activity implements View.OnClickListener 
                 } else {
                     ll_mostfat.setBackground(new ColorDrawable(0xffdedada));
                     ll_result_waist.setBackground(new ColorDrawable(0xffFF0000));
-                    // Toast.makeText(this,"你所填数据不符合人体构造，请重新填写。。。",Toast.LENGTH_SHORT).show();
                 }
             } else {
                 tv_result_waist.setText("0");
@@ -257,7 +274,7 @@ public class WaistlineActivity extends Activity implements View.OnClickListener 
                 } else {
                     ll_mostfat.setBackground(new ColorDrawable(0xffdedada));
                     ll_result_waist.setBackground(new ColorDrawable(0xffFF0000));
-                    //Toast.makeText(this,"你所填数据不符合人体构造，请重新填写。。。",Toast.LENGTH_SHORT).show();
+
                 }
             } else {
                 tv_result_waist.setText("0");
@@ -272,4 +289,5 @@ public class WaistlineActivity extends Activity implements View.OnClickListener 
             }
         }
     }
+
 }

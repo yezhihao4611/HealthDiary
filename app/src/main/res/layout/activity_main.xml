@@ -30,7 +30,7 @@
             style="@style/st_homeBt"
             android:checked="true"
             android:drawableTop="@drawable/home"
-            android:text="消息中心"/>
+            android:text="信息中心"/>
 
         <RadioButton
             android:id="@+id/bmi"
@@ -61,6 +61,7 @@
             android:id="@+id/other"
             style="@style/st_homeBt"
             android:drawableTop="@drawable/me"
+
             android:text="其他"/>
 
     </RadioGroup>

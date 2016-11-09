@@ -377,7 +377,7 @@ public class HealthData {
             }
             Log.i("TZ", "point:" + point + "maxPoint:" + maxPoint + "y:" + y + "m:" + m + "d:" + d + "newKg:" + newKg + "newG:" + newG
                     + "BMI:" + BMI);
-            Log.i("TZ", "readData()：最近1日数据读取完毕");
+            Log.i("TZ", "readNewData()：最近1日数据读取完毕");
         }
     }
 

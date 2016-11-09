@@ -16,6 +16,8 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.tz.healthdiary.R;
+import com.tz.healthdiary.StartAnimaActivity;
+import com.tz.healthdiary.sqlite.MyDataService;
 
 /**
  * Created by anzhuo on 2016/10/20.
@@ -35,12 +37,12 @@ public class BaseActivity extends Activity implements View.OnClickListener {
     RadioButton rb_wumen_base;
     int height;
     int weight;
+    int mweight;
     int year;
     float str;
     int result;
     String re;
     String res;
-    int i = 1;
     PopupWindow popupWindow;
     TextView tv_one;
     TextView tv_two;
@@ -48,6 +50,8 @@ public class BaseActivity extends Activity implements View.OnClickListener {
     TextView tv_four;
     TextView tv_five;
     View v;
+     MyDataService myDataService= StartAnimaActivity.myDataService;
+    int i = myDataService.getSex();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +81,15 @@ public class BaseActivity extends Activity implements View.OnClickListener {
         tv_three.setOnClickListener(this);
         tv_four.setOnClickListener(this);
         tv_five.setOnClickListener(this);
+        et_year_base.setText(myDataService.getAge()+"");
+        int Mweight=myDataService.getKg();
+        int mweight=myDataService.getG();
+        String Nweight= String.valueOf(Mweight+mweight*0.1);
+        et_weight_base.setText(Nweight);
+        int Mheight=myDataService.getMeter();
+        int mheight=myDataService.getCm();
+        int Nheighe=Mheight*100+mheight;
+        et_height_base.setText(Nheighe+"");
         et_weight_base.addTextChangedListener(textWatcher);
         et_height_base.addTextChangedListener(textWatcher);
         et_year_base.addTextChangedListener(textWatcher);
@@ -147,8 +160,9 @@ public class BaseActivity extends Activity implements View.OnClickListener {
         } else {
             year = Integer.parseInt(et_year_base.getText().toString());
             height = Integer.parseInt(et_height_base.getText().toString());
-            weight = Integer.parseInt(et_weight_base.getText().toString());
-            str = (float) (66 + (13.7 * weight) + (5 * height) - (6.8 * year));
+            weight = myDataService.getKg();
+            mweight=myDataService.getG();
+            str = (float) (66 + (13.7 * (weight+mweight)) + (5 * height) - (6.8 * year));
             result = (int) str;
             re = String.valueOf(result);
             if (year >= 5 & year <= 120 && height >= 20 && height <= 250 & weight >= 10 && weight <= 400) {
@@ -209,8 +223,9 @@ public class BaseActivity extends Activity implements View.OnClickListener {
         } else {
             year = Integer.parseInt(et_year_base.getText().toString());
             height = Integer.parseInt(et_height_base.getText().toString());
-            weight = Integer.parseInt(et_weight_base.getText().toString());
-            str = (float) (655 + (9.7 * weight) + (1.8 * height) - (4.7 * year));
+            weight = myDataService.getKg();
+            mweight=myDataService.getG();
+            str = (float) (655 + (9.7 * (weight+mweight)) + (1.8 * height) - (4.7 * year));
             result = (int) str;
             re = String.valueOf(result);
             if (year >= 5 & year <= 120 && height >= 20 && height <= 250 & weight >= 10 && weight <= 400) {
