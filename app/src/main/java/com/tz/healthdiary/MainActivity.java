@@ -108,6 +108,22 @@ public class MainActivity extends AppCompatActivity {
 
     MyDataService mMyDataService = StartAnimaActivity.myDataService;
 
+    Handler mHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            switch (msg.what){
+                case 0:
+                    mBMIFragment.initData();
+
+                    mCentreFragment.showCurve();
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

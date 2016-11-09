@@ -51,6 +51,12 @@ public class BMIFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.activity_bmi, null);
         initView();
+        sex = mMyDataService.getSex();
+        if (sex == 0) {
+            mCircleImageView.setImageDrawable(getResources().getDrawable(R.drawable.girl));
+        } else {
+            mCircleImageView.setImageDrawable(getResources().getDrawable(R.drawable.boy));
+        }
         initData();
         return view;
     }
@@ -61,43 +67,40 @@ public class BMIFragment extends Fragment {
         maxW = (TextView) view.findViewById(R.id.max_weight_number);
         sTextView = (TextView) view.findViewById(stature_number);
         mCircleImageView = (CircleImageView) view.findViewById(R.id.civ_sex);
+        mColorArcProgressBar = (ColorArcProgressBar) view.findViewById(R.id.bars);
     }
 
     public void initData() {
-        BMI = mMyDataService.getBMI();
-        M = mMyDataService.getMeter();
-        Cm = mMyDataService.getCm();
-        Log.i("TZ", "M:" + M);
-        Log.i("TZ", "Cm:" + Cm);
-        sex = mMyDataService.getSex();
-        weight = mMyDataService.getNewKg() + (double) mMyDataService.getNewG() / 10;
-        stature = M + ((double) Cm / 100);
-        Log.i("TZ", "stature:" + stature);
+        if (null != mColorArcProgressBar) {
+            BMI = mMyDataService.getBMI();
+            M = mMyDataService.getMeter();
+            Cm = mMyDataService.getCm();
+            Log.i("TZ", "M:" + M);
+            Log.i("TZ", "Cm:" + Cm);
 
-        mColorArcProgressBar = (ColorArcProgressBar) view.findViewById(R.id.bar);
-        mColorArcProgressBar.setBMI(BMI);
-        float x = Float.parseFloat(evolveBMI(BMI) + "");
-        mColorArcProgressBar.setCurrentValues(x);
+            weight = mMyDataService.getNewKg() + (double) mMyDataService.getNewG() / 10;
+            stature = M + ((double) Cm / 100);
+            Log.i("TZ", "stature:" + stature);
 
-        mTextView.setText(weight + "");
-        sTextView.setText(stature + "");
 
-        if (sex == 0) {
-            mCircleImageView.setImageDrawable(getResources().getDrawable(R.drawable.girl));
-        } else if (sex == 1) {
-            mCircleImageView.setImageDrawable(getResources().getDrawable(R.drawable.boy));
+            mColorArcProgressBar.setBMI(BMI);
+            float x = Float.parseFloat(evolveBMI(BMI) + "");
+            mColorArcProgressBar.setCurrentValues(x);
+
+            mTextView.setText(weight + "");
+            sTextView.setText(stature + "");
+
+            double a = 25.0 * (stature * stature);
+            double b = 18.5 * (stature * stature);
+            DecimalFormat df = new DecimalFormat("0.0");
+            maxWeight = Double.parseDouble(df.format(a));
+            minWeight = Double.parseDouble(df.format(b));
+
+            Log.i("TZ", "maxWeight:" + maxWeight);
+            Log.i("TZ", "minWeight:" + minWeight);
+            maxW.setText(maxWeight + "");
+            minW.setText(minWeight + "");
         }
-
-        double a = 25.0 * (stature * stature);
-        double b = 18.5 * (stature * stature);
-        DecimalFormat df = new DecimalFormat("0.0");
-        maxWeight = Double.parseDouble(df.format(a));
-        minWeight = Double.parseDouble(df.format(b));
-
-        Log.i("TZ", "maxWeight:" + maxWeight);
-        Log.i("TZ", "minWeight:" + minWeight);
-        maxW.setText(maxWeight + "");
-        minW.setText(minWeight + "");
     }
 
     @Override

@@ -301,13 +301,13 @@ public class HealthData {
         mSQLiteDatabase.insert(HealthDbHelper.TABLE_NAME, null, mContentValues);
 
         Log.i("TZ", "reserveNewData()：每日数据储存完毕");
-        UpData();
+        UpDatas();
     }
 
     /**
      * 储存每日数据后更新point和maxPoint
      */
-    public void UpData() {
+    public void UpDatas() {
         mHealthDbHelper = new HealthDbHelper(MyApplication.getContext());
         mSQLiteDatabase = mHealthDbHelper.getReadableDatabase();
         Cursor cursor = mSQLiteDatabase.query(HealthDbHelper.TABLE_NAME, null, null, null, null, null, null);
@@ -321,6 +321,7 @@ public class HealthData {
         Log.i("TZ", "point和maxPoint更新完毕：" + "point:" + point + "maxPoint:" + maxPoint);
         readWeekData();
     }
+
     /**
      * 储存每日数据后更新数据
      */
@@ -337,6 +338,7 @@ public class HealthData {
         }
         readWeekData();
     }
+
     /**
      * 读取原始数据
      */
@@ -433,7 +435,9 @@ public class HealthData {
                 } else {
                     Log.i("TZ", "该数据不可用:" + "point=" + point);
                 }
-                listOnes.add(listOne);
+                if (listOne != null) {
+                    listOnes.add(listOne);
+                }
             }
             Log.i("TZ", "readWeekData：7次数据读取完毕");
             Log.i("TZ", "readWeekData：listOne:" + listOne);
@@ -474,7 +478,9 @@ public class HealthData {
                 } else {
                     Log.i("TZ", "该数据不可用:" + "point=" + point);
                 }
-                listTwos.add(listTwo);
+                if (listTwo != null) {
+                    listTwos.add(listTwo);
+                }
             }
             Log.i("TZ", "readTwoWeekData：14日数据读取完毕");
             Log.i("TZ", "readTwoWeekData：listTwo:" + listTwo);
@@ -515,7 +521,9 @@ public class HealthData {
                 } else {
                     Log.i("TZ", "该数据不可用:" + "point=" + point);
                 }
-                listFours.add(listFour);
+                if (listFour != null) {
+                    listFours.add(listFour);
+                }
             }
             Log.i("TZ", "readFourWeekData：28日数据读取完毕");
             Log.i("TZ", "readFourWeekData：listFour:" + listFour);
