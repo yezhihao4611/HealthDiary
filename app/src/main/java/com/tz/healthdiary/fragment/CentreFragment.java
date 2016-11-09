@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,7 +40,6 @@ public class CentreFragment extends Fragment {
     TextView tv_one;
     TextView tv_two;
     TextView tv_three;
-    int dotsNumber;
     private JcoolGraph mLineChar;
     PopupWindow popupWindow;
     ListView lv_weight_center;
@@ -49,15 +49,15 @@ public class CentreFragment extends Fragment {
     WeightListAdapter weightListAdapter;
     private float[] numbers;
     MyDataService mMyDataService = StartAnimaActivity.myDataService;
-    private List<List<Integer>> dataOnes;
-    private List<Integer> dataOne;
+    private List<List<Integer>> dataLists;
+    private List<Integer> dataList;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_center, null);
         v = LayoutInflater.from(getActivity()).inflate(R.layout.popwindow_center_layout, null);
-        dotsNumber = 7;
+        dataLists = mMyDataService.getListOnes();
         return view;
     }
 
@@ -86,8 +86,7 @@ public class CentreFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 bt_change.setText(" 7天 ▽");
-                dotsNumber = 7;
-                mLineChar.feedData(0);
+                dataLists = mMyDataService.getListOnes();
                 popupWindow.dismiss();
                 showCurve();
             }
@@ -96,7 +95,8 @@ public class CentreFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 bt_change.setText("14天 ▽");
-                dotsNumber = 14;
+                dataLists = mMyDataService.getListTwos();
+                Log.i("Hao",dataLists+"");
                 popupWindow.dismiss();
                 showCurve();
             }
@@ -105,7 +105,7 @@ public class CentreFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 bt_change.setText("28天 ▽");
-                dotsNumber = 28;
+                dataLists = mMyDataService.getListFours();
                 popupWindow.dismiss();
                 showCurve();
             }
@@ -122,24 +122,20 @@ public class CentreFragment extends Fragment {
         if (null != mLineChar) {
             List<Jchart> lines = new ArrayList<>();
             int min = 300;
-            dataOnes = mMyDataService.getListOnes();
             list = new ArrayList<>();
 
-            if (dataOnes.size() < dotsNumber) {
-                dotsNumber = dataOnes.size();
-            }
-            for (int i = 0; i < dotsNumber; i++) {
+            for (int i = 0; i < dataLists.size(); i++) {
                 weightInfo = new WeightInfo();
-                dataOne = dataOnes.get(i);
-                float y = (float) dataOne.get(4) + ((float) dataOne.get(5) / 10f);
-                lines.add(new Jchart(0f, y, dataOne.get(2) + "-" + dataOne.get(3), Color.BLACK));
+                dataList = dataLists.get(i);
+                float y = (float) dataList.get(4) + ((float) dataList.get(5) / 10f);
+                lines.add(new Jchart(0f, y, dataList.get(2) + "-" + dataList.get(3), Color.BLACK));
 
                 if (min > y) {
                     min = (int) y;
                 }
-                weightInfo.setYear(dataOne.get(1) + "");
-                weightInfo.setMonth(dataOne.get(2) + "");
-                weightInfo.setDay(dataOne.get(3) + "");
+                weightInfo.setYear(dataList.get(1) + "");
+                weightInfo.setMonth(dataList.get(2) + "");
+                weightInfo.setDay(dataList.get(3) + "");
                 weightInfo.setWeight(y + "");
 
                 list.add(0, weightInfo);
