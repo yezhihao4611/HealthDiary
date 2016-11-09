@@ -57,6 +57,7 @@ public class SearchActivity extends Activity {
 
                         } else {
                             tv_introduce.setText("数据不存在......");
+                            progressDialog.dismiss();
                         }
                     }
                     break;
