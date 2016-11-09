@@ -21,6 +21,7 @@ public class NewsAdaputer extends BaseAdapter {
     Context mcontext;
     List<NewsInfo> mlist;
     NewsInfo newsInfo;
+
     public  NewsAdaputer(Context context,List list){
         this.mcontext=context;
         this.mlist=list;

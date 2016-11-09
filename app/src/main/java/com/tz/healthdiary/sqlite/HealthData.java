@@ -302,7 +302,22 @@ public class HealthData {
 
         Log.i("TZ", "reserveNewData()：每日数据储存完毕");
     }
-
+    /**
+     * 储存每日数据后更新数据
+     */
+    public void UpData() {
+        mHealthDbHelper = new HealthDbHelper(MyApplication.getContext());
+        mSQLiteDatabase = mHealthDbHelper.getReadableDatabase();
+        Cursor cursor = mSQLiteDatabase.query(HealthDbHelper.TABLE_NAME, null, null, null, null, null, null);
+        if (cursor != null) {
+            if (cursor.moveToLast()) {
+                point = Integer.parseInt(cursor.getString(cursor.getColumnIndex("point")));
+                maxPoint = point;
+                Log.i("TZ", "point:" + point);
+            }
+        }
+        readWeekData();
+    }
     /**
      * 读取原始数据
      */
@@ -375,7 +390,7 @@ public class HealthData {
         Cursor cursor = mSQLiteDatabase.query(HealthDbHelper.TABLE_NAME, null, null, null, null, null, null);
         if (cursor != null) {
             listOnes = new ArrayList<>();
-            cursor.move(2);
+            cursor.move(1);
             while (cursor.moveToNext()) {
                 point = Integer.parseInt(cursor.getString(cursor.getColumnIndex("point")));
                 if (maxPoint - 7 < point) {

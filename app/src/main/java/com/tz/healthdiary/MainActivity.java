@@ -1,9 +1,9 @@
 package com.tz.healthdiary;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
@@ -142,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
         G = mMyDataService.getNewG();
 
         BMI = mMyDataService.getBMI();
-        Log.i("TZ", "BMI初始化:"+BMI);
+        Log.i("TZ", "BMI初始化:" + BMI);
         Log.i("TZ", "initData(),Kg: " + Kg + ", G: " + G);
         wvkg.setOnWheelViewListener(new WheelView.OnWheelViewListener() {
             @Override
@@ -164,6 +164,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
     /**
      * 点击事件
      *
@@ -184,27 +185,28 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case bt_add_yes:
                 int year = calendar.get(Calendar.YEAR);
-                int month = calendar.get(Calendar.MONTH)+1;
+                int month = calendar.get(Calendar.MONTH) + 1;
                 int day = calendar.get(Calendar.DAY_OF_MONTH);
-                if (day!=d){
-                    mMyDataService.setY(year);
-                    mMyDataService.setM(month);
-                    mMyDataService.setD(day);
-                    mMyDataService.setNewKg(Kg);
-                    mMyDataService.setNewG(G);
-                    Log.i("TZ", "bt_add_yes:确认储存");
-                    mMyDataService.everydayAddData();
-                    Log.i("TZ", "bt_add_yes:储存完毕");
-                }else {
-                    mMyDataService.setNewKg(Kg);
-                    mMyDataService.setNewG(G);
-                    Log.i("TZ", "bt_add_yes:确认修改");
-                    mMyDataService.updataData();
-                    Log.i("TZ", "bt_add_yes:修改完毕");
-
-                }
+//                if (day!=d){
+                mMyDataService.setY(year);
+                mMyDataService.setM(month);
+                mMyDataService.setD(day);
+                mMyDataService.setNewKg(Kg);
+                mMyDataService.setNewG(G);
+                Log.i("TZ", "bt_add_yes:确认储存");
+                mMyDataService.everydayAddData();
+                Log.i("TZ", "bt_add_yes:储存完毕");
+//                }else {
+//                    mMyDataService.setNewKg(Kg);
+//                    mMyDataService.setNewG(G);
+//                    Log.i("TZ", "bt_add_yes:确认修改");
+//                    mMyDataService.updataData();
+//                    Log.i("TZ", "bt_add_yes:修改完毕");
+//
+//                }
                 BMI = mMyDataService.getBMI();
-                Log.i("TZ", "BMI更新后:"+BMI);
+                Log.i("TZ", "BMI更新后:" + BMI);
+                mCentreFragment = null;
                 mPopupWindow.dismiss();
                 break;
             default:
@@ -249,14 +251,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showFragment(int i) {
-        manager = getSupportFragmentManager();
+        manager = getFragmentManager();
         transaction = manager.beginTransaction();
         //先把所有的fragment隐藏
         HideAllFragment(transaction);
         switch (i) {
             case 0:
                 if (mCentreFragment == null) {
-                    transaction.add(R.id.fl_main, new CentreFragment());
+                    transaction.add(R.id.fl_main, mCentreFragment=new CentreFragment());
                 } else {
                     transaction.show(mCentreFragment);
                 }

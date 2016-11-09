@@ -365,7 +365,7 @@ public class MyDataService extends Service {
         BMI = Double.parseDouble(df.format(a));
         mHealthData.setBMI(BMI);
         mHealthData.reserveNewData();
-
+        mHealthData.UpData();
     }
 
     //修改最近一次数据
