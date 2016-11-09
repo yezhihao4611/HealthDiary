@@ -50,7 +50,26 @@ public class MyDataService extends Service {
     private double BMI;
     //腰围
     private int waistline;
+    //整体体重
+    private int weight;
+    //整体身高
+    private int height;
 
+    public int getWeight() {
+        return weight;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
 
     public int getAge() {
         return Age;
@@ -292,6 +311,9 @@ public class MyDataService extends Service {
         newG = mHealthData.getNewG();
         BMI = mHealthData.getBMI();
 
+        weight= (int) (Kg+G*0.1);
+        height=Meter*100+Cm;
+
         listOne = mHealthData.getListOne();
         listOnes = mHealthData.getListOnes();
 
@@ -304,6 +326,7 @@ public class MyDataService extends Service {
         Log.i("TZ", "获取数据10:" + "Sex:" + Sex + "Year:" + Year + "Month:" + Month + "Day:" + Day
                 + "Age:" + Age + "Kg:" + Kg + "G:" + G + "Meter:" + Meter + "Cm:" + Cm
                 + "Waistline:" + waistline);
+        Log.i("TZ", "listOnes:" + listOnes);
         Log.i("TZ", "获取数据7:" + "point:" + point + "y:" + y + "m:" + m + "d:" + d
                 + "newKg:" + newKg + "newG:" + newG + "BMI:" + BMI);
     }
@@ -328,7 +351,7 @@ public class MyDataService extends Service {
 
         point = 1;
         int years = calendar.get(Calendar.YEAR);
-        int months = calendar.get(Calendar.MONTH)+1;
+        int months = calendar.get(Calendar.MONTH) + 1;
         int days = calendar.get(Calendar.DAY_OF_MONTH);
         y = years;
         m = months;
@@ -380,8 +403,9 @@ public class MyDataService extends Service {
     }
 
     //修改腰围
-    public void alterWaistlineData(){
+    public void alterWaistlineData() {
         mHealthData.setWaistline(waistline);
         mHealthData.alterWaistlineData();
+        Log.i("TZ",waistline+"");
     }
 }

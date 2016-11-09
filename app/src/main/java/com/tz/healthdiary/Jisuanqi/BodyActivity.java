@@ -17,6 +17,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tz.healthdiary.R;
+import com.tz.healthdiary.StartAnimaActivity;
+import com.tz.healthdiary.sqlite.MyDataService;
 
 /**
  * Created by anzhuo on 2016/10/20.
@@ -45,11 +47,11 @@ public class BodyActivity extends Activity implements View.OnClickListener {
     int weight;
     int waist;
     double result;
-    int a = 2;
     String str;
     double i;
     AlertDialog.Builder builder;
-
+ MyDataService myDataService= StartAnimaActivity.myDataService;
+    int a = myDataService.getSex();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,6 +77,16 @@ public class BodyActivity extends Activity implements View.OnClickListener {
         builder=new AlertDialog.Builder(BodyActivity.this);
         builder.setIcon(R.mipmap.ic_launcher);
         iv_back_body.setOnClickListener(this);
+        int Mheight=myDataService.getMeter();
+        int mheight=myDataService.getCm();
+        int Nheighe=Mheight*100+mheight;
+        et_height_body.setText(Nheighe+"");
+        int Mweight=myDataService.getKg();
+        int mweight=myDataService.getG();
+        String Nweight= String.valueOf(Mweight+mweight*0.1);
+        et_weight_bady.setText(Nweight);
+        et_year_body.setText(myDataService.getAge()+"");
+        et_waist_body.setText(myDataService.getWaistline()+"");
         et_waist_body.addTextChangedListener(textWatcher);
         et_height_body.addTextChangedListener(textWatcher);
         et_weight_bady.addTextChangedListener(textWatcher);
@@ -125,7 +137,7 @@ public class BodyActivity extends Activity implements View.OnClickListener {
 
         } else {
             height = Integer.parseInt(et_height_body.getText().toString());
-            weight = Integer.parseInt(et_weight_bady.getText().toString());
+            weight = myDataService.getKg();
             waist = Integer.parseInt(et_waist_body.getText().toString());
             result = (0.74 * waist - weight * 0.082 - 34.89);
             str = String.format("%.2f", result);
@@ -159,8 +171,7 @@ public class BodyActivity extends Activity implements View.OnClickListener {
                 ll_nomal.setBackground(new ColorDrawable(0xFFFFFFFF));
                 ll_high.setBackground(new ColorDrawable(0xFFFFFFFF));
                 ll_mosthigh.setBackground(new ColorDrawable(0xFFFFFFFF));
-
-               // Toast.makeText(this,"你所填数据不符合人体构造，请重新填写。。。",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this,"你所填数据不符合人体构造，请重新填写。。。",Toast.LENGTH_SHORT).show();
                 /*builder.setMessage("体脂百分比是指将脂肪含量用其占总体重的百分比的形式表示,分成两种脂肪\n" +
                         "1.必需脂肪，就是指身体要维持生命及繁殖所需的脂肪。\n" +
                         "2.储存脂肪，由脂肪组织内所累积的脂肪组成，当中部份位于胸腔及腹部，用以保护身体的内脏。\n" +
@@ -176,7 +187,7 @@ public class BodyActivity extends Activity implements View.OnClickListener {
         tv_normal_body.setText("20-30%");
         tv_high_body.setText("30-41%");
         tv_mosthigh_body.setText("≥41");
-        if (et_weight_bady.getText().toString().equals("") || et_height_body.getText().toString().equals("") || et_waist_body.getText().toString().equals("")) {
+        if (et_weight_bady.getText().toString().equals("") || et_height_body.getText().toString().equals("") || et_waist_body.getText().toString().equals("")&&i>0) {
             ll_low.setBackground(new ColorDrawable(0xFFFFFFFF));
             ll_nomal.setBackground(new ColorDrawable(0xFFFFFFFF));
             ll_high.setBackground(new ColorDrawable(0xFFFFFFFF));
@@ -184,13 +195,13 @@ public class BodyActivity extends Activity implements View.OnClickListener {
 
         } else {
             height = Integer.parseInt(et_height_body.getText().toString());
-            weight = Integer.parseInt(et_weight_bady.getText().toString());
+            weight = myDataService.getKg();
             waist = Integer.parseInt(et_waist_body.getText().toString());
             result = (0.74 * waist - weight * 0.082 - 34.89);
             str = String.format("%.2f", result);
             i = Double.parseDouble(str);
 
-            if (height >= 50 && height <= 230 && weight >= 20 && weight <= 300 && waist >= 30 && waist <= 200) {
+            if (height >= 50 && height <= 230 && weight >= 20 && weight <= 300 && waist >= 30 && waist <= 200&&i>0) {
 
                 if (i <= 20&&i>0) {
                     tv_result_body.setText(str + "%");
@@ -214,9 +225,11 @@ public class BodyActivity extends Activity implements View.OnClickListener {
             } else {
                 ll_result_body.setBackground(new ColorDrawable(0xffdedada));
                 tv_result_body.setText("0");
+                ll_low.setBackground(new ColorDrawable(0xFFFFFFFF));
+                ll_nomal.setBackground(new ColorDrawable(0xFFFFFFFF));
+                ll_high.setBackground(new ColorDrawable(0xFFFFFFFF));
+                ll_mosthigh.setBackground(new ColorDrawable(0xFFFFFFFF));
 
-
-                //Toast.makeText(this,"你所填数据不符合人体构造，请重新填写。。。",Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -237,11 +250,19 @@ public class BodyActivity extends Activity implements View.OnClickListener {
                 Log.i("LT","123");
                 bWumenResult();
             }
+            if (et_waist_body.getText().toString().equals("")){
 
+            }
+            else {
+                int wasit = Integer.parseInt(et_waist_body.getText().toString());
+                myDataService.setWaistline(wasit);
+                myDataService.alterWaistlineData();
+            }
         }
 
         @Override
         public void afterTextChanged(Editable s) {
+
 
         }
     };

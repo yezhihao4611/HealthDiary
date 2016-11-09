@@ -21,7 +21,7 @@ public class StartAnimaActivity extends AppCompatActivity {
     ImageView mImageView;
 
     static SharedPreferences mSharedPreferences;
-    static MyDataService myDataService;
+    public static MyDataService myDataService;
 
     Handler mHandler = new Handler() {
         @Override
