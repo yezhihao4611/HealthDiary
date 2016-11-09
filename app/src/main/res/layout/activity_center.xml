@@ -21,6 +21,17 @@
             android:text="健康曲线"
             android:textSize="24dp" />
 
+        <Button
+            android:id="@+id/bt_change"
+            android:layout_below="@id/tv_tv_1"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            android:background="#E8E8E8"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text=" 7天 ▽"
+            android:textSize="20dp"/>
+
         <com.tz.healthdiary.Jgraph.graph.JcoolGraph xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/chart_line"
             android:layout_width="match_parent"
@@ -29,6 +40,7 @@
             android:clickable="true"
             android:paddingRight="10dp"
             android:layout_marginTop="150dp"
+            android:paddingTop="40dp"
             app:graphstyle="line"
             app:linestyle="curve"
             app:linewidth="3dp"
