@@ -144,7 +144,6 @@ public class CentreFragment extends Fragment {
                 if (min > y) {
                     min = (int) y;
                 }
-
                 weightInfo.setYear(dataOne.get(1) + "");
                 weightInfo.setMonth(dataOne.get(2) + "");
                 weightInfo.setDay(dataOne.get(3) + "");
