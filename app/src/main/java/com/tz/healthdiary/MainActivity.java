@@ -108,20 +108,6 @@ public class MainActivity extends AppCompatActivity {
 
     MyDataService mMyDataService = StartAnimaActivity.myDataService;
 
-    Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what) {
-                case 0:
-                    mBMIFragment.initData();
-                    break;
-                default:
-                    break;
-            }
-        }
-    };
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -158,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
         G = mMyDataService.getNewG();
 
         BMI = mMyDataService.getBMI();
-        Log.i("TZ", "BMI初始化:" + BMI);
+        Log.i("TZ", "BMI初始化:"+BMI);
         Log.i("TZ", "initData(),Kg: " + Kg + ", G: " + G);
         wvkg.setOnWheelViewListener(new WheelView.OnWheelViewListener() {
             @Override

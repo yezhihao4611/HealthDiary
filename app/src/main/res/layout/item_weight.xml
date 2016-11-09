@@ -8,6 +8,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         android:layout_weight="1">
         <TextView
             android:id="@+id/tv_date_year"
@@ -44,14 +46,29 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="|"
+        android:textColor="#9C9C9C"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         android:textSize="20dp"/>
-    <TextView
-        android:id="@+id/tv_weight"
+    <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:gravity="center"
-        android:text="xx.x  kg"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_weight="1">
+    <TextView
+        android:id="@+id/tv_weight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="xx.x"
         android:textSize="20dp" />
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="  kg"
+        android:textSize="20dp" />
+        </LinearLayout>
 </LinearLayout>

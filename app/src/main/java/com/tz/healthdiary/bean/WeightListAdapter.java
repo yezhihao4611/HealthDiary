@@ -55,6 +55,7 @@ public class WeightListAdapter extends BaseAdapter {
             convertView.setTag(viewHolder);
         }
         viewHolder = (ViewHolder) convertView.getTag();
+        weightInfo = mList.get(position);
         viewHolder.tv_date_year.setText(weightInfo.getYear());
         viewHolder.tv_date_month.setText(weightInfo.getMonth());
         viewHolder.tv_date_day.setText(weightInfo.getDay());
@@ -64,10 +65,10 @@ public class WeightListAdapter extends BaseAdapter {
 
 
     public class ViewHolder {
-        TextView tv_date_year;
-        TextView tv_date_month;
-        TextView tv_date_day;
-        TextView tv_weight;
+        private TextView tv_date_year;
+        private TextView tv_date_month;
+        private TextView tv_date_day;
+        private TextView tv_weight;
     }
 
 }

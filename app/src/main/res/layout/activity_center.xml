@@ -1,36 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/sv_curve"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#E8E8E8"
-    android:orientation="horizontal">
+    android:orientation="vertical">
 
-
-    <com.tz.healthdiary.Jgraph.graph.JcoolGraph
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/chart_line"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="360dp"
-        android:clickable="true"
-        android:paddingRight="10dp"
-        android:paddingTop="50dp"
-        app:graphstyle="line"
-        app:linestyle="curve"
-        app:linewidth="3dp"
-        app:showymsg="true"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <ListView
-        android:id="@+id/lv_weight_center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_tv_1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:paddingTop="50dp"
+            android:text="健康曲线"
+            android:textSize="24dp" />
 
-    </ListView>
+        <com.tz.healthdiary.Jgraph.graph.JcoolGraph xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/chart_line"
+            android:layout_width="match_parent"
+            android:layout_height="360dp"
+            android:layout_alignTop="@id/tv_tv_1"
+            android:clickable="true"
+            android:paddingRight="10dp"
+            android:layout_marginTop="150dp"
+            app:graphstyle="line"
+            app:linestyle="curve"
+            app:linewidth="3dp"
+            app:showymsg="true" />
 
-    <ListView
-        android:id="@+id/lv_weight_center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"></ListView>
+        <TextView
+            android:id="@+id/tv_tv_2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/chart_line"
+            android:layout_marginTop="40dp"
+            android:gravity="center"
+            android:text="数据列表"
+            android:textSize="20dp" />
 
+        <com.tz.healthdiary.bean.ListViewForScrollView
+            android:id="@+id/lv_weight_center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/tv_tv_2"></com.tz.healthdiary.bean.ListViewForScrollView>
 
-</LinearLayout>
+    </RelativeLayout>
+
+</ScrollView>
