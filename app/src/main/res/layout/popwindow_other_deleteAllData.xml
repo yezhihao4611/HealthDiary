@@ -29,7 +29,7 @@
                 android:layout_marginBottom="24dp"
                 android:gravity="center"
                 android:textSize="20sp"
-                android:text=" 是否要删除所有数据？"/>
+                android:text=" 是否要删除所有的数据？"/>
 
         </LinearLayout>
 
