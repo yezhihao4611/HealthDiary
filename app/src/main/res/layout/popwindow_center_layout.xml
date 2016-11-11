@@ -11,7 +11,7 @@
         android:layout_height="38dp"
         android:layout_margin="1dp"
         android:gravity="center"
-        android:text=" 7天 "
+        android:text=" 7次 "
         android:textSize="20dp" />
 
     <TextView
@@ -22,7 +22,7 @@
         android:layout_marginLeft="1dp"
         android:layout_marginBottom="1dp"
         android:gravity="center"
-        android:text="14天 "
+        android:text="14次 "
         android:textSize="20dp" />
 
     <TextView
@@ -33,7 +33,7 @@
         android:layout_marginLeft="1dp"
         android:layout_marginBottom="1dp"
         android:gravity="center"
-        android:text="28天 "
+        android:text="28次 "
         android:textSize="20dp" />
 
 

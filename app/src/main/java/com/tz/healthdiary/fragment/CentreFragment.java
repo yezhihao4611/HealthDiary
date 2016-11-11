@@ -98,7 +98,7 @@ public class CentreFragment extends Fragment {
         tv_one_c.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                bt_change.setText(" 7天 ▽");
+                bt_change.setText(" 7次 ▽");
                 dataLists = mMyDataService.getListOnes();
                 cDay=1;
                 popupWindow.dismiss();
@@ -108,7 +108,7 @@ public class CentreFragment extends Fragment {
         tv_two_c.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                bt_change.setText("14天 ▽");
+                bt_change.setText("14次 ▽");
                 dataLists = mMyDataService.getListTwos();
                 cDay=2;
                 popupWindow.dismiss();
@@ -118,9 +118,9 @@ public class CentreFragment extends Fragment {
         tv_three_c.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                bt_change.setText("28天 ▽");
+                bt_change.setText("28次 ▽");
                 dataLists = mMyDataService.getListFours();
-                cDay=2;
+                cDay=3;
                 popupWindow.dismiss();
                 onResume();
             }
