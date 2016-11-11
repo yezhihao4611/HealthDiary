@@ -68,7 +68,7 @@ public class OtherFragment extends Fragment implements View.OnClickListener {
         tv_year_other = (TextView) view.findViewById(R.id.tv_year);
         deleteSQL = (TextView) view.findViewById(R.id.tv_delete_other);
         head_other = (ImageView) view.findViewById(R.id.head_other);
-        mPopView = LayoutInflater.from(getActivity()).inflate(R.layout.popwindow_other_deletealldata, null);
+        mPopView = LayoutInflater.from(getActivity()).inflate(R.layout.other_delete, null);
         btDeleteN = (Button) mPopView.findViewById(R.id.bt_deleteall_no);
         btDeleteY = (Button) mPopView.findViewById(R.id.bt_deleteall_yes);
         btDeleteN.setOnClickListener(this);
