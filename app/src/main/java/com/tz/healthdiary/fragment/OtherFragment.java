@@ -82,8 +82,8 @@ public class OtherFragment extends Fragment implements View.OnClickListener {
         tv_year_other.addTextChangedListener(textWatcher);
         et_height_other.addTextChangedListener(textWatcher);
         //读取体重
-        int Mweight = myDataService.getKg();
-        int mweight = myDataService.getG();
+        int Mweight = myDataService.getNewKg();
+        int mweight = myDataService.getNewG();
         Log.i("TZ", "Mweight:" + Mweight + "mweight" + mweight);
         String Nweight = String.valueOf(Mweight + (double) mweight * 0.1);
         tv_weight_other.setText(Nweight);

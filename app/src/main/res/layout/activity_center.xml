@@ -37,6 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="450dp"
             android:layout_alignTop="@id/tv_tv_1"
+            android:layout_marginLeft="5dp"
             android:layout_marginTop="80dp"
             android:clickable="true"
             android:paddingRight="10dp"
