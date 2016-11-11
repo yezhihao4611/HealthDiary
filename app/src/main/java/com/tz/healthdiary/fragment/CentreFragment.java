@@ -168,7 +168,6 @@ public class CentreFragment extends Fragment {
                 weightInfo.setMonth(dataList.get(2) + "");
                 weightInfo.setDay(dataList.get(3) + "");
                 weightInfo.setWeight(y + "");
-
                 list.add(0, weightInfo);
             }
 
