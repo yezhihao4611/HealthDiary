@@ -108,21 +108,35 @@ public class MainActivity extends AppCompatActivity {
 
     MyDataService mMyDataService = StartAnimaActivity.myDataService;
 
-    Handler mHandler = new Handler(){
+    public static int location;
+
+    Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            switch (msg.what){
+            switch (msg.what) {
                 case 0:
-                    mBMIFragment.initData();
+                    mCentreFragment = new CentreFragment();
+                    showFragment(0);
+                    break;
+                case 1:
+                    mBMIFragment = new BMIFragment();
+                    showFragment(1);
+                    //mBMIFragment.initData();
+                    break;
+                case 2:
 
-                    mCentreFragment.showCurve();
+                    break;
+                case 3:
+                    mOtherFragment = new OtherFragment();
+                    showFragment(3);
                     break;
                 default:
                     break;
             }
         }
     };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -226,7 +240,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         Message message = new Message();
-                        message.what = 0;
+                        message.what = location;
                         mHandler.sendMessage(message);
                     }
                 }).start();
@@ -244,6 +258,7 @@ public class MainActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b) {
                     showFragment(0);
+                    location=0;
                 }
             }
         });
@@ -252,6 +267,7 @@ public class MainActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b) {
                     showFragment(1);
+                    location=1;
                 }
             }
         });
@@ -260,6 +276,7 @@ public class MainActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b) {
                     showFragment(2);
+                    location=2;
                 }
             }
         });
@@ -268,6 +285,7 @@ public class MainActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b) {
                     showFragment(3);
+                    location=3;
                 }
             }
         });

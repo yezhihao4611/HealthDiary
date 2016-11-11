@@ -316,11 +316,11 @@ public class MyDataService extends Service {
         listOne = mHealthData.getListOne();
         listOnes = mHealthData.getListOnes();
 
-        /*listTwo = mHealthData.getListOne();
+        listTwo = mHealthData.getListOne();
         listTwos = mHealthData.getListTwos();
 
         listFour = mHealthData.getListOne();
-        listFours = mHealthData.getListFours();*/
+        listFours = mHealthData.getListFours();
 
         Log.i("TZ", "获取数据10:" + "Sex:" + Sex + "Year:" + Year + "Month:" + Month + "Day:" + Day
                 + "Age:" + Age + "Kg:" + Kg + "G:" + G + "Meter:" + Meter + "Cm:" + Cm
@@ -388,6 +388,7 @@ public class MyDataService extends Service {
         BMIget();
         mHealthData.setBMI(BMI);
         mHealthData.reserveNewData();
+        mHealthData.UpData();
         renewData();
     }
 

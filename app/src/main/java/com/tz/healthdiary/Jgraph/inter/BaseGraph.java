@@ -73,7 +73,7 @@ public abstract class BaseGraph extends View implements GestureDetector.OnGestur
      */
     protected ArrayList<String> mYaxis_msg;
     protected float mYaxis_Max = 0;
-    protected float mYaxis_min;
+    protected float mYaxis_min = 0;
     /**
      * y轴最长的文字
      */
@@ -366,6 +366,7 @@ public abstract class BaseGraph extends View implements GestureDetector.OnGestur
      * 获取屏幕 宽高 后 更新 图表区域 矩阵数据 柱子宽 间隔宽度
      */
     protected void refreshChartSetData() {
+        mVisibleNums = 0;
         if (mGraphStyle == BAR) {
             //柱状图默认 间隔固定
             mInterval = mInterval >= MathHelper.dip2px(mContext, 6) ? MathHelper.dip2px(mContext, 6) : mInterval;
@@ -878,7 +879,6 @@ public abstract class BaseGraph extends View implements GestureDetector.OnGestur
                 refreshYaxisValues(mYaxis_msg.size());
             }
         }
-
     }
 
     public void setOnGraphItemListener(OnGraphItemListener listener) {
@@ -940,7 +940,7 @@ public abstract class BaseGraph extends View implements GestureDetector.OnGestur
         mYaxismax = new DecimalFormat("##.#").format(mYaxis_Max);
         float diffLevel = (mYaxis_Max - mYaxis_min) / ((float) showYnum - 1);
         for (int i = 0; i < showYnum; i++) {
-            mYaxis_msg.add(new DecimalFormat("#").format(mYaxis_min + diffLevel * i));
+            mYaxis_msg.add(new DecimalFormat("##.#").format(mYaxis_min + diffLevel * i));
         }
     }
 
