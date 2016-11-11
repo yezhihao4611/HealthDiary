@@ -11,6 +11,7 @@
         android:layout_height="38dp"
         android:layout_margin="1dp"
         android:gravity="center"
+        android:background="#E8E8E8"
         android:text=" 7次 "
         android:textSize="20dp" />
 
@@ -19,6 +20,7 @@
         android:layout_width="98dp"
         android:layout_height="38dp"
         android:layout_marginRight="1dp"
+        android:background="#E8E8E8"
         android:layout_marginLeft="1dp"
         android:layout_marginBottom="1dp"
         android:gravity="center"
@@ -29,6 +31,7 @@
         android:id="@+id/tv_three_c"
         android:layout_width="98dp"
         android:layout_height="38dp"
+        android:background="#E8E8E8"
         android:layout_marginRight="1dp"
         android:layout_marginLeft="1dp"
         android:layout_marginBottom="1dp"
