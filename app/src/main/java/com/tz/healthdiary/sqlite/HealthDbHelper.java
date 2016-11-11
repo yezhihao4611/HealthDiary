@@ -29,4 +29,15 @@ public class HealthDbHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
     }
+
+    /**
+     * 删除数据库
+     *
+     * @param context
+     * @return
+     */
+    public boolean deleteDatabase(Context context) {
+        return context.deleteDatabase(DB_NAME);
+    }
 }
+

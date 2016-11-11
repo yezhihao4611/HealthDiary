@@ -578,6 +578,25 @@ public class HealthData {
         String[] point = {"基本数据"};
         mSQLiteDatabase.update(HealthDbHelper.TABLE_NAME, mContentValues, where, point);
         Log.i("TZ", "alterWaistlineData：修改腰围完毕");
+        Log.i("TZ", "alterWaistlineData：修改腰围完毕");
+    }
+
+    /**
+     * 修改身高
+     */
+    public void alterStatureData() {
+        Log.i("TZ", "alterStatureData：开始修改身高");
+        mContentValues = new ContentValues();
+        mHealthDbHelper = new HealthDbHelper(MyApplication.getContext());
+        mSQLiteDatabase = mHealthDbHelper.getWritableDatabase();
+
+        mContentValues.put("meter", Meter);
+        mContentValues.put("cm", Cm);
+
+        String where = "name=?";
+        String[] point = {"基本数据"};
+        mSQLiteDatabase.update(HealthDbHelper.TABLE_NAME, mContentValues, where, point);
+        Log.i("TZ", "alterStatureData：修改身高完毕");
     }
 
     /**
@@ -591,5 +610,13 @@ public class HealthData {
         readTwoWeekData();//读取最近14次数据
         readFourWeekData();//读取最近28次数据
         Log.i("TZ", "startDataFromSql：数据读取完毕！");
+        Log.i("TZ", "startDataFromSql：数据读取完毕！");
+    }
+
+    /**
+     * 删除所有数据
+     */
+    public void deleteAllData() {
+        mHealthDbHelper.deleteDatabase(MyApplication.getContext());
     }
 }

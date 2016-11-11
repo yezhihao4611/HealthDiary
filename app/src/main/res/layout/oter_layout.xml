@@ -33,8 +33,8 @@
             android:text="年        龄"
             android:textSize="16sp" />
 
-        <EditText
-            android:id="@+id/et_year"
+        <TextView
+            android:id="@+id/tv_year"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -42,33 +42,18 @@
             android:gravity="center"
             android:inputType="number"
             android:background="@null"
+            android:textColor="#000000"
+            android:textSize="18sp"
             android:text="22" />
-
-        <RadioGroup
-            android:id="@+id/rg_main"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
+        <ImageView
+            android:id="@+id/head_other"
             android:layout_weight="3"
-            android:gravity="center"
-            android:orientation="horizontal">
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/female_selected"/>
 
-            <RadioButton
-                android:id="@+id/man"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:button="@null"
-                android:checked="true"
-                android:drawableTop="@drawable/man" />
 
-            <RadioButton
-                android:id="@+id/wuman"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:button="@null"
-                android:drawableTop="@drawable/wumen" />
-        </RadioGroup>
     </LinearLayout>
 
     <LinearLayout
@@ -222,7 +207,7 @@
 
     <TextView
         android:id="@+id/tv_delete_other"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:text="删除所有数据"

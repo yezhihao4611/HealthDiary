@@ -20,7 +20,7 @@ public class StartAnimaActivity extends AppCompatActivity {
 
     ImageView mImageView;
 
-    static SharedPreferences mSharedPreferences;
+    public static SharedPreferences mSharedPreferences;
     public static MyDataService myDataService;
 
     Handler mHandler = new Handler() {
@@ -30,7 +30,6 @@ public class StartAnimaActivity extends AppCompatActivity {
             switch (msg.what) {
                 case 0:
                     Intent intent0 = new Intent(StartAnimaActivity.this, FirstActivity.class);
-
                     startActivity(intent0);
                     finish();
                     break;
