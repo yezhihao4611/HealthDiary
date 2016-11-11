@@ -98,9 +98,9 @@ public class CentreFragment extends Fragment {
         tv_one_c.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cDay = 1;
-                bt_change.setText(" 7天 ▽");
+                bt_change.setText(" 7次 ▽");
                 dataLists = mMyDataService.getListOnes();
+                cDay=1;
                 popupWindow.dismiss();
                 onResume();
             }
@@ -108,10 +108,9 @@ public class CentreFragment extends Fragment {
         tv_two_c.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cDay = 2;
-                bt_change.setText("14天 ▽");
+                bt_change.setText("14次 ▽");
                 dataLists = mMyDataService.getListTwos();
-                Log.i("Hao", dataLists + "");
+                cDay=2;
                 popupWindow.dismiss();
                 onResume();
             }
@@ -119,9 +118,9 @@ public class CentreFragment extends Fragment {
         tv_three_c.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                cDay = 3;
-                bt_change.setText("28天 ▽");
+                bt_change.setText("28次 ▽");
                 dataLists = mMyDataService.getListFours();
+                cDay=3;
                 popupWindow.dismiss();
                 onResume();
             }
@@ -132,10 +131,7 @@ public class CentreFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-
         sv_curve.smoothScrollTo(0, 0);
-
-
         showCurve();
     }
 
@@ -164,7 +160,7 @@ public class CentreFragment extends Fragment {
                 } else {
                     lines.add(new Jchart(0f, y, dataList.get(2) + "-" + dataList.get(3), Color.BLACK));
                 }
-                if (min > y) {
+                if ((float)min > y) {
                     min = (int) y;
                 }
 
@@ -172,7 +168,6 @@ public class CentreFragment extends Fragment {
                 weightInfo.setMonth(dataList.get(2) + "");
                 weightInfo.setDay(dataList.get(3) + "");
                 weightInfo.setWeight(y + "");
-
                 list.add(0, weightInfo);
             }
 

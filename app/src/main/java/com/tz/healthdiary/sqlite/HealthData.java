@@ -578,6 +578,7 @@ public class HealthData {
         String[] point = {"基本数据"};
         mSQLiteDatabase.update(HealthDbHelper.TABLE_NAME, mContentValues, where, point);
         Log.i("TZ", "alterWaistlineData：修改腰围完毕");
+        Log.i("TZ", "alterWaistlineData：修改腰围完毕");
     }
 
     /**
@@ -608,6 +609,7 @@ public class HealthData {
         readWeekData();//读取最近7次数据
         readTwoWeekData();//读取最近14次数据
         readFourWeekData();//读取最近28次数据
+        Log.i("TZ", "startDataFromSql：数据读取完毕！");
         Log.i("TZ", "startDataFromSql：数据读取完毕！");
     }
 

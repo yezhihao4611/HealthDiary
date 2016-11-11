@@ -107,126 +107,130 @@ public class MainActivity extends AppCompatActivity {
     //BMI指数
     private double BMI;
 
-    public static int location;
 
     MyDataService mMyDataService = StartAnimaActivity.myDataService;
 
-    Handler mHandler = new Handler() {
+    public static int location;
+
+
+        Handler mHandler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+                switch (msg.what) {
+                    case 0:
+                        mCentreFragment = new CentreFragment();
+                        showFragment(0);
+                        break;
+                    case 1:
+                        mBMIFragment = new BMIFragment();
+                        showFragment(1);
+                        //mBMIFragment.initData();
+                        break;
+                    case 2:
+
+                        break;
+                    case 3:
+                        mOtherFragment = new OtherFragment();
+                        showFragment(3);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+        };
+
+
         @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what) {
-                case 0:
-                    mCentreFragment = new CentreFragment();
-                    showFragment(0);
-                    break;
-                case 1:
-                    mBMIFragment = new BMIFragment();
-                    showFragment(1);
-                    //mBMIFragment.initData();
-                    break;
-                case 2:
-
-                    break;
-                case 3:
-                    mOtherFragment = new OtherFragment();
-                    showFragment(3);
-                    break;
-                default:
-                    break;
-            }
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_main);
+            initView();
+            initData();
+            onCheckedChangeds();
         }
-    };
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        initView();
-        initData();
-        onCheckedChangeds();
-    }
+        private void initView() {
+            mMyDataService.initData();//读取数据
+            mLinearLayout = (LinearLayout) findViewById(R.id.main);
+            centre = (RadioButton) findViewById(R.id.centre);
+            bmi = (RadioButton) findViewById(R.id.bmi);
+            news = (RadioButton) findViewById(R.id.news);
+            other = (RadioButton) findViewById(R.id.other);
 
-    private void initView() {
-        mMyDataService.initData();//读取数据
-        mLinearLayout = (LinearLayout) findViewById(R.id.main);
-        centre = (RadioButton) findViewById(R.id.centre);
-        bmi = (RadioButton) findViewById(R.id.bmi);
-        news = (RadioButton) findViewById(R.id.news);
-        other = (RadioButton) findViewById(R.id.other);
+            mCentreFragment = new CentreFragment();
+            mBMIFragment = new BMIFragment();
+            mNewsFragment = new NewsFragment();
+            mOtherFragment = new OtherFragment();
 
-        mCentreFragment = new CentreFragment();
-        mBMIFragment = new BMIFragment();
-        mNewsFragment = new NewsFragment();
-        mOtherFragment = new OtherFragment();
+            mPopView = LayoutInflater.from(MainActivity.this).inflate(R.layout.popupwindow_add_day_data, null);
+            initWheelView();
+            centre.setChecked(true);
+        }
 
-        mPopView = LayoutInflater.from(MainActivity.this).inflate(R.layout.popupwindow_add_day_data, null);
-        initWheelView();
-        centre.setChecked(true);
-    }
+        private void initData() {
+            y = mMyDataService.getY();
+            m = mMyDataService.getM();
+            d = mMyDataService.getD();
 
-    private void initData() {
-        y = mMyDataService.getY();
-        m = mMyDataService.getM();
-        d = mMyDataService.getD();
+            Kg = mMyDataService.getNewKg();
+            G = mMyDataService.getNewG();
 
-        Kg = mMyDataService.getNewKg();
-        G = mMyDataService.getNewG();
+            BMI = mMyDataService.getBMI();
+            Log.i("TZ", "BMI初始化:" + BMI);
+            Log.i("TZ", "initData(),Kg: " + Kg + ", G: " + G);
+            wvkg.setOnWheelViewListener(new WheelView.OnWheelViewListener() {
+                @Override
+                public void onSelected(int selectedIndex, String item) {
+                    KgX = selectedIndex;
+                    Kg = Integer.parseInt(item);
+                    mMyDataService.setNewKg(Kg);
+                    Log.i("TZ", "[Dialog]selectedIndex: " + selectedIndex + ", item: " + item);
+                }
+            });
+            wvg.setOnWheelViewListener(new WheelView.OnWheelViewListener() {
+                @Override
+                public void onSelected(int selectedIndex, String item) {
+                    GX = selectedIndex;
+                    G = Integer.parseInt(item);
+                    mMyDataService.setNewG(G);
+                    Log.i("TZ", "[Dialog]selectedIndex: " + selectedIndex + ", item: " + item);
+                }
+            });
+        }
 
-        BMI = mMyDataService.getBMI();
-        Log.i("TZ", "BMI初始化:" + BMI);
-        Log.i("TZ", "initData(),Kg: " + Kg + ", G: " + G);
-        wvkg.setOnWheelViewListener(new WheelView.OnWheelViewListener() {
-            @Override
-            public void onSelected(int selectedIndex, String item) {
-                KgX = selectedIndex;
-                Kg = Integer.parseInt(item);
-                mMyDataService.setNewKg(Kg);
-                Log.i("TZ", "[Dialog]selectedIndex: " + selectedIndex + ", item: " + item);
-            }
-        });
-        wvg.setOnWheelViewListener(new WheelView.OnWheelViewListener() {
-            @Override
-            public void onSelected(int selectedIndex, String item) {
-                GX = selectedIndex;
-                G = Integer.parseInt(item);
-                mMyDataService.setNewG(G);
-                Log.i("TZ", "[Dialog]selectedIndex: " + selectedIndex + ", item: " + item);
-            }
-        });
-    }
-
-    /**
-     * 点击事件
-     *
-     * @param view
-     */
-    public void doClick(View view) {
-        switch (view.getId()) {
-            case fab_add:
-                Log.i("TZ", "fab_add,Kg: " + Kg + ", G: " + G);
-                wvkg.setSeletion(Kg);
-                wvg.setSeletion(G);
-                showPopupWindow(mPopView);
-                mPopupWindow.showAtLocation(mPopView, Gravity.CENTER, 0, 0);
-                //Toast.makeText(MainActivity.this, "ok", Toast.LENGTH_LONG).show();
-                break;
-            case bt_add_no:
-                mPopupWindow.dismiss();
-                break;
-            case bt_add_yes:
-                int year = calendar.get(Calendar.YEAR);
-                int month = calendar.get(Calendar.MONTH) + 1;
-                int day = calendar.get(Calendar.DAY_OF_MONTH);
-                //if (day != d) {
-                mMyDataService.setY(year);
-                mMyDataService.setM(month);
-                mMyDataService.setD(day);
-                mMyDataService.setNewKg(Kg);
-                mMyDataService.setNewG(G);
-                Log.i("TZ", "bt_add_yes:确认储存");
-                mMyDataService.everydayAddData();
-                Log.i("TZ", "bt_add_yes:储存完毕");
+        /**
+         * 点击事件
+         *
+         * @param view
+         */
+        public void doClick(View view) {
+            switch (view.getId()) {
+                case fab_add:
+                    Log.i("TZ", "fab_add,Kg: " + Kg + ", G: " + G);
+                    wvkg.setSeletion(Kg);
+                    wvg.setSeletion(G);
+                    showPopupWindow(mPopView);
+                    mPopupWindow.showAtLocation(mPopView, Gravity.CENTER, 0, 0);
+                    //Toast.makeText(MainActivity.this, "ok", Toast.LENGTH_LONG).show();
+                    break;
+                case bt_add_no:
+                    mPopupWindow.dismiss();
+                    break;
+                case bt_add_yes:
+                    int year = calendar.get(Calendar.YEAR);
+                    int month = calendar.get(Calendar.MONTH) + 1;
+                    int day = calendar.get(Calendar.DAY_OF_MONTH);
+                    //if (day != d) {
+                    mMyDataService.setY(year);
+                    mMyDataService.setM(month);
+                    mMyDataService.setD(day);
+                    mMyDataService.setNewKg(Kg);
+                    mMyDataService.setNewG(G);
+                    Log.i("TZ", "bt_add_yes:确认储存");
+                    mMyDataService.everydayAddData();
+                    Log.i("TZ", "bt_add_yes:储存完毕");
                 /*} else {
                     mMyDataService.setNewKg(Kg);
                     mMyDataService.setNewG(G);
@@ -234,164 +238,164 @@ public class MainActivity extends AppCompatActivity {
                     mMyDataService.updataData();
                     Log.i("TZ", "bt_add_yes:修改完毕");
                 }*/
-                BMI = mMyDataService.getBMI();
-                Log.i("TZ", "BMI更新后:" + BMI);
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Message message = new Message();
-                        message.what = location;
-                        mHandler.sendMessage(message);
+                    BMI = mMyDataService.getBMI();
+                    Log.i("TZ", "BMI更新后:" + BMI);
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Message message = new Message();
+                            message.what = location;
+                            mHandler.sendMessage(message);
+                        }
+                    }).start();
+                    mPopupWindow.dismiss();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void onCheckedChangeds() {
+            showFragment(0);
+            centre.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                    if (b) {
+                        showFragment(0);
+                        location = 0;
                     }
-                }).start();
-                mPopupWindow.dismiss();
-                break;
-            default:
-                break;
-        }
-    }
-
-    private void onCheckedChangeds() {
-        showFragment(0);
-        centre.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b) {
-                    showFragment(0);
-                    location = 0;
                 }
+            });
+            bmi.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                    if (b) {
+                        showFragment(1);
+                        location = 1;
+                    }
+                }
+            });
+            news.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                    if (b) {
+                        showFragment(2);
+                        location = 2;
+                    }
+                }
+            });
+            other.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                    if (b) {
+                        showFragment(3);
+                        location = 3;
+                    }
+                }
+            });
+        }
+
+        private void showFragment(int i) {
+            manager = getFragmentManager();
+            transaction = manager.beginTransaction();
+            //先把所有的fragment隐藏
+            HideAllFragment(transaction);
+            switch (i) {
+                case 0:
+                    if (mCentreFragment == null) {
+                        transaction.add(R.id.fl_main, new CentreFragment());
+                    } else {
+                        transaction.show(mCentreFragment);
+                    }
+                    transaction.replace(R.id.fl_main, mCentreFragment);
+                    break;
+                case 1:
+                    if (mBMIFragment == null) {
+                        transaction.add(R.id.fl_main, new BMIFragment());
+                    } else {
+                        transaction.show(mBMIFragment);
+                    }
+                    transaction.replace(R.id.fl_main, mBMIFragment);
+                    break;
+                case 2:
+                    if (mNewsFragment == null) {
+                        transaction.add(R.id.fl_main, new NewsFragment());
+                    } else {
+                        transaction.show(mNewsFragment);
+                    }
+                    transaction.replace(R.id.fl_main, mNewsFragment);
+                    break;
+                case 3:
+                    if (mOtherFragment == null) {
+                        transaction.add(R.id.fl_main, new OtherFragment());
+                    } else {
+                        transaction.show(mOtherFragment);
+                    }
+                    transaction.replace(R.id.fl_main, mOtherFragment);
+                    break;
             }
-        });
-        bmi.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b) {
-                    showFragment(1);
-                    location = 1;
-                }
+            transaction.commit();
+        }
+
+        private void HideAllFragment(FragmentTransaction transaction) {
+            if (mCentreFragment != null) {
+                transaction.hide(mCentreFragment);
             }
-        });
-        news.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b) {
-                    showFragment(2);
-                    location = 2;
-                }
+            if (mBMIFragment != null) {
+                transaction.hide(mBMIFragment);
             }
-        });
-        other.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                if (b) {
-                    showFragment(3);
-                    location = 3;
-                }
+            if (mNewsFragment != null) {
+                transaction.hide(mNewsFragment);
             }
-        });
-    }
+            if (mOtherFragment != null) {
+                transaction.hide(mOtherFragment);
+            }
+        }
 
-    private void showFragment(int i) {
-        manager = getFragmentManager();
-        transaction = manager.beginTransaction();
-        //先把所有的fragment隐藏
-        HideAllFragment(transaction);
-        switch (i) {
-            case 0:
-                if (mCentreFragment == null) {
-                    transaction.add(R.id.fl_main, new CentreFragment());
-                } else {
-                    transaction.show(mCentreFragment);
-                }
-                transaction.replace(R.id.fl_main, mCentreFragment);
-                break;
-            case 1:
-                if (mBMIFragment == null) {
-                    transaction.add(R.id.fl_main, new BMIFragment());
-                } else {
-                    transaction.show(mBMIFragment);
-                }
-                transaction.replace(R.id.fl_main, mBMIFragment);
-                break;
-            case 2:
-                if (mNewsFragment == null) {
-                    transaction.add(R.id.fl_main, new NewsFragment());
-                } else {
-                    transaction.show(mNewsFragment);
-                }
-                transaction.replace(R.id.fl_main, mNewsFragment);
-                break;
-            case 3:
-                if (mOtherFragment == null) {
-                    transaction.add(R.id.fl_main, new OtherFragment());
-                } else {
-                    transaction.show(mOtherFragment);
-                }
-                transaction.replace(R.id.fl_main, mOtherFragment);
-                break;
+        private void initWheelView() {
+            wvkg = (WheelView) mPopView.findViewById(R.id.wv_kg);
+            wvg = (WheelView) mPopView.findViewById(R.id.wv_g);
+            //设置首个item的起始值
+            wvkg.setOffset(NUM);
+            wvg.setOffset(NUM);
+            //设置控件中各个item的内容
+            wvkg.setItems(Arrays.asList(KgList));
+            wvg.setItems(Arrays.asList(GList));
         }
-        transaction.commit();
-    }
 
-    private void HideAllFragment(FragmentTransaction transaction) {
-        if (mCentreFragment != null) {
-            transaction.hide(mCentreFragment);
+        private void showPopupWindow(View view) {
+            mPopupWindow = new PopupWindow(view);
+            mPopupWindow.setWidth(WindowManager.LayoutParams.WRAP_CONTENT);
+            mPopupWindow.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
+            //设置pop点击
+            mPopupWindow.setTouchable(true);
+            //设置外部点击
+            mPopupWindow.setOutsideTouchable(true);
+            //设置背景颜色，0x后面加8位
+            mPopupWindow.setBackgroundDrawable(new BitmapDrawable());
+            //设置屏幕背景透明度
+            backgroundAlpha(0.5f);
+            //添加pop窗口关闭事件
+            mPopupWindow.setOnDismissListener(new PopupWindowDismissListener());
         }
-        if (mBMIFragment != null) {
-            transaction.hide(mBMIFragment);
+
+        public void backgroundAlpha(float bgAlpha) {
+            WindowManager.LayoutParams lp = getWindow().getAttributes();
+            lp.alpha = bgAlpha; //0.0-1.0
+            getWindow().setAttributes(lp);
         }
-        if (mNewsFragment != null) {
-            transaction.hide(mNewsFragment);
-        }
-        if (mOtherFragment != null) {
-            transaction.hide(mOtherFragment);
+
+        /**
+         * popWin关闭事件，主要是为了将背景透明度改回来
+         *
+         * @author cg
+         */
+        class PopupWindowDismissListener implements PopupWindow.OnDismissListener {
+
+            @Override
+            public void onDismiss() {
+                //窗口关闭时恢复背景透明度
+                backgroundAlpha(1f);
+            }
         }
     }
-
-    private void initWheelView() {
-        wvkg = (WheelView) mPopView.findViewById(R.id.wv_kg);
-        wvg = (WheelView) mPopView.findViewById(R.id.wv_g);
-        //设置首个item的起始值
-        wvkg.setOffset(NUM);
-        wvg.setOffset(NUM);
-        //设置控件中各个item的内容
-        wvkg.setItems(Arrays.asList(KgList));
-        wvg.setItems(Arrays.asList(GList));
-    }
-
-    private void showPopupWindow(View view) {
-        mPopupWindow = new PopupWindow(view);
-        mPopupWindow.setWidth(WindowManager.LayoutParams.WRAP_CONTENT);
-        mPopupWindow.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
-        //设置pop点击
-        mPopupWindow.setTouchable(true);
-        //设置外部点击
-        mPopupWindow.setOutsideTouchable(true);
-        //设置背景颜色，0x后面加8位
-        mPopupWindow.setBackgroundDrawable(new BitmapDrawable());
-        //设置屏幕背景透明度
-        backgroundAlpha(0.5f);
-        //添加pop窗口关闭事件
-        mPopupWindow.setOnDismissListener(new PopupWindowDismissListener());
-    }
-
-    public void backgroundAlpha(float bgAlpha) {
-        WindowManager.LayoutParams lp = getWindow().getAttributes();
-        lp.alpha = bgAlpha; //0.0-1.0
-        getWindow().setAttributes(lp);
-    }
-
-    /**
-     * popWin关闭事件，主要是为了将背景透明度改回来
-     *
-     * @author cg
-     */
-    class PopupWindowDismissListener implements PopupWindow.OnDismissListener {
-
-        @Override
-        public void onDismiss() {
-            //窗口关闭时恢复背景透明度
-            backgroundAlpha(1f);
-        }
-    }
-}

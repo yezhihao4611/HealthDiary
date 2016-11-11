@@ -73,7 +73,7 @@ public abstract class BaseGraph extends View implements GestureDetector.OnGestur
      */
     protected ArrayList<String> mYaxis_msg;
     protected float mYaxis_Max = 0;
-    protected float mYaxis_min;
+    protected float mYaxis_min = 0;
     /**
      * y轴最长的文字
      */
@@ -875,7 +875,6 @@ public abstract class BaseGraph extends View implements GestureDetector.OnGestur
                 refreshYaxisValues(mYaxis_msg.size());
             }
         }
-
     }
 
     public void setOnGraphItemListener(OnGraphItemListener listener) {
