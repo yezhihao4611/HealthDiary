@@ -310,17 +310,17 @@ public class MyDataService extends Service {
         newG = mHealthData.getNewG();
         BMI = mHealthData.getBMI();
 
-        weight= (int) (Kg+G*0.1);
-        height=Meter*100+Cm;
+        weight = (int) (Kg + G * 0.1);
+        height = Meter * 100 + Cm;
 
         listOne = mHealthData.getListOne();
         listOnes = mHealthData.getListOnes();
 
-        /*listTwo = mHealthData.getListOne();
+        listTwo = mHealthData.getListOne();
         listTwos = mHealthData.getListTwos();
 
         listFour = mHealthData.getListOne();
-        listFours = mHealthData.getListFours();*/
+        listFours = mHealthData.getListFours();
 
         Log.i("TZ", "获取数据10:" + "Sex:" + Sex + "Year:" + Year + "Month:" + Month + "Day:" + Day
                 + "Age:" + Age + "Kg:" + Kg + "G:" + G + "Meter:" + Meter + "Cm:" + Cm
@@ -388,6 +388,7 @@ public class MyDataService extends Service {
         BMIget();
         mHealthData.setBMI(BMI);
         mHealthData.reserveNewData();
+        mHealthData.UpData();
         renewData();
     }
 
@@ -409,7 +410,9 @@ public class MyDataService extends Service {
         Log.i("TZ", "everydayAddData():" + "listFours:" + listFours);
     }
 
-    //修改最近一次数据
+    /**
+     * 修改最近一次数据
+     */
     public void updataData() {
         mHealthData.setNewKg(newKg);
         mHealthData.setNewG(newG);
@@ -418,10 +421,29 @@ public class MyDataService extends Service {
         mHealthData.alterWeightData();
     }
 
-    //修改腰围
+    /**
+     * 修改腰围
+     */
     public void alterWaistlineData() {
         mHealthData.setWaistline(waistline);
         mHealthData.alterWaistlineData();
-        Log.i("TZ",waistline+"");
+        Log.i("TZ", waistline + "");
+    }
+
+    /**
+     * 修改身高
+     */
+    public void alterStatureData() {
+        mHealthData.setMeter(Meter);
+        mHealthData.setCm(Cm);
+        mHealthData.alterStatureData();
+        Log.i("TZ", "Meter:" + Meter + "\n" + "Cm:" + Cm);
+    }
+
+    /**
+     * 删除所有数据
+     */
+    public void deleteAllData() {
+        mHealthData.deleteAllData();
     }
 }

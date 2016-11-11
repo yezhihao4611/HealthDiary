@@ -28,6 +28,7 @@
             android:background="#E8E8E8"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
+            android:onClick="doClick"
             android:text=" 7天 ▽"
             android:textSize="20dp"/>
 

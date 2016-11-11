@@ -366,6 +366,7 @@ public abstract class BaseGraph extends View implements GestureDetector.OnGestur
      * 获取屏幕 宽高 后 更新 图表区域 矩阵数据 柱子宽 间隔宽度
      */
     protected void refreshChartSetData() {
+        mVisibleNums = 0;
         if (mGraphStyle == BAR) {
             //柱状图默认 间隔固定
             mInterval = mInterval >= MathHelper.dip2px(mContext, 6) ? MathHelper.dip2px(mContext, 6) : mInterval;
@@ -406,10 +407,6 @@ public abstract class BaseGraph extends View implements GestureDetector.OnGestur
         }
         findTheBestChart();
 
-        Log.i("TZ", "mChartArea.bottom:"
-                + "mChartArea.top:"
-                + "mYaxis_Max:" + mYaxis_Max
-                + "mYaxis_min:" + mYaxis_min);
         mHeightRatio = (mChartArea.bottom - mChartArea.top) / (mYaxis_Max - mYaxis_min);
         for (int i = 0; i < mJcharts.size(); i++) {
             Jchart jchart = mJcharts.get(i);
@@ -940,7 +937,7 @@ public abstract class BaseGraph extends View implements GestureDetector.OnGestur
         mYaxismax = new DecimalFormat("##.#").format(mYaxis_Max);
         float diffLevel = (mYaxis_Max - mYaxis_min) / ((float) showYnum - 1);
         for (int i = 0; i < showYnum; i++) {
-            mYaxis_msg.add(new DecimalFormat("#").format(mYaxis_min + diffLevel * i));
+            mYaxis_msg.add(new DecimalFormat("##.#").format(mYaxis_min + diffLevel * i));
         }
     }
 

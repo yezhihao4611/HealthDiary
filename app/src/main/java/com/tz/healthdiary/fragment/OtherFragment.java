@@ -1,33 +1,35 @@
 package com.tz.healthdiary.fragment;
 
 import android.app.Fragment;
-import android.app.AlertDialog;
-import android.app.Fragment;
-import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
+import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.tz.healthdiary.InitializeActivity;
 import com.tz.healthdiary.Jisuanqi.BaseActivity;
 import com.tz.healthdiary.Jisuanqi.BodyActivity;
 import com.tz.healthdiary.Jisuanqi.WaistlineActivity;
 import com.tz.healthdiary.OpinionActivity;
 import com.tz.healthdiary.R;
-import com.tz.healthdiary.Jisuanqi.WaistlineActivity;
 import com.tz.healthdiary.StartAnimaActivity;
 import com.tz.healthdiary.sqlite.MyDataService;
+import com.tz.healthdiary.utils.MyApplication;
 
 /**
  * Created by 西野七濑 on 2016/10/18.
@@ -37,17 +39,22 @@ public class OtherFragment extends Fragment implements View.OnClickListener {
     TextView tv_waist_other;
     TextView tv_body_other;
     TextView tv_base_other;
+    TextView deleteSQL;
     Intent intent;
     TextView tv_opinion_other;
     View view;
     EditText et_height_other;
-    EditText et_year_other;
+    TextView tv_year_other;
     TextView tv_weight_other;
-    RadioButton rb_man;
-    RadioButton rb_wumen;
-    RadioGroup rg_other;
-    MyDataService myDataService= StartAnimaActivity.myDataService;
+    ImageView head_other;
+    MyDataService myDataService = StartAnimaActivity.myDataService;
     int a = myDataService.getSex();
+    SharedPreferences mSharedPreferences = StartAnimaActivity.mSharedPreferences;
+    Button btDeleteY;
+    Button btDeleteN;
+    private PopupWindow mPopupWindow;
+    private View mPopView;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -56,40 +63,44 @@ public class OtherFragment extends Fragment implements View.OnClickListener {
         tv_body_other = (TextView) view.findViewById(R.id.tv_body_other);
         tv_base_other = (TextView) view.findViewById(R.id.tv_base_other);
         tv_opinion_other = (TextView) view.findViewById(R.id.tv_opinion_other);
-        tv_weight_other= (TextView) view.findViewById(R.id.tv_weight_other);
-        et_height_other= (EditText) view.findViewById(R.id.et_height_other );
-        et_year_other= (EditText) view.findViewById(R.id.et_year);
-        rb_man= (RadioButton) view.findViewById(R.id.man);
-        rb_wumen= (RadioButton) view.findViewById(R.id.wuman);
-        rg_other= (RadioGroup) view.findViewById(R.id.rg_main);
+        tv_weight_other = (TextView) view.findViewById(R.id.tv_weight_other);
+        et_height_other = (EditText) view.findViewById(R.id.et_height_other);
+        tv_year_other = (TextView) view.findViewById(R.id.tv_year);
+        deleteSQL = (TextView) view.findViewById(R.id.tv_delete_other);
+        head_other = (ImageView) view.findViewById(R.id.head_other);
+        mPopView = LayoutInflater.from(getActivity()).inflate(R.layout.popwindow_other_deletealldata, null);
+        btDeleteN = (Button) mPopView.findViewById(R.id.bt_deleteall_no);
+        btDeleteY = (Button) mPopView.findViewById(R.id.bt_deleteall_yes);
+        btDeleteN.setOnClickListener(this);
+        btDeleteY.setOnClickListener(this);
+        deleteSQL.setOnClickListener(this);
         tv_waist_other.setOnClickListener(this);
         tv_body_other.setOnClickListener(this);
         tv_base_other.setOnClickListener(this);
         tv_opinion_other.setOnClickListener(this);
         tv_weight_other.setOnClickListener(this);
-        et_year_other.addTextChangedListener(textWatcher);
+        tv_year_other.addTextChangedListener(textWatcher);
         et_height_other.addTextChangedListener(textWatcher);
         //读取体重
-        int Mweight=myDataService.getKg();
-        int mweight=myDataService.getG();
-        String Nweight= String.valueOf(Mweight+mweight*0.1);
+        int Mweight = myDataService.getKg();
+        int mweight = myDataService.getG();
+        Log.i("TZ", "Mweight:" + Mweight + "mweight" + mweight);
+        String Nweight = String.valueOf(Mweight + (double) mweight * 0.1);
         tv_weight_other.setText(Nweight);
         //读取身高
-        int Mheight=myDataService.getMeter();
-        int mheight=myDataService.getCm();
-        int Nheighe=Mheight*100+mheight;
-        et_height_other.setText(Nheighe+"");
+        int Mheight = myDataService.getMeter();
+        int mheight = myDataService.getCm();
+        int Nheighe = Mheight * 100 + mheight;
+        et_height_other.setText(Nheighe + "");
         //读取年龄
-        et_year_other.setText(myDataService.getAge()+"");
-       if (a==1){
-           rg_other.check(R.id.man);
-       }
-        else {
-           rg_other.check(R.id.wuman);
-       }
+        tv_year_other.setText(myDataService.getAge() + "");
+        if (a == 1) {
+            head_other.setImageResource(R.drawable.male_selected);
+        } else {
+            head_other.setImageResource(R.drawable.female_selected);
+        }
         return view;
     }
-
 
     @Override
     public void onClick(View v) {
@@ -110,26 +121,46 @@ public class OtherFragment extends Fragment implements View.OnClickListener {
                 intent = new Intent(getActivity(), OpinionActivity.class);
                 startActivity(intent);
                 break;
-            case R.id.tv_weight_other:
-                Toast.makeText(getActivity(),"请在底部加号按钮处修改体重",Toast.LENGTH_SHORT).show();
+            case R.id.tv_delete_other:
+                showPopupWindow(mPopView);
+                mPopupWindow.showAtLocation(mPopView, Gravity.CENTER, 0, 0);
+                break;
+            case R.id.bt_deleteall_no:
+                mPopupWindow.dismiss();
+                break;
+            case R.id.bt_deleteall_yes:
+                myDataService.deleteAllData();
+                mSharedPreferences = getActivity().getSharedPreferences("firstSharedPreferences", 0);
+                mSharedPreferences.edit().putBoolean("initialize", true).apply();
+                Toast.makeText(MyApplication.getContext(), "除", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity(), InitializeActivity.class);
+                startActivity(intent);
+                getActivity().finish();
+                break;
+
+            default:
                 break;
         }
-
     }
-    public TextWatcher textWatcher=new TextWatcher() {
+
+    public TextWatcher textWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
         }
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            int heighe= Integer.parseInt(et_height_other.getText().toString());
-            int Mheight=heighe/100;
-            int mheighe=heighe%100;
-            myDataService.setMeter(Mheight);
-            myDataService.setCm(mheighe);
+            if (et_height_other.getText().toString().equals("")) {
 
+            } else {
+                int heighe = Integer.parseInt(et_height_other.getText().toString());
+                int Mheight = heighe / 100;
+                int mheighe = heighe % 100;
+                Log.i("TZ", "Mheight:" + Mheight + "\n" + "mheighe" + mheighe);
+                myDataService.setMeter(Mheight);
+                myDataService.setCm(mheighe);
+                myDataService.alterStatureData();
+            }
         }
 
         @Override
@@ -137,4 +168,39 @@ public class OtherFragment extends Fragment implements View.OnClickListener {
 
         }
     };
+
+    private void showPopupWindow(View view) {
+        mPopupWindow = new PopupWindow(view);
+        mPopupWindow.setWidth(WindowManager.LayoutParams.WRAP_CONTENT);
+        mPopupWindow.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
+        //设置pop点击
+        mPopupWindow.setTouchable(true);
+        //设置外部点击
+        mPopupWindow.setOutsideTouchable(true);
+        //设置背景颜色，0x后面加8位
+        mPopupWindow.setBackgroundDrawable(new BitmapDrawable());
+        //设置屏幕背景透明度
+        backgroundAlpha(0.5f);
+        //添加pop窗口关闭事件
+        mPopupWindow.setOnDismissListener(new PopupWindowDismissListener());
+    }
+    public void backgroundAlpha(float bgAlpha) {
+        WindowManager.LayoutParams lp = getActivity().getWindow().getAttributes();
+        lp.alpha = bgAlpha; //0.0-1.0
+        getActivity().getWindow().setAttributes(lp);
+    }
+
+    /**
+     * popWin关闭事件，主要是为了将背景透明度改回来
+     *
+     * @author cg
+     */
+    class PopupWindowDismissListener implements PopupWindow.OnDismissListener {
+
+        @Override
+        public void onDismiss() {
+            //窗口关闭时恢复背景透明度
+            backgroundAlpha(1f);
+        }
+    }
 }

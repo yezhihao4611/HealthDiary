@@ -71,36 +71,34 @@ public class BMIFragment extends Fragment {
     }
 
     public void initData() {
-        if (null != mColorArcProgressBar) {
-            BMI = mMyDataService.getBMI();
-            M = mMyDataService.getMeter();
-            Cm = mMyDataService.getCm();
-            Log.i("TZ", "M:" + M);
-            Log.i("TZ", "Cm:" + Cm);
+        BMI = mMyDataService.getBMI();
+        M = mMyDataService.getMeter();
+        Cm = mMyDataService.getCm();
+        Log.i("TZ", "M:" + M);
+        Log.i("TZ", "Cm:" + Cm);
 
-            weight = mMyDataService.getNewKg() + (double) mMyDataService.getNewG() / 10;
-            stature = M + ((double) Cm / 100);
-            Log.i("TZ", "stature:" + stature);
+        weight = mMyDataService.getNewKg() + (double) mMyDataService.getNewG() / 10;
+        stature = M + ((double) Cm / 100);
+        Log.i("TZ", "stature:" + stature);
 
 
-            mColorArcProgressBar.setBMI(BMI);
-            float x = Float.parseFloat(evolveBMI(BMI) + "");
-            mColorArcProgressBar.setCurrentValues(x);
+        mColorArcProgressBar.setBMI(BMI);
+        float x = Float.parseFloat(evolveBMI(BMI) + "");
+        mColorArcProgressBar.setCurrentValues(x);
 
-            mTextView.setText(weight + "");
-            sTextView.setText(stature + "");
+        mTextView.setText(weight + "");
+        sTextView.setText(stature + "");
 
-            double a = 25.0 * (stature * stature);
-            double b = 18.5 * (stature * stature);
-            DecimalFormat df = new DecimalFormat("0.0");
-            maxWeight = Double.parseDouble(df.format(a));
-            minWeight = Double.parseDouble(df.format(b));
+        double a = 25.0 * (stature * stature);
+        double b = 18.5 * (stature * stature);
+        DecimalFormat df = new DecimalFormat("0.0");
+        maxWeight = Double.parseDouble(df.format(a));
+        minWeight = Double.parseDouble(df.format(b));
 
-            Log.i("TZ", "maxWeight:" + maxWeight);
-            Log.i("TZ", "minWeight:" + minWeight);
-            maxW.setText(maxWeight + "");
-            minW.setText(minWeight + "");
-        }
+        Log.i("TZ", "maxWeight:" + maxWeight);
+        Log.i("TZ", "minWeight:" + minWeight);
+        maxW.setText(maxWeight + "");
+        minW.setText(minWeight + "");
     }
 
     @Override

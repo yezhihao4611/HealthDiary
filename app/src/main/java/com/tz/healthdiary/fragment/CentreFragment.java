@@ -37,42 +37,55 @@ import java.util.List;
 public class CentreFragment extends Fragment {
     View v;
     Button bt_change;
-    TextView tv_one;
-    TextView tv_two;
-    TextView tv_three;
-    private JcoolGraph mLineChar;
+    TextView tv_one_c;
+    TextView tv_two_c;
+    TextView tv_three_c;
+    JcoolGraph mLineChar;
     PopupWindow popupWindow;
     ListView lv_weight_center;
     ScrollView sv_curve;
     WeightInfo weightInfo;
     List<WeightInfo> list;
     WeightListAdapter weightListAdapter;
-    private float[] numbers;
     MyDataService mMyDataService = StartAnimaActivity.myDataService;
     private List<List<Integer>> dataLists;
     private List<Integer> dataList;
+    private static int cDay;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_center, null);
         v = LayoutInflater.from(getActivity()).inflate(R.layout.popwindow_center_layout, null);
-        dataLists = mMyDataService.getListOnes();
         return view;
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         bt_change = (Button) view.findViewById(R.id.bt_change);
-        tv_one = (TextView) v.findViewById(R.id.tv_one);
-        tv_two = (TextView) v.findViewById(R.id.tv_two);
-        tv_three = (TextView) v.findViewById(R.id.tv_three);
+        tv_one_c = (TextView) v.findViewById(R.id.tv_one_c);
+        tv_two_c = (TextView) v.findViewById(R.id.tv_two_c);
+        tv_three_c = (TextView) v.findViewById(R.id.tv_three_c);
         mLineChar = (JcoolGraph) view.findViewById(R.id.chart_line);
         lv_weight_center = (ListView) view.findViewById(R.id.lv_weight_center);
         sv_curve = (ScrollView) view.findViewById(R.id.sv_curve);
-        sv_curve.smoothScrollTo(0, 0);
+
+        dataLists = new ArrayList<>();
+
+        if (cDay == 2) {
+            bt_change.setText(" 14次 ▽");
+            dataLists = mMyDataService.getListTwos();
+        } else if (cDay == 3) {
+            dataLists = mMyDataService.getListFours();
+            bt_change.setText(" 28次 ▽");
+
+        } else {
+            cDay = 1;
+            dataLists = mMyDataService.getListOnes();
+            bt_change.setText(" 7次 ▽");
+        }
 
         bt_change.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,39 +95,47 @@ public class CentreFragment extends Fragment {
 
             }
         });
-        tv_one.setOnClickListener(new View.OnClickListener() {
+        tv_one_c.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                cDay = 1;
                 bt_change.setText(" 7天 ▽");
                 dataLists = mMyDataService.getListOnes();
                 popupWindow.dismiss();
-                showCurve();
+                onResume();
             }
         });
-        tv_two.setOnClickListener(new View.OnClickListener() {
+        tv_two_c.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                cDay = 2;
                 bt_change.setText("14天 ▽");
                 dataLists = mMyDataService.getListTwos();
-                Log.i("Hao",dataLists+"");
+                Log.i("Hao", dataLists + "");
                 popupWindow.dismiss();
-                showCurve();
+                onResume();
             }
         });
-        tv_three.setOnClickListener(new View.OnClickListener() {
+        tv_three_c.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                cDay = 3;
                 bt_change.setText("28天 ▽");
                 dataLists = mMyDataService.getListFours();
                 popupWindow.dismiss();
-                showCurve();
+                onResume();
             }
         });
+
     }
 
     @Override
     public void onResume() {
         super.onResume();
+
+        sv_curve.smoothScrollTo(0, 0);
+
+
         showCurve();
     }
 
@@ -128,11 +149,25 @@ public class CentreFragment extends Fragment {
                 weightInfo = new WeightInfo();
                 dataList = dataLists.get(i);
                 float y = (float) dataList.get(4) + ((float) dataList.get(5) / 10f);
-                lines.add(new Jchart(0f, y, dataList.get(2) + "-" + dataList.get(3), Color.BLACK));
-
+                if (dataLists.size() > 14) {
+                    if (i % 3 == 0) {
+                        lines.add(new Jchart(0f, y, dataList.get(2) + "-" + dataList.get(3), Color.BLACK));
+                    } else {
+                        lines.add(new Jchart(0f, y, " ", Color.BLACK));
+                    }
+                } else if (dataLists.size() > 7) {
+                    if (i % 2 == 0) {
+                        lines.add(new Jchart(0f, y, dataList.get(2) + "-" + dataList.get(3), Color.BLACK));
+                    } else {
+                        lines.add(new Jchart(0f, y, " ", Color.BLACK));
+                    }
+                } else {
+                    lines.add(new Jchart(0f, y, dataList.get(2) + "-" + dataList.get(3), Color.BLACK));
+                }
                 if (min > y) {
                     min = (int) y;
                 }
+
                 weightInfo.setYear(dataList.get(1) + "");
                 weightInfo.setMonth(dataList.get(2) + "");
                 weightInfo.setDay(dataList.get(3) + "");
@@ -159,6 +194,7 @@ public class CentreFragment extends Fragment {
             mLineChar.aniShow_growing();
         }
     }
+
     public void setpop() {
         //设置popwindow
         popupWindow = new PopupWindow(v);

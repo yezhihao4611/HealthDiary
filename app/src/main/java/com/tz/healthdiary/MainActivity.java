@@ -17,7 +17,6 @@ import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RadioButton;
-import android.widget.Toast;
 
 import com.tz.healthdiary.custom.WheelView;
 import com.tz.healthdiary.fragment.BMIFragment;
@@ -42,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayout mLinearLayout;
     private Button mButton1;
     private Button mButton2;
+
+    Button bt_change;
 
     private RadioButton centre;
     private RadioButton bmi;
@@ -106,17 +107,30 @@ public class MainActivity extends AppCompatActivity {
     //BMI指数
     private double BMI;
 
+    public static int location;
+
     MyDataService mMyDataService = StartAnimaActivity.myDataService;
 
-    Handler mHandler = new Handler(){
+    Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            switch (msg.what){
+            switch (msg.what) {
                 case 0:
-                    mBMIFragment.initData();
+                    mCentreFragment = new CentreFragment();
+                    showFragment(0);
+                    break;
+                case 1:
+                    mBMIFragment = new BMIFragment();
+                    showFragment(1);
+                    //mBMIFragment.initData();
+                    break;
+                case 2:
 
-                    mCentreFragment.showCurve();
+                    break;
+                case 3:
+                    mOtherFragment = new OtherFragment();
+                    showFragment(3);
                     break;
                 default:
                     break;
@@ -160,7 +174,7 @@ public class MainActivity extends AppCompatActivity {
         G = mMyDataService.getNewG();
 
         BMI = mMyDataService.getBMI();
-        Log.i("TZ", "BMI初始化:"+BMI);
+        Log.i("TZ", "BMI初始化:" + BMI);
         Log.i("TZ", "initData(),Kg: " + Kg + ", G: " + G);
         wvkg.setOnWheelViewListener(new WheelView.OnWheelViewListener() {
             @Override
@@ -195,7 +209,7 @@ public class MainActivity extends AppCompatActivity {
                 wvg.setSeletion(G);
                 showPopupWindow(mPopView);
                 mPopupWindow.showAtLocation(mPopView, Gravity.CENTER, 0, 0);
-                Toast.makeText(MainActivity.this, "ok", Toast.LENGTH_LONG).show();
+                //Toast.makeText(MainActivity.this, "ok", Toast.LENGTH_LONG).show();
                 break;
             case bt_add_no:
                 mPopupWindow.dismiss();
@@ -205,14 +219,14 @@ public class MainActivity extends AppCompatActivity {
                 int month = calendar.get(Calendar.MONTH) + 1;
                 int day = calendar.get(Calendar.DAY_OF_MONTH);
                 //if (day != d) {
-                    mMyDataService.setY(year);
-                    mMyDataService.setM(month);
-                    mMyDataService.setD(day);
-                    mMyDataService.setNewKg(Kg);
-                    mMyDataService.setNewG(G);
-                    Log.i("TZ", "bt_add_yes:确认储存");
-                    mMyDataService.everydayAddData();
-                    Log.i("TZ", "bt_add_yes:储存完毕");
+                mMyDataService.setY(year);
+                mMyDataService.setM(month);
+                mMyDataService.setD(day);
+                mMyDataService.setNewKg(Kg);
+                mMyDataService.setNewG(G);
+                Log.i("TZ", "bt_add_yes:确认储存");
+                mMyDataService.everydayAddData();
+                Log.i("TZ", "bt_add_yes:储存完毕");
                 /*} else {
                     mMyDataService.setNewKg(Kg);
                     mMyDataService.setNewG(G);
@@ -226,7 +240,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         Message message = new Message();
-                        message.what = 0;
+                        message.what = location;
                         mHandler.sendMessage(message);
                     }
                 }).start();
@@ -244,6 +258,7 @@ public class MainActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b) {
                     showFragment(0);
+                    location = 0;
                 }
             }
         });
@@ -252,6 +267,7 @@ public class MainActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b) {
                     showFragment(1);
+                    location = 1;
                 }
             }
         });
@@ -260,6 +276,7 @@ public class MainActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b) {
                     showFragment(2);
+                    location = 2;
                 }
             }
         });
@@ -268,6 +285,7 @@ public class MainActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if (b) {
                     showFragment(3);
+                    location = 3;
                 }
             }
         });

@@ -224,6 +224,7 @@ public class HealthData {
      * 储存原始数据
      */
     public void reserveData() {
+        Log.i("TZ", "reserveData()：开始储存原始数据");
         mContentValues = new ContentValues();
         mHealthDbHelper = new HealthDbHelper(MyApplication.getContext());
         mSQLiteDatabase = mHealthDbHelper.getWritableDatabase();
@@ -255,6 +256,7 @@ public class HealthData {
      * 储存第一次数据
      */
     public void reserveFirstData() {
+        Log.i("TZ", "reserveNewData()：开始储存第一次数据");
         mContentValues = new ContentValues();
         mHealthDbHelper = new HealthDbHelper(MyApplication.getContext());
         mSQLiteDatabase = mHealthDbHelper.getWritableDatabase();
@@ -281,6 +283,7 @@ public class HealthData {
      * 储存每日数据
      */
     public void reserveNewData() {
+        Log.i("TZ", "reserveNewData()：开始储存每日数据");
         mContentValues = new ContentValues();
         mHealthDbHelper = new HealthDbHelper(MyApplication.getContext());
         mSQLiteDatabase = mHealthDbHelper.getWritableDatabase();
@@ -308,6 +311,7 @@ public class HealthData {
      * 储存每日数据后更新point和maxPoint
      */
     public void UpDatas() {
+        Log.i("TZ", "UpDatas：开始更新point和maxPoint");
         mHealthDbHelper = new HealthDbHelper(MyApplication.getContext());
         mSQLiteDatabase = mHealthDbHelper.getReadableDatabase();
         Cursor cursor = mSQLiteDatabase.query(HealthDbHelper.TABLE_NAME, null, null, null, null, null, null);
@@ -326,6 +330,7 @@ public class HealthData {
      * 储存每日数据后更新数据
      */
     public void UpData() {
+        Log.i("TZ", "UpData()：开始更新数据");
         mHealthDbHelper = new HealthDbHelper(MyApplication.getContext());
         mSQLiteDatabase = mHealthDbHelper.getReadableDatabase();
         Cursor cursor = mSQLiteDatabase.query(HealthDbHelper.TABLE_NAME, null, null, null, null, null, null);
@@ -333,25 +338,26 @@ public class HealthData {
             if (cursor.moveToLast()) {
                 point = Integer.parseInt(cursor.getString(cursor.getColumnIndex("point")));
                 maxPoint = point;
-                Log.i("TZ", "point:" + point);
+                Log.i("TZ", "maxPoint:" + maxPoint);
             }
         }
         readWeekData();
+        readTwoWeekData();
+        readFourWeekData();
+        Log.i("TZ", "UpData()：数据更新完毕");
     }
 
     /**
      * 读取原始数据
      */
     public void readData() {
+        Log.i("TZ", "readData()：开始读取原始数据");
         mHealthDbHelper = new HealthDbHelper(MyApplication.getContext());
         mSQLiteDatabase = mHealthDbHelper.getReadableDatabase();
         Cursor cursor = mSQLiteDatabase.query(HealthDbHelper.TABLE_NAME, null, null, null, null, null, null);
 
         if (cursor != null) {
             cursor.moveToFirst();
-            Log.i("TZ", "1");
-            Log.i("TZ", "i:" + cursor.getString(cursor.getColumnIndex("year")) + "");
-            Log.i("TZ", "2");
             Year = Integer.parseInt(cursor.getString(cursor.getColumnIndex("year")));
             Month = Integer.parseInt(cursor.getString(cursor.getColumnIndex("month")));
             Day = Integer.parseInt(cursor.getString(cursor.getColumnIndex("day")));
@@ -379,6 +385,7 @@ public class HealthData {
      * 读取最近1日数据
      */
     public void readNewData() {
+        Log.i("TZ", "readNewData()：开始读取最近1日数据");
         mHealthDbHelper = new HealthDbHelper(MyApplication.getContext());
         mSQLiteDatabase = mHealthDbHelper.getReadableDatabase();
         Cursor cursor = mSQLiteDatabase.query(HealthDbHelper.TABLE_NAME, null, null, null, null, null, null);
@@ -406,42 +413,44 @@ public class HealthData {
      * 读取7次数据
      */
     public void readWeekData() {
+        Log.i("TZ", "readWeekData：开始读取7次数据");
+        listOne = null;
+        listOnes = null;
         mHealthDbHelper = new HealthDbHelper(MyApplication.getContext());
-        mSQLiteDatabase = mHealthDbHelper.getReadableDatabase();
+        SQLiteDatabase mSQLiteDatabase = mHealthDbHelper.getReadableDatabase();
         Cursor cursor = mSQLiteDatabase.query(HealthDbHelper.TABLE_NAME, null, null, null, null, null, null);
         if (cursor != null) {
             listOnes = new ArrayList<>();
             cursor.move(1);
             while (cursor.moveToNext()) {
-                point = Integer.parseInt(cursor.getString(cursor.getColumnIndex("point")));
-                if (point > maxPoint - 7) {
+                int p = Integer.parseInt(cursor.getString(cursor.getColumnIndex("point")));
+                if (p > maxPoint - 7) {
                     listOne = new ArrayList<>();
-                    point = Integer.parseInt(cursor.getString(cursor.getColumnIndex("point")));
 
-                    y = Integer.parseInt(cursor.getString(cursor.getColumnIndex("y")));
-                    m = Integer.parseInt(cursor.getString(cursor.getColumnIndex("m")));
-                    d = Integer.parseInt(cursor.getString(cursor.getColumnIndex("d")));
+                    int y = Integer.parseInt(cursor.getString(cursor.getColumnIndex("y")));
+                    int m = Integer.parseInt(cursor.getString(cursor.getColumnIndex("m")));
+                    int d = Integer.parseInt(cursor.getString(cursor.getColumnIndex("d")));
 
-                    newKg = Integer.parseInt(cursor.getString(cursor.getColumnIndex("newKg")));
-                    newG = Integer.parseInt(cursor.getString(cursor.getColumnIndex("newG")));
+                    int newKg = Integer.parseInt(cursor.getString(cursor.getColumnIndex("newKg")));
+                    int newG = Integer.parseInt(cursor.getString(cursor.getColumnIndex("newG")));
 
-                    listOne.add(point);
+                    listOne.add(p);
                     listOne.add(y);
                     listOne.add(m);
                     listOne.add(d);
                     listOne.add(newKg);
                     listOne.add(newG);
-                    Log.i("TZ", "该数据可用:" + "point=" + point);
+                    //Log.i("TZ", "该数据可用:" + "point=" + p);
                 } else {
-                    Log.i("TZ", "该数据不可用:" + "point=" + point);
+                    //Log.i("TZ", "该数据不可用:" + "point=" + p);
                 }
                 if (listOne != null) {
                     listOnes.add(listOne);
                 }
             }
-            Log.i("TZ", "readWeekData：7次数据读取完毕");
             Log.i("TZ", "readWeekData：listOne:" + listOne);
-            Log.i("TZ", "readWeekData：lists:" + listOnes);
+            Log.i("TZ", "readWeekData：listOnes:" + listOnes);
+            Log.i("TZ", "readWeekData：7次数据读取完毕");
         }
     }
 
@@ -449,42 +458,44 @@ public class HealthData {
      * 读取14次数据
      */
     public void readTwoWeekData() {
+        Log.i("TZ", "readTwoWeekData：开始读取14日数据");
+        listTwo = null;
+        listTwos = null;
         mHealthDbHelper = new HealthDbHelper(MyApplication.getContext());
-        mSQLiteDatabase = mHealthDbHelper.getReadableDatabase();
+        SQLiteDatabase mSQLiteDatabase = mHealthDbHelper.getReadableDatabase();
         Cursor cursor = mSQLiteDatabase.query(HealthDbHelper.TABLE_NAME, null, null, null, null, null, null);
         if (cursor != null) {
             listTwos = new ArrayList<>();
             cursor.move(1);
             while (cursor.moveToNext()) {
-                point = Integer.parseInt(cursor.getString(cursor.getColumnIndex("point")));
-                if (point > maxPoint - 14) {
+                int p = Integer.parseInt(cursor.getString(cursor.getColumnIndex("point")));
+                if (p > maxPoint - 14) {
                     listTwo = new ArrayList<>();
-                    point = Integer.parseInt(cursor.getString(cursor.getColumnIndex("point")));
 
-                    y = Integer.parseInt(cursor.getString(cursor.getColumnIndex("y")));
-                    m = Integer.parseInt(cursor.getString(cursor.getColumnIndex("m")));
-                    d = Integer.parseInt(cursor.getString(cursor.getColumnIndex("d")));
+                    int y = Integer.parseInt(cursor.getString(cursor.getColumnIndex("y")));
+                    int m = Integer.parseInt(cursor.getString(cursor.getColumnIndex("m")));
+                    int d = Integer.parseInt(cursor.getString(cursor.getColumnIndex("d")));
 
-                    newKg = Integer.parseInt(cursor.getString(cursor.getColumnIndex("newKg")));
-                    newG = Integer.parseInt(cursor.getString(cursor.getColumnIndex("newG")));
+                    int newKg = Integer.parseInt(cursor.getString(cursor.getColumnIndex("newKg")));
+                    int newG = Integer.parseInt(cursor.getString(cursor.getColumnIndex("newG")));
 
-                    listTwo.add(point);
+                    listTwo.add(p);
                     listTwo.add(y);
                     listTwo.add(m);
                     listTwo.add(d);
                     listTwo.add(newKg);
                     listTwo.add(newG);
-                    Log.i("TZ", "该数据可用:" + "point=" + point);
+                    //Log.i("TZ", "该数据可用:" + "point=" + p);
                 } else {
-                    Log.i("TZ", "该数据不可用:" + "point=" + point);
+                    //Log.i("TZ", "该数据不可用:" + "point=" + p);
                 }
                 if (listTwo != null) {
                     listTwos.add(listTwo);
                 }
             }
-            Log.i("TZ", "readTwoWeekData：14日数据读取完毕");
             Log.i("TZ", "readTwoWeekData：listTwo:" + listTwo);
-            Log.i("TZ", "readTwoWeekData：lists:" + listTwos);
+            Log.i("TZ", "readTwoWeekData：listTwos:" + listTwos);
+            Log.i("TZ", "readTwoWeekData：14日数据读取完毕");
         }
     }
 
@@ -492,42 +503,44 @@ public class HealthData {
      * 读取28次数据
      */
     public void readFourWeekData() {
+        Log.i("TZ", "readFourWeekData：开始读取28日数据");
+        listFour = null;
+        listFours = null;
         mHealthDbHelper = new HealthDbHelper(MyApplication.getContext());
-        mSQLiteDatabase = mHealthDbHelper.getReadableDatabase();
+        SQLiteDatabase mSQLiteDatabase = mHealthDbHelper.getReadableDatabase();
         Cursor cursor = mSQLiteDatabase.query(HealthDbHelper.TABLE_NAME, null, null, null, null, null, null);
         if (cursor != null) {
             listFours = new ArrayList<>();
             cursor.move(1);
             while (cursor.moveToNext()) {
-                point = Integer.parseInt(cursor.getString(cursor.getColumnIndex("point")));
-                if (point > maxPoint - 28) {
+                int p = Integer.parseInt(cursor.getString(cursor.getColumnIndex("point")));
+                if (p > maxPoint - 28) {
                     listFour = new ArrayList<>();
-                    point = Integer.parseInt(cursor.getString(cursor.getColumnIndex("point")));
 
-                    y = Integer.parseInt(cursor.getString(cursor.getColumnIndex("y")));
-                    m = Integer.parseInt(cursor.getString(cursor.getColumnIndex("m")));
-                    d = Integer.parseInt(cursor.getString(cursor.getColumnIndex("d")));
+                    int y = Integer.parseInt(cursor.getString(cursor.getColumnIndex("y")));
+                    int m = Integer.parseInt(cursor.getString(cursor.getColumnIndex("m")));
+                    int d = Integer.parseInt(cursor.getString(cursor.getColumnIndex("d")));
 
-                    newKg = Integer.parseInt(cursor.getString(cursor.getColumnIndex("newKg")));
-                    newG = Integer.parseInt(cursor.getString(cursor.getColumnIndex("newG")));
+                    int newKg = Integer.parseInt(cursor.getString(cursor.getColumnIndex("newKg")));
+                    int newG = Integer.parseInt(cursor.getString(cursor.getColumnIndex("newG")));
 
-                    listFour.add(point);
+                    listFour.add(p);
                     listFour.add(y);
                     listFour.add(m);
                     listFour.add(d);
                     listFour.add(newKg);
                     listFour.add(newG);
-                    Log.i("TZ", "该数据可用:" + "point=" + point);
+                    //Log.i("TZ", "该数据可用:" + "point=" + p);
                 } else {
-                    Log.i("TZ", "该数据不可用:" + "point=" + point);
+                    //Log.i("TZ", "该数据不可用:" + "point=" + p);
                 }
                 if (listFour != null) {
                     listFours.add(listFour);
                 }
             }
-            Log.i("TZ", "readFourWeekData：28日数据读取完毕");
             Log.i("TZ", "readFourWeekData：listFour:" + listFour);
-            Log.i("TZ", "readFourWeekData：lists:" + listFours);
+            Log.i("TZ", "readFourWeekData：listFours:" + listFours);
+            Log.i("TZ", "readFourWeekData：28日数据读取完毕");
         }
     }
 
@@ -535,6 +548,7 @@ public class HealthData {
      * 修改最近一次体重
      */
     public void alterWeightData() {
+        Log.i("TZ", "alterWeightData：开始修改最近一次体重");
         mContentValues = new ContentValues();
         mHealthDbHelper = new HealthDbHelper(MyApplication.getContext());
         mSQLiteDatabase = mHealthDbHelper.getWritableDatabase();
@@ -546,12 +560,14 @@ public class HealthData {
         String where = "point=?";
         String[] point = {maxPoint + ""};
         mSQLiteDatabase.update(HealthDbHelper.TABLE_NAME, mContentValues, where, point);
+        Log.i("TZ", "alterWeightData：最近一次体重修改完毕");
     }
 
     /**
      * 修改腰围
      */
     public void alterWaistlineData() {
+        Log.i("TZ", "alterWaistlineData：开始修改腰围");
         mContentValues = new ContentValues();
         mHealthDbHelper = new HealthDbHelper(MyApplication.getContext());
         mSQLiteDatabase = mHealthDbHelper.getWritableDatabase();
@@ -561,18 +577,44 @@ public class HealthData {
         String where = "name=?";
         String[] point = {"基本数据"};
         mSQLiteDatabase.update(HealthDbHelper.TABLE_NAME, mContentValues, where, point);
+        Log.i("TZ", "alterWaistlineData：修改腰围完毕");
+    }
+
+    /**
+     * 修改身高
+     */
+    public void alterStatureData() {
+        Log.i("TZ", "alterStatureData：开始修改身高");
+        mContentValues = new ContentValues();
+        mHealthDbHelper = new HealthDbHelper(MyApplication.getContext());
+        mSQLiteDatabase = mHealthDbHelper.getWritableDatabase();
+
+        mContentValues.put("meter", Meter);
+        mContentValues.put("cm", Cm);
+
+        String where = "name=?";
+        String[] point = {"基本数据"};
+        mSQLiteDatabase.update(HealthDbHelper.TABLE_NAME, mContentValues, where, point);
+        Log.i("TZ", "alterStatureData：修改身高完毕");
     }
 
     /**
      * 从数据库读取全部数据
      */
     public void startDataFromSql() {
-        Log.i("TZ", "startData()：正在读取数据...");
+        Log.i("TZ", "startDataFromSql：正在读取数据...");
         readData();//读取基本数据，10个
         readNewData();//读取最近一次数据，6个+1个
         readWeekData();//读取最近7次数据
         readTwoWeekData();//读取最近14次数据
         readFourWeekData();//读取最近28次数据
-        Log.i("TZ", "startData()：数据读取完毕！");
+        Log.i("TZ", "startDataFromSql：数据读取完毕！");
+    }
+
+    /**
+     * 删除所有数据
+     */
+    public void deleteAllData() {
+        mHealthDbHelper.deleteDatabase(MyApplication.getContext());
     }
 }
