@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +27,8 @@ import com.tz.healthdiary.sqlite.MyDataService;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.tz.healthdiary.MainActivity.location;
 
 /**
  * Created by 西野七濑 on 2016/10/18.
@@ -56,6 +57,7 @@ public class CentreFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.activity_center, null);
+        location = 0;
         v = LayoutInflater.from(getActivity()).inflate(R.layout.popwindow_center_layout, null);
         return view;
     }

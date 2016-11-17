@@ -37,6 +37,8 @@ import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.exception.BmobException;
 import cn.bmob.v3.listener.FindListener;
 
+import static com.tz.healthdiary.MainActivity.location;
+
 /**
  * Created by 西野七濑 on 2016/10/18.
  * News页面的Fragment
@@ -96,6 +98,7 @@ public class NewsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.listview, null);
+        location = 2;
         lv_list = (ListView) view.findViewById(R.id.lv_listview);
         et_name = (EditText) view.findViewById(R.id.et_name);
         tv_search_news= (TextView) view.findViewById(R.id.tv_search_news);

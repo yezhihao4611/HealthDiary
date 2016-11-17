@@ -31,6 +31,8 @@ import com.tz.healthdiary.StartAnimaActivity;
 import com.tz.healthdiary.sqlite.MyDataService;
 import com.tz.healthdiary.utils.MyApplication;
 
+import static com.tz.healthdiary.MainActivity.location;
+
 /**
  * Created by 西野七濑 on 2016/10/18.
  * Other页面的Fragment
@@ -59,6 +61,7 @@ public class OtherFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.oter_layout, null);
+        location = 3;
         tv_waist_other = (TextView) view.findViewById(R.id.tv_waist_other);
         tv_body_other = (TextView) view.findViewById(R.id.tv_body_other);
         tv_base_other = (TextView) view.findViewById(R.id.tv_base_other);
