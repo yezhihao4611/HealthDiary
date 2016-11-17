@@ -17,6 +17,7 @@ import com.tz.healthdiary.sqlite.MyDataService;
 
 import java.text.DecimalFormat;
 
+import static com.tz.healthdiary.MainActivity.location;
 import static com.tz.healthdiary.R.id.stature_number;
 
 /**
@@ -50,6 +51,7 @@ public class BMIFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.activity_bmi, null);
+        location = 1;
         initView();
         sex = mMyDataService.getSex();
         if (sex == 0) {
