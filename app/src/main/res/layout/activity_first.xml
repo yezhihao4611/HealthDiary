@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:background="#88666666">
+            >
 
             <TextView
                 android:id="@+id/tv_into"
@@ -30,7 +30,7 @@
                 android:layout_alignParentRight="true"
                 android:text="进入"
                 android:layout_margin="8dp"
-                android:textSize="36sp"/>
+                android:textSize="24sp"/>
 
         </RelativeLayout>
 

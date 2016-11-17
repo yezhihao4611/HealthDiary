@@ -21,6 +21,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.tz.healthdiary.AboutActivity;
 import com.tz.healthdiary.InitializeActivity;
 import com.tz.healthdiary.Jisuanqi.BaseActivity;
 import com.tz.healthdiary.Jisuanqi.BodyActivity;
@@ -47,6 +48,7 @@ public class OtherFragment extends Fragment implements View.OnClickListener {
     TextView tv_year_other;
     TextView tv_weight_other;
     ImageView head_other;
+    TextView tv_about_other;
     MyDataService myDataService = StartAnimaActivity.myDataService;
     int a = myDataService.getSex();
     SharedPreferences mSharedPreferences = StartAnimaActivity.mSharedPreferences;
@@ -58,7 +60,7 @@ public class OtherFragment extends Fragment implements View.OnClickListener {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.oter_layout, null);
+        view = inflater.inflate(R.layout.other_layout, null);
         tv_waist_other = (TextView) view.findViewById(R.id.tv_waist_other);
         tv_body_other = (TextView) view.findViewById(R.id.tv_body_other);
         tv_base_other = (TextView) view.findViewById(R.id.tv_base_other);
@@ -68,6 +70,7 @@ public class OtherFragment extends Fragment implements View.OnClickListener {
         tv_year_other = (TextView) view.findViewById(R.id.tv_year);
         deleteSQL = (TextView) view.findViewById(R.id.tv_delete_other);
         head_other = (ImageView) view.findViewById(R.id.head_other);
+        tv_about_other = (TextView) view.findViewById(R.id.tv_about_other);
         mPopView = LayoutInflater.from(getActivity()).inflate(R.layout.other_delete, null);
         btDeleteN = (Button) mPopView.findViewById(R.id.bt_deleteall_no);
         btDeleteY = (Button) mPopView.findViewById(R.id.bt_deleteall_yes);
@@ -79,6 +82,7 @@ public class OtherFragment extends Fragment implements View.OnClickListener {
         tv_base_other.setOnClickListener(this);
         tv_opinion_other.setOnClickListener(this);
         tv_weight_other.setOnClickListener(this);
+        tv_about_other.setOnClickListener(this);
         tv_year_other.addTextChangedListener(textWatcher);
         et_height_other.addTextChangedListener(textWatcher);
         //读取体重
@@ -128,11 +132,15 @@ public class OtherFragment extends Fragment implements View.OnClickListener {
             case R.id.bt_deleteall_no:
                 mPopupWindow.dismiss();
                 break;
+            case R.id.tv_about_other:
+                intent = new Intent(getActivity(), AboutActivity.class);
+                startActivity(intent);
+                break;
             case R.id.bt_deleteall_yes:
                 myDataService.deleteAllData();
                 mSharedPreferences = getActivity().getSharedPreferences("firstSharedPreferences", 0);
                 mSharedPreferences.edit().putBoolean("initialize", true).apply();
-                Toast.makeText(MyApplication.getContext(), "除", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MyApplication.getContext(), "已删除", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(getActivity(), InitializeActivity.class);
                 startActivity(intent);
                 getActivity().finish();
@@ -184,6 +192,7 @@ public class OtherFragment extends Fragment implements View.OnClickListener {
         //添加pop窗口关闭事件
         mPopupWindow.setOnDismissListener(new PopupWindowDismissListener());
     }
+
     public void backgroundAlpha(float bgAlpha) {
         WindowManager.LayoutParams lp = getActivity().getWindow().getAttributes();
         lp.alpha = bgAlpha; //0.0-1.0

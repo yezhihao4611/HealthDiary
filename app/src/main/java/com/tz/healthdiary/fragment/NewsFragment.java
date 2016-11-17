@@ -58,6 +58,7 @@ public class NewsFragment extends Fragment {
             super.handleMessage(msg);
             switch (msg.what) {
                 case Number:
+
                     query.findObjects(new FindListener<News>() {
                         @Override
                         public void done(List<News> Mlist, BmobException e) {

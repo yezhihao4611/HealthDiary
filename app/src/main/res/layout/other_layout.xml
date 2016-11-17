@@ -218,7 +218,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="意  见   反   馈"
+        android:text="意   见   反   馈"
+        android:textSize="18sp" />
+    <TextView
+        android:id="@+id/tv_about_other"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:onClick="onClick"
+        android:text="关   于   我   们"
         android:textSize="18sp" />
 
 
