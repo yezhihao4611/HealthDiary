@@ -40,17 +40,14 @@ public class FirstActivity extends AppCompatActivity {
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override//从滑动开始到结束前一直调用
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
             }
 
             @Override//页面跳转完后调用
             public void onPageSelected(int position) {
-
             }
 
             @Override//状态改变时调用
             public void onPageScrollStateChanged(int state) {
-
             }
         });
     }
