@@ -27,7 +27,7 @@ public class FirstActivity extends AppCompatActivity {
     private ViewPager mViewPager;
     private TextView mTextView;
     private PagerAdapter mPagerAdapter;
-    private int[] imageId = new int[]{R.mipmap.firstOne,R.mipmap.firstTwo,R.mipmap.firstthree};
+    private int[] imageId = new int[]{R.mipmap.firstone,R.mipmap.firsttwo,R.mipmap.firstthree};
     private List<ImageView> mImageViews = new ArrayList<ImageView>();
     SharedPreferences mSharedPreferences = StartAnimaActivity.mSharedPreferences;
 
